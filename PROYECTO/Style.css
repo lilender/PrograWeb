@@ -1,0 +1,22 @@
+body{
+    background-color: #EDE6DE;
+}
+
+h1{
+    color: #626864;
+    text-align: center;
+    font-family: "Londrina Sketch";
+    font-size: 5rem;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 0rem;
+}
+
+h2{
+    color: #626864;
+    text-align: center;
+    font-family: Mansalva;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 0rem;
+}
