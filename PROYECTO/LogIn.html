@@ -19,12 +19,12 @@
         <title>MyTomillo</title>
     </head>
 
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
+    <body class="container-fluid">
+            <div class="row align-items-center">
+                <div class="light-background col-md-6 ">
                     <h1>BIENVENIDO</h1>
                     <h2>a la comunidad de ovejas</h2>
+                    <img src="pictures/MyTomillo.png" alt="MyTomillo" style="width: 72.5%;">
                 </div>
                 
                 <div class="grey-background col-md-6">
@@ -32,25 +32,39 @@
                     <h3>MyTomillo</h3>
                     
                     <form>
-                        <div class="box-input">
-                                <input class="input" type="text" id="Iusername" name="Iusername" value="Ingrese Nombre de Usuario">
-                                <label class="input-border"></label>
-                                <div class="inputUnderline"></div>
+                        <div class="align-self-center box-input">
+                                <div class="d-flex justify-content-center">
+                                    <input class="input" type="text" id="Iusername" name="Iusername" value="Ingrese Nombre de Usuario">
+                                    <label class="input-border"></label>
+                                </div>
                         </div>
                         
                         <div class="box-input">
                             <input class="input" type="text" id="Ipassword" name="Ipassword" value="Ingrese Contraseña">                        
                             <label class="input-border"></label>
                         </div>
-
-                        <input class="button-primary" type="submit" value="Log In">
+                        
+                        <div class="box-input">
+                            <input class="button-primary" type="submit" value="Log In">
+                        </div>
                     </form>
+                    
+                    <p class="p-login">¿No tienes una cuenta? ¡Regístrate!</p>
+                    <button class="button-secondary"> Sign In</button>
+
+                    <p class="p-login" style="padding-top: 4rem;">¡También puedes hechar un vistazo!</p>
+                    <button class="button-tertiary">Ingresar sin cuenta</button>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
-        </div>
+            <div class="row align-items-center">
+                <footer class="container-fluid">
+                    <h3>Contáctanos</h3>
+                    <p class="p-footer">Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+                </footer>
+            </div>
+            
     </body>
-
-    <footer>
-
-    </footer>
 </html>
