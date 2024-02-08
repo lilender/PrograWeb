@@ -16,6 +16,16 @@ body{
     align-content: center;
 }
 
+.second-grey-background{
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background: rgb(52,52,49);
+    background: linear-gradient(180deg, rgba(52,52,49,1) 0%, rgba(92,91,87,1) 20%);
+    text-align: center;
+    align-content: center;
+}
+
 .light-background{
     background-color: #EDE6DE;
     background-size: cover;
@@ -59,6 +69,11 @@ h3{
    text-align: center;
 }
 
+p{
+    color:#5C5B57;
+    font-family: "Chelsea Market"; 
+}
+
 .p-login{
     color:#ffffff93;
     font-family: "Chelsea Market"; 
@@ -72,6 +87,11 @@ h3{
    font-family: "Chelsea Market"; 
    text-align: center;
    font-size: 0.80rem;
+}
+
+.box{
+    width: 100%;
+    position: relative;
 }
 
 .box-input {
@@ -96,8 +116,23 @@ h3{
     font-family: "Chelsea Market"; 
     font-size:small;
     text-align: center;
+    border:none;
     width: 18rem;
     height: 2rem;
+}
+
+.input:focus{
+    border:none;
+    outline: none;
+}
+
+.input-border-secondary{
+    position: absolute;
+    bottom: 0;
+    left: 14.5rem;
+    width: 38%;
+    height: 0.2rem;
+    background-image: radial-gradient(circle, rgba(92,91,87,1) 0%,  rgba(230,237,222,1) 100%);
 }
 
 .button-primary{
@@ -126,7 +161,7 @@ h3{
 .button-secondary{
     position: relative;
     color: #fff;
-    background-color: #809a6593;
+    background-color: #506b3393;
     font-family: "Chelsea Market";
     font-size: 0.8rem;
     padding: 2px 50px;
@@ -167,3 +202,64 @@ h3{
     border: solid 5px #ffffff;
     font-size: 0.92rem;
 }
+
+.button-quaternary{
+    position: relative;
+    color: #fff;
+    background-color:rgba(91, 162, 86, 0.50);
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 2px 50px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+    transition: all 200ms;
+    transform: translateY(0);
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-quaternary:hover{
+    background-color: #ffffff00;
+    color: #809A65;
+    border: solid 5px #809A65;
+    font-size: 0.83rem;
+}
+
+label{
+    position: relative;
+    background-color:rgba(91, 162, 86, 0.50);
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size: 0.8rem;
+    padding: 2px 50px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+}
+
+.inputfile {
+    /* visibility: hidden etc. wont work */
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+  }
+  .inputfile:focus + label {
+    /* keyboard navigation */
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    border:none;
+    outline: none;
+  }
+  
+  .inputfile + label * {
+    pointer-events: none;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+  }
