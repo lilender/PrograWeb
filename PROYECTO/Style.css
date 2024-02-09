@@ -4,6 +4,7 @@ body{
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    
 }
 
 .grey-background{
@@ -33,6 +34,7 @@ body{
     background-attachment: fixed;
     text-align: center;
     align-content: center;
+
 }
 
 footer{
@@ -50,7 +52,8 @@ h1{
     font-size: 5rem;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
+    margin-top: 2rem;
 }
 
 h2{
@@ -59,7 +62,7 @@ h2{
     font-family: "Mansalva";
     font-size: 2rem;
     font-weight: 400;
-    margin-top: 0rem;
+    margin-top: -1rem;
 }
 
 h3{
@@ -71,7 +74,8 @@ h3{
 
 p{
     color:#5C5B57;
-    font-family: "Chelsea Market"; 
+    font-family: "Chelsea Market";
+    font-size: 0.9rem;
 }
 
 .p-login{
@@ -90,15 +94,17 @@ p{
 }
 
 .box{
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     position: relative;
+    display: flex;
 }
 
 .box-input {
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
     width: 100%;
     position: relative;
-  }
+}
 
 .input-border{
     position: absolute;
@@ -109,7 +115,7 @@ p{
     background-image: radial-gradient(circle, rgba(230,237,222,1) 0%, rgba(92,91,87,1) 100%);
 }
 
-.input{
+input{
     border-radius: 1rem;
     background: rgba(91, 162, 86, 0.50);
     color: #f6f3f0;
@@ -121,9 +127,20 @@ p{
     height: 2rem;
 }
 
-.input:focus{
+input:focus{
     border:none;
     outline: none;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
+}
+
+::-webkit-input-placeholder{
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
 }
 
 .input-border-secondary{
@@ -262,4 +279,16 @@ label{
     pointer-events: none;
     color: #f6f3f0;
     font-family: "Chelsea Market"; 
+  }
+
+  .label-file{
+    background-image: url('pictures/subir.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-size: 25%; 
+    background-position: 50%; 
+    width: 5%; 
+    height: 25%; 
+    cursor: pointer;
+
   }

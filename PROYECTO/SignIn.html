@@ -21,58 +21,62 @@
     </head>
 
     <body class="container-fluid">
-            <div class="light-background row align-items-center">
-                <div class="col-md-6 ">
+            <div class="light-background row">
+                <div class="col-md-6">
 
                     <h1>BIENVENIDO</h1>
                     <h2>a la comunidad de ovejas</h2>
-                    <p>Para formar parte de la comunidad de ovejas, por favor, ayúdanos llenano la siguiente información</p>
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <div class="align-self-center box-input">
-                                <div class="d-flex justify-content-center">
-                                    <input class="input" type="text" id="Iusername" name="Iname" value="Ingrese Nombre(s)">
-                                </div>
-                        </div>
-                        
-                        <div class="align-self-center box-input">
-                            <input class="input" type="text" id="ILastname" name="ILastname" value="Ingrese Apellido Paterno">                        
-                            <input class="input" type="text" id="ILastname2" name="ILastname2" value="Ingrese Apellido Materno">                        
-                        </div>
+                    <br>
 
-                        <div class="align-self-center box-input">
-                            <input class="input" type="text" id="Imail" name="Imail" value="Ingrese correo electrónico">                        
-                        </div>
-
-                        <br>
-
-                        <div class="align-self-center box-input">
-                            <img src="pictures/tomilloprofile.png" alt="Foto de perfil" style="width: 15%; box-shadow: 1rem;">
-                            <br><br>
-                            <input type="file" name="file" id="file" class="inputfile">
-                            <label for="file">Sube una foto de perfil</label>
-                        </div>
-
-                        <div class="align-self-center box-input">
-                            <input class="input" type="text" id="Iusername" name="Iusername" value="Ingrese nombre de usuario">                        
-                            <input class="input" type="text" id="Ipassword" name="Ipassword" value="Ingrese contraseña">                        
-                        </div>
-
-                        <div class="box-input">
-                            <input class="button-secondary" type="submit" value="Sign In">
-                        </div>
-                    </form>
+                    <div class="box">
+                        <p>Para formar parte de la comunidad de ovejas, por favor, ayúdanos llenano la siguiente información</p>
+                    </div>
                     
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="box d-flex justify-content-center">
+                                <input class="input" type="text" id="Iusername" name="Iname" placeholder="Ingrese Nombre(s)" style="width: 100%; margin: .7rem;">
+                            </div>
+                            
+                            <div class="box d-flex justify-content-center">
+                                <input class="input" type="text" id="ILastname" name="ILastname" placeholder="Ingrese Apellido Paterno" style="width: 50%; margin: .7rem;">                        
+                                <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="Ingrese Apellido Materno" style="width: 50%; margin: .7rem;">                        
+                            </div>
+
+                            <div class="box d-flex justify-content-center">
+                                <input class="input" type="email" id="Imail" name="Imail" placeholder="Ingrese correo electrónico" style="width: 100%; margin: .7rem; margin-bottom: 1.5rem;">                        
+                            </div>
+
+                            
+                            <div class="box d-flex justify-content-center" style="margin-right: 8rem;">
+                                <div class="box-input">
+                                    <img src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 50%; margin-bottom: 1rem;">
+                                    <br>
+                                    <input type="file" name="file" id="file" class="inputfile">
+                                    <label class="label-file" for="file"></label>
+                                </div>
+                                <div class="box-input">
+                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="Ingrese nombre de usuario" style="width: 100%; margin: .9rem;">                        
+                                    <input class="input" type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese contraseña" style="width: 100%; margin: .9rem;">                        
+                                    <input class="input" type="password" id="Ipassword" name="Ipassword" placeholder="Confirme contraseña" style="width: 100%; margin: .9rem;">                        
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="box-input">
+                                <input class="button-secondary" type="submit" value="Sign In" style="width: 25%; margin: 0.1rem;">
+                            </div>
+                        </form>  
                 </div>
                 
-                <div class="grey-background col-md-6">
-                    <img src="pictures/Ovejas2.png" alt="MyTomillo" style="width: 75.5%;">
+                <div class="grey-background col-md-6 d-flex justify-content-center">
+                    <img src="pictures/Ovejas2.png" alt="MyTomillo" style="width: 80%; padding: 2rem; align-self: center;">
                 </div>
             </div>
-
             
             <div class="row align-items-center">
                 <footer class="container-fluid">
-                    <h3>Contáctanos</h3>
+                    <h3 style="padding-top: 0.5rem;">Contáctanos</h3>
                     <p class="p-footer">Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
                 </footer>
             </div>
