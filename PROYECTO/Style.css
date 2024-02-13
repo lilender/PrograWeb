@@ -1,10 +1,8 @@
-
 body{
     background-color: #35281C;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    
 }
 
 header{
@@ -53,7 +51,8 @@ footer{
 }
 
 h1{
-    color: #626864;
+    color: #5C5B57;
+    -webkit-text-stroke: .04rem #5C5B57;
     text-align: center;
     font-family: "Londrina Sketch";
     font-size: 5rem;
@@ -64,7 +63,7 @@ h1{
 }
 
 h2{
-    color: #626864;
+    color: #5C5B57;
     text-align: center;
     font-family: "Mansalva";
     font-size: 2rem;
@@ -164,7 +163,7 @@ nav ul li a:hover {
     border: 0.4rem solid #A4C49A;
     border-radius: 1.5rem;
     background-color: #EDE6DE;
-    width: 80%;
+    width: 50%;
     margin: 1.5rem auto;
 }
 
@@ -174,10 +173,8 @@ nav ul li a:hover {
 }
 
 .post-text h1{
-    color: #5C5B57;
     font-size: 2.2rem;
     text-align: left;
-    -webkit-text-stroke: .04rem #5C5B57;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -215,10 +212,34 @@ nav ul li a:hover {
     display: block;
 }
 
+.card-back{
+    border-radius: 3rem;
+    background-color: #EDE6DE;
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+}
 
+.card-back h1{
+    font-size: 4rem;
+}
 
+.card-back p{
+    padding: 0.01rem;
+    margin: 0.01rem;
+}
 
-img {
+.profile-image{
+    height: 15rem;
+    width: 15rem;
+    background-color: #8BAE80;
+    border-radius: 50%;
+    border: 0.25rem solid #5C5B57;
+    margin: 2rem;
+    display: inline-block;
+}
+
+.img {
 	display: block;
 	max-width: 100%;
 }
@@ -354,7 +375,7 @@ input:focus{
 .button-primary{
     position: relative;
     color: #fff;
-    background-color: #b5c6a49d;
+    background-color: #b6d895b7;
     font-family: "Chelsea Market";
     font-size: 0.8rem;
     padding: 2px 60px;
@@ -365,39 +386,17 @@ input:focus{
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    margin: 0.7rem;
 }
 
 .button-primary:hover{
     background-color: #ffffff00;
-    color: #e2e8da;
+    color: #91ab70;
     border: solid 5px #b5c6a4;
     font-size: 0.92rem;
 }
 
 .button-secondary{
-    position: relative;
-    color: #fff;
-    background-color: #506b3393;
-    font-family: "Chelsea Market";
-    font-size: 0.8rem;
-    padding: 2px 50px;
-    border: solid #E2E8DA 0.3rem;
-    border-radius: 10rem;
-    transition: all 200ms;
-    transform: translateY(0);
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-}
-
-.button-secondary:hover{
-    background-color: #ffffff00;
-    color: #809A65;
-    border: solid 5px #809A65;
-    font-size: 0.92rem;
-}
-
-.button-tertiary{
     color: #fff;
     background-color: #ffffff00;
     font-family: "Chelsea Market";
@@ -412,34 +411,11 @@ input:focus{
     cursor: pointer;
 }
 
-.button-tertiary:hover{
+.button-secondary:hover{
     background-color: #ffffff00;
     color: #fefffd;
     border: solid 5px #ffffff;
     font-size: 0.92rem;
-}
-
-.button-quaternary{
-    position: relative;
-    color: #fff;
-    background-color:rgba(91, 162, 86, 0.50);
-    font-family: "Chelsea Market";
-    font-size: 0.8rem;
-    padding: 2px 50px;
-    border: solid #E2E8DA 0.3rem;
-    border-radius: 10rem;
-    transition: all 200ms;
-    transform: translateY(0);
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-}
-
-.button-quaternary:hover{
-    background-color: #ffffff00;
-    color: #809A65;
-    border: solid 5px #809A65;
-    font-size: 0.83rem;
 }
 
 label{
