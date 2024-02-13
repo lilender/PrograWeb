@@ -32,6 +32,225 @@ h2{
 h3{
    color: #EDE6DE;
    font-family: "Love Ya Like A Sister"; 
+<<<<<<< Updated upstream
+=======
+   font-size: medium;
+   text-align: center;
+}
+
+h4{
+    color: #ffffff;
+    font-family: "Love Ya Like A Sister"; 
+    font-size: x-large;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0rem;
+ }
+
+p{
+    color:#5C5B57;
+    font-family: "Chelsea Market";
+    font-size: 0.9rem;
+}
+
+.p-login{
+    color:#ffffff93;
+    font-family: "Chelsea Market"; 
+    text-align: center;
+    font-size: 0.80rem;
+    padding-top: 2rem;
+}
+
+.p-footer{
+   color: #EDE6DE;
+   font-family: "Chelsea Market"; 
+   text-align: center;
+   font-size: 0.80rem;
+}
+
+nav {
+    background-color:#EDE6DE; 
+    text-align: center;
+}
+
+nav input{
+    width: 48rem;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a.new-post,
+nav ul li a.advanced-search {
+    background-color:#EDE6DE; 
+}
+
+nav ul li input[type="text"] {
+    border: none;
+    padding: 10px;
+    margin-top: 12px;
+}
+
+nav ul li a img {
+    width: 2.5rem;
+}
+
+nav ul li a:hover {
+    background-color: #c9b29a;
+}
+
+.post-text{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 0.4rem solid #A4C49A;
+    border-radius: 1.5rem;
+    background-color: #EDE6DE;
+    width: 60%;
+    margin: 1.5rem auto;
+}
+
+.post-text p{
+    color: #5C5B57;
+    text-align: left;
+}
+
+.post-text h1{
+    color: #5C5B57;
+    font-size: 2.2rem;
+    text-align: left;
+    -webkit-text-stroke: .04rem #5C5B57;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.post-text h2{
+    color: #5C5B57;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.post-text h3{
+    color: #5C5B57;
+    float: left;
+    font-size: large;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    display: inline;
+}
+
+.post-text h4{
+    color: #5C5B57;
+    float: right;
+    font-size: large;
+    margin-bottom: 0;
+    margin-top: 1rem;
+    padding-top: 0rem;
+}
+
+
+
+
+
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+.stack {
+	width: 100%;
+	max-width: 400px;
+	transition: .25s ease;
+	&:hover {			
+		transform: rotate(5deg);
+		.card:before {
+			transform: translatey(-2%) rotate(-4deg);
+		}	
+		.card:after {
+			transform: translatey(2%) rotate(4deg);
+		}
+	}
+}
+
+.card {
+	aspect-ratio: 3 / 2;
+	border: 4px solid;
+	background-color: #FFF;
+	position: static;
+	transition: .15s ease;
+	cursor: pointer;
+	padding: 5% 5% 15% 5%;
+	&:before, &:after {
+		content: "";
+		display: block;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		border: 4px solid;
+		background-color: #FFF;
+		transform-origin: center center;
+		z-index: -1;
+		transition: .15s ease;
+		top: 0;
+		left: 0;
+	}
+	
+	&:before {
+		transform: translatey(-2%) rotate(-6deg);
+	}
+	
+	&:after {
+		transform: translatey(2%) rotate(6deg);
+	}
+}
+
+	.image {
+		width: 100%;
+		border: 4px solid;
+		background-color: #EEE;
+		aspect-ratio: 1 / 1;
+		position: relative;
+	}
+
+.browser-warning {
+	margin-bottom: 4rem;
+}
+
+@supports (aspect-ratio: 1 / 1) {
+	.browser-warning {
+		display: none;
+	}
+}
+
+
+
+
+
+
+.box{
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+>>>>>>> Stashed changes
 }
 
 .box-input {
