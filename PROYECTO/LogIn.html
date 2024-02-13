@@ -15,42 +15,66 @@
         
         <!--CSS-->
         <link rel="stylesheet" href="Style.css">
+        
+        <!--Scripts-->
+        <script>
+            function toSignIn() {
+              window.location.href = 'SignIn.html';
+            }
+            function toDashboard(){
+              window.location.href = 'Dashboard.html';
+            }
+        </script>
 
         <title>MyTomillo</title>
+        <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
+
+        
     </head>
 
-    <body>
-        <div class="container-fluid">
+    <body class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="light-background col-md-6">
                     <h1>BIENVENIDO</h1>
                     <h2>a la comunidad de ovejas</h2>
+                    <img src="pictures/Ovejas2.png" alt="MyTomillo" style="width: 77%; padding: 2rem;">
                 </div>
                 
                 <div class="grey-background col-md-6">
-                    <img src="pictures/MyTomillo.png" alt="MyTomillo" style="width: 30%;">
-                    <h3>MyTomillo</h3>
+                    <img src="pictures/MyTomilloText.png" alt="MyTomillo" style="width: 35%; padding: 1rem;">
                     
                     <form>
-                        <div class="box-input">
-                                <input class="input" type="text" id="Iusername" name="Iusername" value="Ingrese Nombre de Usuario">
-                                <label class="input-border"></label>
-                                <div class="inputUnderline"></div>
+                        <div class="align-self-center box-input">
+                                <div class="d-flex justify-content-center">
+                                    <input type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">
+                                </div>
                         </div>
                         
                         <div class="box-input">
-                            <input class="input" type="text" id="Ipassword" name="Ipassword" value="Ingrese Contraseña">                        
-                            <label class="input-border"></label>
+                            <input class="input" type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese Contraseña">                        
                         </div>
-
-                        <input class="button-primary" type="submit" value="Log In">
+                        
+                        <div class="box-input">
+                            <input class="button-primary" type="submit" value="Log In">
+                        </div>
                     </form>
+                    
+                    <p class="p-login">¿No tienes una cuenta? ¡Regístrate!</p>
+                    <button class="button-secondary" onclick="toSignIn()"> Sign In</button>
+
+                    <p class="p-login" style="padding-top: 4rem;">¡También puedes hechar un vistazo!</p>
+                    <button class="button-tertiary" onclick="toDashboard()">Ingresar sin cuenta</button>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
-        </div>
+            <div class="row align-items-center">
+                <footer class="container-fluid">
+                    <h3 style="padding-top: 0.5rem;">Contáctanos</h3>
+                    <p class="p-footer">Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+                </footer>
+            </div>
+            
     </body>
-
-    <footer>
-
-    </footer>
 </html>

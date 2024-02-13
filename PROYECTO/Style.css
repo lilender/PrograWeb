@@ -1,13 +1,55 @@
+
 body{
-    background-color: #EDE6DE;
+    background-color: #35281C;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
 }
 
+header{
+    position: fixed;
+    width: 100%;
+    top:0;
+    left: 0;
+}
 
 .grey-background{
-    background-color: #626864;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background: rgb(52,52,49);
+    background: linear-gradient(90deg, rgba(52,52,49,1) 0%, rgba(92,91,87,1) 20%);
+    text-align: center;
+    align-content: center;
+}
+
+.second-grey-background{
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background: rgb(92,91,87);
+    background: linear-gradient(180deg, rgba(92,91,87,1) 15%, rgba(49,48,46,1) 100%);
+    text-align: center;
+    align-content: center;
+}
+
+.light-background{
+    background-color: #EDE6DE;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     text-align: center;
     align-content: center;
 
+}
+
+footer{
+    background-size: cover;
+    background-color: #35281C;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
 }
 
 h1{
@@ -17,7 +59,8 @@ h1{
     font-size: 5rem;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
+    margin-top: 2rem;
 }
 
 h2{
@@ -26,14 +69,12 @@ h2{
     font-family: "Mansalva";
     font-size: 2rem;
     font-weight: 400;
-    margin-top: 0rem;
+    margin-top: -1rem;
 }
 
 h3{
    color: #EDE6DE;
    font-family: "Love Ya Like A Sister"; 
-<<<<<<< Updated upstream
-=======
    font-size: medium;
    text-align: center;
 }
@@ -123,7 +164,7 @@ nav ul li a:hover {
     border: 0.4rem solid #A4C49A;
     border-radius: 1.5rem;
     background-color: #EDE6DE;
-    width: 60%;
+    width: 80%;
     margin: 1.5rem auto;
 }
 
@@ -165,7 +206,14 @@ nav ul li a:hover {
     padding-top: 0rem;
 }
 
-
+.post-text img{
+    width: 50%;
+    float: left;
+    margin:0;
+    padding: 0;
+    border: 0.4rem solid #A4C49A;
+    display: block;
+}
 
 
 
@@ -176,7 +224,7 @@ img {
 }
 
 .stack {
-	width: 100%;
+	width: 85%;
 	max-width: 400px;
 	transition: .25s ease;
 	&:hover {			
@@ -194,7 +242,7 @@ img {
 	aspect-ratio: 3 / 2;
 	border: 4px solid;
 	background-color: #FFF;
-	position: static;
+	position: relative;
 	transition: .15s ease;
 	cursor: pointer;
 	padding: 5% 5% 15% 5%;
@@ -221,7 +269,6 @@ img {
 		transform: translatey(2%) rotate(6deg);
 	}
 }
-
 	.image {
 		width: 100%;
 		border: 4px solid;
@@ -250,43 +297,197 @@ img {
     margin: 0 auto;
     position: relative;
     display: flex;
->>>>>>> Stashed changes
 }
 
 .box-input {
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
     width: 100%;
-  }
+    position: relative;
+}
 
 .input-border{
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
+    left: 14.5rem;
+    width: 38%;
+    height: 0.2rem;
     background-image: radial-gradient(circle, rgba(230,237,222,1) 0%, rgba(92,91,87,1) 100%);
 }
 
-.inputUnderline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-image: radial-gradient(circle, rgba(230,237,222,1) 0%, rgba(92,91,87,1) 100%);
-  }
-
-.input{
+input{
     border-radius: 1rem;
     background: rgba(91, 162, 86, 0.50);
     color: #f6f3f0;
     font-family: "Chelsea Market"; 
     font-size:small;
     text-align: center;
-    width: 15rem;
+    border:none;
+    width: 18rem;
+    height: 2rem;
+}
+
+input:focus{
+    border:none;
+    outline: none;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
+}
+
+::-webkit-input-placeholder{
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
+}
+
+.input-border-secondary{
+    position: absolute;
+    bottom: 0;
+    left: 14.5rem;
+    width: 38%;
+    height: 0.2rem;
+    background-image: radial-gradient(circle, rgba(92,91,87,1) 0%,  rgba(230,237,222,1) 100%);
 }
 
 .button-primary{
-    background-color: #74cb91c7;
-    font-family: "Chelsea Market"; 
+    position: relative;
+    color: #fff;
+    background-color: #b5c6a49d;
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 2px 60px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+    transition: all 200ms;
+    transform: translateX(0);
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
+
+.button-primary:hover{
+    background-color: #ffffff00;
+    color: #e2e8da;
+    border: solid 5px #b5c6a4;
+    font-size: 0.92rem;
+}
+
+.button-secondary{
+    position: relative;
+    color: #fff;
+    background-color: #506b3393;
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 2px 50px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+    transition: all 200ms;
+    transform: translateY(0);
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-secondary:hover{
+    background-color: #ffffff00;
+    color: #809A65;
+    border: solid 5px #809A65;
+    font-size: 0.92rem;
+}
+
+.button-tertiary{
+    color: #fff;
+    background-color: #ffffff00;
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 2px 60px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+    transition: all 200ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-tertiary:hover{
+    background-color: #ffffff00;
+    color: #fefffd;
+    border: solid 5px #ffffff;
+    font-size: 0.92rem;
+}
+
+.button-quaternary{
+    position: relative;
+    color: #fff;
+    background-color:rgba(91, 162, 86, 0.50);
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 2px 50px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+    transition: all 200ms;
+    transform: translateY(0);
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-quaternary:hover{
+    background-color: #ffffff00;
+    color: #809A65;
+    border: solid 5px #809A65;
+    font-size: 0.83rem;
+}
+
+label{
+    position: relative;
+    background-color:rgba(91, 162, 86, 0.50);
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    font-size: 0.8rem;
+    padding: 2px 50px;
+    border: solid #E2E8DA 0.3rem;
+    border-radius: 10rem;
+}
+
+.inputfile {
+    /* visibility: hidden etc. wont work */
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+  }
+  .inputfile:focus + label {
+    /* keyboard navigation */
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+    border:none;
+    outline: none;
+  }
+  
+  .inputfile + label * {
+    pointer-events: none;
+    color: #f6f3f0;
+    font-family: "Chelsea Market"; 
+  }
+
+  .label-file{
+    background-image: url('pictures/subir.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-size: 25%; 
+    background-position: 50%; 
+    width: 5%; 
+    height: 25%; 
+    cursor: pointer;
+
+  }
