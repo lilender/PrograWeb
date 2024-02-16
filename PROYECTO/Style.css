@@ -1,3 +1,7 @@
+*{
+    color: #5C5B57;
+}
+
 body{
     background-color: #35281C;
     background-size: cover;
@@ -5,12 +9,7 @@ body{
     background-attachment: fixed;
 }
 
-header{
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-}
-
+/*Fondos*/
 .grey-background{
     background-size: cover;
     background-position: center;
@@ -41,6 +40,16 @@ header{
 
 }
 
+/*Para la barra de navegación*/
+header{
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    left:0;
+    top:0;
+}
+
+/*Para el footer*/
 footer{
     background-size: cover;
     background-color: #35281C;
@@ -49,8 +58,19 @@ footer{
     width: 100%;
 }
 
+footer h3{
+    margin-top: 1rem;
+}
+
+footer p{
+   color: #EDE6DE;
+   font-family: "Chelsea Market"; 
+   text-align: center;
+   font-size: 0.80rem;
+}
+
+/*Titulos y texto*/
 h1{
-    color: #5C5B57;
     -webkit-text-stroke: .04rem #5C5B57;
     text-align: center;
     font-family: "Londrina Sketch";
@@ -62,7 +82,6 @@ h1{
 }
 
 h2{
-    color: #5C5B57;
     text-align: center;
     font-family: "Mansalva";
     font-size: 2rem;
@@ -77,10 +96,6 @@ h3{
    text-align: center;
 }
 
-footer h3{
-    margin-top: 1rem;
-}
-
 h4{
     color: #ffffff;
     font-family: "Love Ya Like A Sister"; 
@@ -92,7 +107,6 @@ h4{
  }
 
 p{
-    color:#5C5B57;
     font-family: "Chelsea Market";
     font-size: 0.9rem;
 }
@@ -105,13 +119,7 @@ p{
     padding-top: 2rem;
 }
 
-.p-footer{
-   color: #EDE6DE;
-   font-family: "Chelsea Market"; 
-   text-align: center;
-   font-size: 0.80rem;
-}
-
+/*Barra de navegación*/
 nav {
     background-color:#EDE6DE; 
     background-size: cover;
@@ -160,8 +168,7 @@ nav ul li a:hover {
     background-color: #c9b29a;
 }
 
-
-
+/*Publicaciones*/
 .post-text{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -210,35 +217,17 @@ nav ul li a:hover {
     padding-top: 0rem;
 }
 
-.card-back{
-    border-radius: 3rem;
-    background-color: #EDE6DE;
+/*Imagenes de las publicaciones*/
+.image {
     width: 100%;
-    margin-top: 5rem;
-    margin-bottom: 1rem;
+    border: 4px solid rgba(92,91,87,1);
+    border-radius: 3%;
+    background-color: #EEE;
+    aspect-ratio: 1 / 1;
+    position: static;
 }
 
-.card-back h1{
-    font-size: 4rem;
-}
-
-.card-back p{
-    padding: 0.01rem;
-    margin: 0.01rem;
-}
-
-.profile-image{
-    height: 15rem;
-    width: 15rem;
-    background-color: #8BAE80;
-    border-radius: 50%;
-    border: 0.25rem solid #5C5B57;
-    margin: 2rem;
-    display: inline-block;
-}
-
-
-img {
+.post-text img {
 	display: block;
 	max-width: 100%;
 }
@@ -258,11 +247,10 @@ img {
 		}
 	}
 }
-
 .card {
 	aspect-ratio: 3 / 2;
-	border: 4px solid;
-	background-color: #FFF;
+	border: 4px solid rgba(92,91,87,1);
+	background-color: #f9f7f6;
 	position: static;
 	transition: .15s ease;
 	cursor: pointer;
@@ -273,7 +261,7 @@ img {
 		position: absolute;
 		height: 100%;
 		width: 100%;
-		border: 4px solid;
+		border: 4px solid #A4C49A;
 		background-color: #FFF;
 		transform-origin: center center;
 		z-index: -1;
@@ -291,14 +279,8 @@ img {
 	}
 }
 
-.image {
-    width: 100%;
-    border: 4px solid;
-    background-color: #EEE;
-    aspect-ratio: 1 / 1;
-    position: static;
-}
-    
+/*
+
 .browser-warning {
 	margin-bottom: 4rem;
 }
@@ -309,10 +291,37 @@ img {
 	}
 }
 
+*/
 
+/*Foto de perfil*/
 
+.profile-image{
+    height: 15rem;
+    width: 15rem;
+    background-color: #8BAE80;
+    border-radius: 50%;
+    border: 0.25rem solid #5C5B57;
+    margin: 2rem;
+    display: inline-block;
+}
 
+/*Contenedor en profile*/
+.card-back{
+    border-radius: 3rem;
+    background-color: #EDE6DE;
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+}
 
+.card-back h1{
+    font-size: 4rem;
+}
+
+.card-back p{
+    padding: 0.01rem;
+    margin: 0.01rem;
+}
 
 .box{
     width: 70%;
@@ -327,6 +336,7 @@ img {
     position: relative;
 }
 
+/*Inputs*/
 .input-border{
     position: absolute;
     bottom: 0;
@@ -335,7 +345,6 @@ img {
     height: 0.2rem;
     background-image: radial-gradient(circle, rgba(230,237,222,1) 0%, rgba(92,91,87,1) 100%);
 }
-
 input{
     border-radius: 1rem;
     background: rgba(91, 162, 86, 0.50);
@@ -373,6 +382,7 @@ input:focus{
     background-image: radial-gradient(circle, rgba(92,91,87,1) 0%,  rgba(230,237,222,1) 100%);
 }
 
+/*Botones*/
 .button-primary{
     position: relative;
     color: #fff;
@@ -430,6 +440,7 @@ label{
     border-radius: 10rem;
 }
 
+/*Botón para abrir el explorador*/
 .inputfile {
     /* visibility: hidden etc. wont work */
     width: 0.1px;
