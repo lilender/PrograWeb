@@ -77,7 +77,8 @@ h1{
     font-size: 5rem;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 0;
+    padding: 0.2rem;
+    margin-bottom: 0.1rem;
     margin-top: 2rem;
 }
 
@@ -280,7 +281,6 @@ nav ul li a:hover {
 }
 
 /*
-
 .browser-warning {
 	margin-bottom: 4rem;
 }
@@ -303,6 +303,15 @@ nav ul li a:hover {
     border: 0.25rem solid #5C5B57;
     margin: 2rem;
     display: inline-block;
+    text-align: center;
+}
+
+.profile-image img{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+    vertical-align: middle;
+    padding: 0.5rem;
 }
 
 /*Contenedor en profile*/
@@ -310,16 +319,19 @@ nav ul li a:hover {
     border-radius: 3rem;
     background-color: #EDE6DE;
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 5.5rem;
     margin-bottom: 1rem;
+    padding: 0.9rem;
+    left:0;
 }
 
 .card-back h1{
     font-size: 4rem;
+    margin-top: 0.3rem;
 }
 
 .card-back p{
-    padding: 0.01rem;
+    padding: 0.1rem;
     margin: 0.01rem;
 }
 
