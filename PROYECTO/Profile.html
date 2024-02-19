@@ -81,6 +81,9 @@
             function toHome(){
                 window.location.href = 'Dashboard.html';
             }
+            function toPost(){
+                window.location.href = 'Post.html';
+            }
         </script>
         <title>MyTomillo</title>
         <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
@@ -92,7 +95,7 @@
                 <li><a href="#home" onclick="toHome()">
                     <img src="pictures/MyTomilloShadow.png" alt="MyTomillo">
                     </a></li>
-                <li><a href="#news" class="new-post">
+                <li><a href="#news" class="new-post" onclick="toPost()">
                     <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
                     </a></li>
                 <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
