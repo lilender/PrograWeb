@@ -16,75 +16,6 @@
         <!--CSS-->
         <link rel="stylesheet" href="Style.css">
 
-        <!--Scripts-->
-        <script>
-            function editProfile() {
-                document.getElementById('Susername').contentEditable = true;
-                document.getElementById('Sname').hidden = true;
-                document.getElementById('Smail').hidden = true;
-                document.getElementById('Sage').hidden = true;
-                var inputName = document.getElementById('Iname');
-                inputName.style.display = 'inline-block';
-                inputName.style.width = '50%';
-                var inputLastname = document.getElementById('ILastname');
-                inputLastname.style.display = 'inline-block';
-                inputLastname.style.width = '50%';
-                var inputLastname2 = document.getElementById('ILastname2');
-                inputLastname2.style.display = 'inline-block';
-                inputLastname2.style.width = '50%';
-                var inputMail = document.getElementById('Imail');
-                inputMail.style.display = 'inline-block';
-                inputMail.style.width = '50%';
-                var buttonPassword = document.getElementById('BEditPassword');
-                buttonPassword.style.display = 'inline-block';
-                buttonPassword.style.margin = '0rem auto';
-
-                var buttonSave = document.getElementById('BSaveData');
-                buttonSave.style.display = 'inline-block';
-                buttonSave.style.margin = '0rem auto';
-                var buttonEdit = document.getElementById('BEditData');
-                buttonEdit.style.display = 'none';
-            }
-
-            function editPassword(){
-                let person = prompt("Por favor, ingresa tu contraseña:", "Contraseña");
-                if (person == null || person == "") {
-                } else {
-                    var inputPassword = document.getElementById('Ipassword');
-                    inputPassword.style.display = 'inline-block';
-                    inputPassword.style.width = '50%';
-                }
-            }
-            function saveData(){
-                document.getElementById('Susername').contentEditable = false;
-                document.getElementById('Sname').hidden = false;
-                document.getElementById('Smail').hidden = false;
-                document.getElementById('Sage').hidden = false;
-                var inputName = document.getElementById('Iname');
-                inputName.style.display = 'none';
-                var inputLastname = document.getElementById('ILastname');
-                inputLastname.style.display = 'none';
-                var inputLastname2 = document.getElementById('ILastname2');
-                inputLastname2.style.display = 'none';
-                var inputMail = document.getElementById('Imail');
-                inputMail.style.display = 'none';
-                var inputPassword = document.getElementById('Ipassword');
-                inputPassword.style.display = 'none';
-                var buttonPassword = document.getElementById('BEditPassword');
-                buttonPassword.style.display = 'none';
-                var buttonSave = document.getElementById('BSaveData');
-                buttonSave.style.display = 'none';
-                var buttonEdit = document.getElementById('BEditData');
-                buttonEdit.style.display = 'inline-block';
-            }
-
-            function toHome(){
-                window.location.href = 'Dashboard.html';
-            }
-            function toPost(){
-                window.location.href = 'Post.html';
-            }
-        </script>
         <title>MyTomillo</title>
         <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
     </head>
@@ -99,10 +30,10 @@
                     <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
                     </a></li>
                 <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
-                <li><a href="#home" class="advanced-search" >
+                <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
                     <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
                 </a></li>
-                <li><a href="#perfil">
+                <li><a href="#perfil" onclick="toProfile()">
                     <img src="pictures/TomilloProfileShadow.png" alt="MyTomillo">
                 </a></li>
             </ul>    
@@ -134,6 +65,7 @@
                             <button id="BEditPassword" class="button-primary" style="display: none;" onclick="editPassword()">Editar Contraseña</button>
                             <br>
                             <button id="BSaveData" class=" button-primary" style="display: none;" onclick="saveData()">Guardar Información</button>
+                            <button id="BLogOut" class="button-primary" style="display: flex; margin: 0 auto" onclick="logOut()">Cerrar Sesión</button>
                         </div>
                     </div>
                     
@@ -146,7 +78,87 @@
                 <h3>Contáctanos</h3>
                 <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
             </footer>
-        </div>
-            
+        </div>            
     </body>
+
+<!--Scripts-->
+<script>
+    function editProfile() {
+        document.getElementById('Susername').contentEditable = true;
+        document.getElementById('Sname').hidden = true;
+        document.getElementById('Smail').hidden = true;
+        document.getElementById('Sage').hidden = true;
+        var inputName = document.getElementById('Iname');
+        inputName.style.display = 'inline-block';
+        inputName.style.width = '50%';
+        var inputLastname = document.getElementById('ILastname');
+        inputLastname.style.display = 'inline-block';
+        inputLastname.style.width = '50%';
+        var inputLastname2 = document.getElementById('ILastname2');
+        inputLastname2.style.display = 'inline-block';
+        inputLastname2.style.width = '50%';
+        var inputMail = document.getElementById('Imail');
+        inputMail.style.display = 'inline-block';
+        inputMail.style.width = '50%';
+        var buttonPassword = document.getElementById('BEditPassword');
+        buttonPassword.style.display = 'inline-block';
+        buttonPassword.style.margin = '0rem auto';
+
+        var buttonSave = document.getElementById('BSaveData');
+        buttonSave.style.display = 'inline-block';
+        buttonSave.style.margin = '0rem auto';
+        var buttonEdit = document.getElementById('BEditData');
+        buttonEdit.style.display = 'none';
+    }
+
+    function editPassword(){
+        let person = prompt("Por favor, ingresa tu contraseña:", "Contraseña");
+        if (person == null || person == "") {
+        } else {
+            var inputPassword = document.getElementById('Ipassword');
+            inputPassword.style.display = 'inline-block';
+            inputPassword.style.width = '50%';
+        }
+    }
+    function saveData(){
+        document.getElementById('Susername').contentEditable = false;
+        document.getElementById('Sname').hidden = false;
+        document.getElementById('Smail').hidden = false;
+        document.getElementById('Sage').hidden = false;
+        var inputName = document.getElementById('Iname');
+        inputName.style.display = 'none';
+        var inputLastname = document.getElementById('ILastname');
+        inputLastname.style.display = 'none';
+        var inputLastname2 = document.getElementById('ILastname2');
+        inputLastname2.style.display = 'none';
+        var inputMail = document.getElementById('Imail');
+        inputMail.style.display = 'none';
+        var inputPassword = document.getElementById('Ipassword');
+        inputPassword.style.display = 'none';
+        var buttonPassword = document.getElementById('BEditPassword');
+        buttonPassword.style.display = 'none';
+        var buttonSave = document.getElementById('BSaveData');
+        buttonSave.style.display = 'none';
+        var buttonEdit = document.getElementById('BEditData');
+        buttonEdit.style.display = 'inline-block';
+    }
+
+    function toHome(){
+        window.location.href = 'Dashboard.html';
+    }
+    function toPost(){
+        window.location.href = 'Post.html';
+    }
+    function toAdvancedSearch(){
+        window.location.href = 'AdvancedSearch.html';
+    }
+    function toProfile(){
+        window.location.href = 'Profile.html';
+    }
+
+    function logOut(){
+        window.location.href = 'LogIn.html';
+    }
+</script>
+
 </html>

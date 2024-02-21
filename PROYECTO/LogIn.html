@@ -15,16 +15,6 @@
         
         <!--CSS-->
         <link rel="stylesheet" href="Style.css">
-        
-        <!--Scripts-->
-        <script>
-            function toSignIn() {
-              window.location.href = 'SignIn.html';
-            }
-            function toDashboard(){
-              window.location.href = 'Dashboard.html';
-            }
-        </script>
 
         <title>MyTomillo</title>
         <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
@@ -33,46 +23,56 @@
     </head>
 
     <body class="container-fluid">
-            <div class="row">
-                <div class="light-background col-md-6">
-                    <h1>BIENVENIDO</h1>
-                    <h2>a la comunidad de ovejas</h2>
-                    <img src="pictures/Ovejas2.png" alt="MyTomillo" style="width: 72%; padding: 2rem;">
-                </div>
-                
-                <div class="grey-background col-md-6">
-                    <img src="pictures/MyTomilloText.png" alt="MyTomillo" style="width: 35%; padding: 1rem;">
-                    
-                    <form>
-                        <div class="align-self-center box-input">
-                                <div class="d-flex justify-content-center">
-                                    <input type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">
-                                </div>
-                        </div>
-                        
-                        <div class="box-input">
-                            <input class="input" type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese Contraseña">                        
-                        </div>
-                        
-                        <div class="box-input">
-                            <input class="button-primary" type="submit" value="Log In" style="display: inline-block;">
-                        </div>
-                    </form>
-                    
-                    <p class="p-login">¿No tienes una cuenta? ¡Regístrate!</p>
-                    <button class="button-primary" onclick="toSignIn()"> Sign In</button>
-                    <br>
-                    <br>
-                    <p class="p-login" style="padding-top: 2rem;">¡También puedes hechar un vistazo!</p>
-                    <button class="button-secondary" onclick="toDashboard()">Ingresar sin cuenta</button>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <footer class="container-fluid">
-                    <h3 style="padding-top: 0.5rem;">Contáctanos</h3>
-                    <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
-                </footer>
+        <div class="row">
+            <div class="light-background col-md-6">
+                <h1>BIENVENIDO</h1>
+                <h2>a la comunidad de ovejas</h2>
+                <img src="pictures/Ovejas2.png" alt="MyTomillo" style="width: 72%; padding: 2rem;">
             </div>
             
+            <div class="grey-background col-md-6">
+                <img src="pictures/MyTomilloText.png" alt="MyTomillo" style="width: 35%; padding: 1rem;">
+                
+                <form>
+                    <div class="align-self-center box-input">
+                            <div class="d-flex justify-content-center">
+                                <input type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">
+                            </div>
+                    </div>
+                    
+                    <div class="box-input">
+                        <input class="input" type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese Contraseña">                        
+                    </div>
+                    
+                    <div class="box-input">
+                        <input class="button-primary" type="submit" value="Log In" style="display: inline-block;">
+                    </div>
+                </form>
+                
+                <p class="p-login">¿No tienes una cuenta? ¡Regístrate!</p>
+                <button class="button-primary" onclick="toSignIn()"> Sign In</button>
+                <br>
+                <br>
+                <p class="p-login" style="padding-top: 2rem;">¡También puedes hechar un vistazo!</p>
+                <button class="button-secondary" onclick="toDashboard()">Ingresar sin cuenta</button>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <footer class="container-fluid">
+                <h3 style="padding-top: 0.5rem;">Contáctanos</h3>
+                <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+            </footer>
+        </div>
     </body>
+
+    <!--Scripts-->
+    <script>
+        function toSignIn() {
+          window.location.href = 'SignIn.html';
+        }
+        function toDashboard(){
+          window.location.href = 'Dashboard.html';
+        }
+    </script>
+    
 </html>

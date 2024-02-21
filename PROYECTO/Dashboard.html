@@ -23,17 +23,17 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#home">
+                <li><a href="#home" onclick="toHome()">
                     <img src="pictures/MyTomilloShadow.png" alt="MyTomillo">
                     </a></li>
-                <li><a href="#news" class="new-post">
+                <li><a href="#news" class="new-post" onclick="toPost()">
                     <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
                     </a></li>
                 <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
-                <li><a href="#about" class="advanced-search">
+                <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
                     <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
                 </a></li>
-                <li><a href="#perfil">
+                <li><a href="#perfil" onclick="toProfile()">
                     <img src="pictures/TomilloProfileShadow.png" alt="MyTomillo">
                 </a></li>
             </ul>    
@@ -142,4 +142,21 @@
         </div>
             
     </body>
+
+    <!--SCRIPTS-->
+    <script>
+        function toHome(){
+            window.location.href = 'Dashboard.html';
+        }
+        function toPost(){
+            window.location.href = 'Post.html';
+        }
+        function toAdvancedSearch(){
+            window.location.href = 'AdvancedSearch.html';
+        }
+        function toProfile(){
+            window.location.href = 'Profile.html';
+        }
+    </script>
+
 </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!--Fonts-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Sketch">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mansalva">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea+Market">
+        
+        <!--CSS-->
+        <link rel="stylesheet" href="Style.css">
+
+        <title>MyTomillo</title>
+        <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
+    </head>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="toHome()">
+                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo">
+                    </a></li>
+                <li><a href="#news" class="new-post" onclick="toPost()">
+                    <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
+                    </a></li>
+                <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
+                <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
+                    <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
+                </a></li>
+                <li><a href="#perfil" onclick="toProfile()">
+                    <img src="pictures/TomilloProfileShadow.png" alt="MyTomillo">
+                </a></li>
+            </ul>    
+        </nav>
+    </header>
+
+    <body class="container-fluid">
+        <div class="second-grey-background row align-items-center">
+            <h4>Búsqueda Avanzada</h4>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card-back" style="margin-top: 3rem; margin-bottom: 3rem;">
+                    <p class="row align-items-center" style="font-size: 1rem; display: block;">Aquí puedes buscar una publicación con más detalle</p>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <p style="display: inline-block; margin: 0rem;">Buscar desde el día...</p>
+
+                            <div class="custom-date-wrapper" style="display: inline-block;">
+                                <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" id="datePicker">
+                                <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
+                            </div>
+                            
+                            <p style="display: inline-block; margin: 0rem;">hasta el día...</p>
+                            <div class="custom-date-wrapper" style="display: inline-block;">
+                                <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" id="datePicker">
+                                <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0.5rem;">
+                        <div class="col-md-12">
+                            <p style="margin: 0rem; display: inline-block;">Selecciona una categoría:</p>
+                            <button class="button-primary" style="display: inline-block; margin:0rem; width: 9rem;" id="BClass">Mascotas</button>
+                            <button class="button-primary" style="display: inline-block; margin:0rem; width: 9rem" id="BClass2">Hobbies</button>    
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem;" placeholder="Escribe lo que piensas..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            
+        </div>
+        <div class="row align-items-center">
+            <footer class="container-fluid">
+                <h3>Contáctanos</h3>
+                <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+            </footer>
+        </div>
+    </body>
+
+    <!--SCRIPTS-->
+    <script>
+        function toHome(){
+            window.location.href = 'Dashboard.html';
+        }
+        function toPost(){
+            window.location.href = 'Post.html';
+        }
+        function toAdvancedSearch(){
+            window.location.href = 'AdvancedSearch.html';
+        }
+        function toProfile(){
+            window.location.href = 'Profile.html';
+        }
+    </script>
+</html>

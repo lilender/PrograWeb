@@ -461,6 +461,7 @@ textarea{
     font-size:small;
     text-align: center;
     border:none;
+    resize: none; 
 }
 
 /*Botón para abrir el explorador*/
@@ -500,5 +501,21 @@ textarea{
     width: 5%; 
     height: 25%; 
     cursor: pointer;
-
   }
+
+.calendar-icon {
+    width: 1.3rem;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.custom-date-wrapper {
+    position: relative;
+    width: 18rem;
+}
+input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
+    display: none;   
+}
