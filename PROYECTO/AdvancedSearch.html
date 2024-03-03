@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <!--Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Sketch">
@@ -29,7 +28,7 @@
                 <li><a href="#news" class="new-post" onclick="toPost()">
                     <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
                     </a></li>
-                <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
+                <li class="search-container" style="width: 60%;"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
                 <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
                     <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
                 </a></li>
@@ -65,14 +64,22 @@
                     </div>
                     <div class="row" style="margin: 0.5rem;">
                         <div class="col-md-12">
-                            <p style="margin: 0rem; display: inline-block;">Selecciona una categoría:</p>
-                            <button class="button-primary" style="display: inline-block; margin:0rem; width: 9rem;" id="BClass">Mascotas</button>
-                            <button class="button-primary" style="display: inline-block; margin:0rem; width: 9rem" id="BClass2">Hobbies</button>    
+                            <div class="col-md-12">
+                                <div class="dropdown-center">
+                                    <button id="DDcategoria" class="btn button-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="width: 60%;">
+                                      Selecciona una Categoría
+                                    </button>
+                                    <ul class="dropdown-menu content">
+                                      <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
+                                      <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-12">
-                            <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem;" placeholder="Escribe lo que piensas..."></textarea>
+                            <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem; padding: 2rem;" placeholder="Escribe lo que recuerdas..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -87,6 +94,10 @@
             </footer>
         </div>
     </body>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
     <!--SCRIPTS-->
     <script>

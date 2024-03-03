@@ -29,7 +29,7 @@
                 <li><a href="#news" class="new-post" onclick="toPost()">
                     <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
                     </a></li>
-                <li class="search-container"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
+                <li class="search-container" style="width: 60%"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
                 <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
                     <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
                 </a></li>
@@ -52,19 +52,26 @@
                         <div class="col-md-12 align-items-center">
                             <span><h1 id="Susername">LittleEnder</h1></span>
                             <div class="box-input">
-                                <input class="input" type="text" id="Iname" name="Iname" placeholder="Marla Judith" style="margin: .7rem; display: none;">
-                                <input class="input" type="text" id="ILastname" name="ILastname" placeholder="Estrada" style="margin: .7rem; display: none;">                        
-                                <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="Valdez" style="margin: .7rem; display: none;">       
-                                <input class="input" type="email" id="Imail" name="Imail" placeholder="tomillo@uanl.edu.mx" style="margin: .7rem; display: none;">    
-                                <input class="input" type="password" id="Ipassword" name="Imail" placeholder="pasword" style="margin: .7rem; margin-bottom: 1.5rem; display: none;">    
+                                <form action="/upload" method="post" enctype="multipart/form-data">
+                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="LittleEnder" style="margin: .7rem; display: none;">
+                                    <input class="input" type="text" id="Iname" name="Iname" placeholder="Marla Judith" style="margin: .7rem; display: none;">
+                                    <input class="input" type="text" id="ILastname" name="ILastname" placeholder="Estrada" style="margin: .7rem; display: none;">                        
+                                    <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="Valdez" style="margin: .7rem; display: none;">       
+                                    <input class="input" type="email" id="Imail" name="Imail" placeholder="tomillo@uanl.edu.mx" style="margin: .7rem; display: none;">    
+                                    <input class="input" type="password" id="Ipassword" name="Imail" placeholder="password" style="margin: .7rem; display: none;">
+
+                                    <div class="box-input">
+                                        <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;">
+                                        <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
+                                    </div>                                    
+                                </form>
                             </div>
                             <span><p id="Sname">Marla Judith Estrada Valdez </p></span>
                             <span><p id="Sage">19 años</p></span>
                             <span><p id="Smail">tomillo@uanl.edu.mx</p></span>
                             <button id="BEditData" class="button-primary">Editar Perfil</button>
-                            <button id="BEditPassword" class="button-primary" style="display: none;" onclick="editPassword()">Editar Contraseña</button>
-                            <br>
-                            <button id="BSaveData" class=" button-primary" style="display: none;" onclick="saveData()">Guardar Información</button>
+                            <button id="BEditPassword" class="button-primary" style="display: none;">Editar Contraseña</button>
+                            <button id="BSaveData" class=" button-primary" style="display: none;">Guardar Información</button>
                             <button id="BLogOut" class="button-primary" style="display: flex; margin: 0 auto" onclick="logOut()">Cerrar Sesión</button>
                         </div>
                     </div>
@@ -204,10 +211,14 @@
             $("#Smail").toggle();
             $("#Sage").toggle();
 
+            $("#Iusername").toggle();
             $("#Iname").toggle();
             $("#ILastname").toggle();
             $("#ILastname2").toggle();
             $("#Imail").toggle();
+
+            $("#file").toggle();
+            $("#Ifile").toggle();
 
             $("#BSaveData").toggle();
             $("#BEditPassword").toggle();
@@ -216,65 +227,48 @@
         });
     });
 
-    function editProfile() {
-        document.getElementById('Susername').contentEditable = true;
-        document.getElementById('Sname').hidden = true;
-        document.getElementById('Smail').hidden = true;
-        document.getElementById('Sage').hidden = true;
-        var inputName = document.getElementById('Iname');
-        inputName.style.display = 'inline-block';
-        inputName.style.width = '50%';
-        var inputLastname = document.getElementById('ILastname');
-        inputLastname.style.display = 'inline-block';
-        inputLastname.style.width = '50%';
-        var inputLastname2 = document.getElementById('ILastname2');
-        inputLastname2.style.display = 'inline-block';
-        inputLastname2.style.width = '50%';
-        var inputMail = document.getElementById('Imail');
-        inputMail.style.display = 'inline-block';
-        inputMail.style.width = '50%';
-        var buttonPassword = document.getElementById('BEditPassword');
-        buttonPassword.style.display = 'inline-block';
-        buttonPassword.style.margin = '0rem auto';
+    $(document).ready(function(){
+        $("#BSaveData").click(function(){
+            $("#profile-publications").toggle(); // Alternar la visibilidad del div oculto al hacer clic en el botón
 
-        var buttonSave = document.getElementById('BSaveData');
-        buttonSave.style.display = 'inline-block';
-        buttonSave.style.margin = '0rem auto';
-        var buttonEdit = document.getElementById('BEditData');
-        buttonEdit.style.display = 'none';
-    }
+            $("#Susername").toggle();
+            $("#Sname").toggle();
+            $("#Smail").toggle();
+            $("#Sage").toggle();
 
-    function editPassword(){
-        let person = prompt("Por favor, ingresa tu contraseña:", "Contraseña");
-        if (person == null || person == "") {
-        } else {
-            var inputPassword = document.getElementById('Ipassword');
-            inputPassword.style.display = 'inline-block';
-            inputPassword.style.width = '50%';
-        }
-    }
-    function saveData(){
-        document.getElementById('Susername').contentEditable = false;
-        document.getElementById('Sname').hidden = false;
-        document.getElementById('Smail').hidden = false;
-        document.getElementById('Sage').hidden = false;
-        var inputName = document.getElementById('Iname');
-        inputName.style.display = 'none';
-        var inputLastname = document.getElementById('ILastname');
-        inputLastname.style.display = 'none';
-        var inputLastname2 = document.getElementById('ILastname2');
-        inputLastname2.style.display = 'none';
-        var inputMail = document.getElementById('Imail');
-        inputMail.style.display = 'none';
-        var inputPassword = document.getElementById('Ipassword');
-        inputPassword.style.display = 'none';
-        var buttonPassword = document.getElementById('BEditPassword');
-        buttonPassword.style.display = 'none';
-        var buttonSave = document.getElementById('BSaveData');
-        buttonSave.style.display = 'none';
-        var buttonEdit = document.getElementById('BEditData');
-        buttonEdit.style.display = 'inline-block';
-    }
+            $("#Iusername").toggle();
+            $("#Iname").toggle();
+            $("#ILastname").toggle();
+            $("#ILastname2").toggle();
+            $("#Imail").toggle();
+
+            $("#file").toggle();
+            $("#Ifile").toggle();
+
+            $("#BSaveData").toggle();
+            $("#BEditPassword").toggle();
+            $("#BEditData").toggle();
+
+            if($("#Ipassword").is(":visible")){
+                $("#Ipassword").hide(); // Ocultar el input
+            }
+
+        });
+    });
+
+    $(document).ready(function(){
+        $("#BEditPassword").click(function(){
+            var contraseña = prompt("Ingrese su contraseña para confirmar el cambio:");
+            if (contraseña != null && contraseña != "") {
+                // Aquí puedes agregar la lógica para verificar la contraseña.
+                // Si la contraseña es correcta, puedes proceder con el cambio de contraseña.
+                alert("Contraseña confirmada. Procediendo con el cambio de contraseña.");
+                $("#Ipassword").toggle();
+            } else {
+                alert("Contraseña incorrecta o no ingresada. No se realizará ningún cambio.");
+            }
+        });
+    });
 
     function toHome(){
         window.location.href = 'Dashboard.html';
