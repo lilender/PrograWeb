@@ -128,10 +128,18 @@ nav {
     background-position: center;
     background-attachment: fixed;
     text-align: center;
+    height: 10%;
 }
 
 nav input{
-    width: 100%;
+    width: 90%;
+    display: inline-block;
+    text-align: left;
+}
+
+input[class="search-bar"]::-webkit-input-placeholder{
+    text-align: left;
+    padding: 1rem;
 }
 
 nav ul {
@@ -142,14 +150,17 @@ nav ul {
 }
 
 nav ul li {
+    font-family: "Chelsea Market";
+    font-size: 0.75rem;
+    color: #5C5B57;
     display: inline-block;
-    width: 5%;
 }
 
 nav ul li a {
     display: block;
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 0rem 0rem;
+    color: #5C5B57;
     text-decoration: none;
 }
 
@@ -165,10 +176,19 @@ nav ul li input[type="text"] {
 
 nav ul li a img {
     width: 2.5rem;
+    margin: 0.4rem;
 }
 
 nav ul li a:hover {
-    background-color: #c9b29a;
+    color: #68c469;
+}
+
+.nav-profile-image{
+    margin-bottom: 0rem; 
+    width: 100%; 
+    height: 100%; 
+    padding: 0rem; 
+    margin: 0rem;
 }
 
 /*Publicaciones*/
@@ -387,16 +407,56 @@ input:focus{
     text-align: center;
 }
 
-.input-border-secondary{
-    position: absolute;
-    bottom: 0;
-    left: 14.5rem;
-    width: 38%;
-    height: 0.2rem;
-    background-image: radial-gradient(circle, rgba(92,91,87,1) 0%,  rgba(230,237,222,1) 100%);
+.input-login{
+    border-radius: 1rem;
+    background: rgba(139, 217, 133, 0.5);
+    color: #ffffffc2;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
+    border:none;
+    width: 18rem;
+    height: 2rem;
+}
+
+.input-login:focus{
+    border:none;
+    outline: none;
+    color: #ffffffc2;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
+}
+
+input[class="input-login"]::-webkit-input-placeholder{
+    color: #ffffffc2;
+    font-family: "Chelsea Market"; 
+    font-size:small;
+    text-align: center;
 }
 
 /*Botones*/
+.button-normal{
+    position: relative;
+    color: #ffffff;
+    background-color: rgba(139, 217, 133, 0.5);
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 10rem;
+    flex-direction: column;
+    text-align: right;
+    cursor: pointer;
+    margin: 0rem;
+    width: 5rem;
+}
+
+.button-normal:hover{
+    background-color: #42952d8d;
+    color: #1a6f24;
+}
+
 .button-primary{
     position: relative;
     color: #ffffff;
@@ -479,10 +539,20 @@ label{
     border-radius: 10rem;
 }
 
+/*cuadrado subir foto fongo*/
+
+.square-bg-photo{
+    margin-bottom: 1rem; 
+    border: solid rgba(139, 217, 133, 0.5) 0.3rem; 
+    border-radius: 1.5rem;
+    background-color: #b9ddae71;
+}
+
+/*textarea post*/
 textarea{
     border-radius: 0.5rem;
     padding: 1rem;
-    background: rgba(91, 162, 86, 0.50);
+    background: rgba(139, 217, 133, 0.5);
     color: #043202;
     font-family: "Chelsea Market";
     font-size: small;
@@ -497,8 +567,39 @@ textarea:focus{
 }
 
 /*Dropdown*/
+.button-dropdown{
+    position: relative;
+    color: #20552bc2;
+    background-color: rgba(139, 217, 133, 0.5);
+    font-family: "Chelsea Market";
+    font-size: 0.8rem;
+    padding: 0.3rem 1.5rem;
+    border: none;
+    border-radius: 10rem;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin: 0.7rem;
+    width: 16rem;
+}
+
+.button-dropdown:focus{
+    background-color: rgba(139, 217, 133, 0.5);
+    color: #20552bed;
+    border: none;
+    box-shadow: none;
+}
+
+.button-dropdown:hover{
+    background-color: rgba(139, 217, 133, 0.5);
+    color: #20552bed;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+}
+
 .content{
-    width: 60%; 
+    width: 17.5%; 
     background-color: rgb(151, 192, 148);
     font-family: "Chelsea Market";
     font-size: 0.8rem;
@@ -568,3 +669,4 @@ textarea:focus{
 input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
     display: none;   
 }
+

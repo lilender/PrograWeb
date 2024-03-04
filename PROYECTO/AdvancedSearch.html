@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Bootstrap-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
         <!--Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Sketch">
@@ -20,20 +20,34 @@
     </head>
 
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home" onclick="toHome()">
-                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo">
+        <nav class="row">
+            <ul class="d-flex justify-content-between align-items-center">
+                <li style="width: 8%;"><a href="#home" onclick="toHome()" style="margin-left: 1rem; margin-right: 2rem;">
+                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo" style="margin-bottom: 0rem;">MyTomillo
                     </a></li>
-                <li><a href="#news" class="new-post" onclick="toPost()">
-                    <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
-                    </a></li>
-                <li class="search-container" style="width: 60%;"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
-                <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
-                    <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
+                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost()">Nueva Publicación
+                    <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
+                    </a> </li>
+                <li class="row search-container" style="width: 61%;">
+                    <form>
+                        <div class="input-group mb-6">
+                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <button class="button-normal" type="submit" style="width: 10%;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+                <li style="text-align: left; width: 12%;"><a href="#about" class="advanced-search" onclick="toAdvancedSearch()"> Búsqueda Avanzada
+                    <img src="pictures/AdvancedSearch.png" alt="Busqueda Avanzada" style="width: 18%;">
                 </a></li>
-                <li><a href="#perfil" onclick="toProfile()">
-                    <img src="pictures/TomilloProfileShadow.png" alt="MyTomillo">
+                <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
+                    <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
+                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                    </span>
+                    Perfil
                 </a></li>
             </ul>    
         </nav>
@@ -66,14 +80,14 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="dropdown-center">
-                                    <button id="DDcategoria" class="btn button-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" style="width: 60%;">
+                                    <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                                       Selecciona una Categoría
                                     </button>
                                     <ul class="dropdown-menu content">
                                       <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
                                       <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
                                     </ul>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,12 +109,21 @@
         </div>
     </body>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!--SCRIPTS-->
     <script>
+        $(document).ready(function(){
+            $('.dropdown-item').click(function(){
+                var text = $(this).text(); // Obtener el texto de la opción seleccionada
+                $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
+            });
+        });
+
         function toHome(){
             window.location.href = 'Dashboard.html';
         }

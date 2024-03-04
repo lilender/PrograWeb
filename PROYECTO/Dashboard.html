@@ -21,20 +21,34 @@
     </head>
 
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home" onclick="toHome()">
-                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo">
+        <nav class="row">
+            <ul class="d-flex justify-content-between align-items-center">
+                <li style="width: 8%;"><a href="#home" onclick="toHome()" style="margin-left: 1rem; margin-right: 2rem;">
+                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo" style="margin-bottom: 0rem;">MyTomillo
                     </a></li>
-                <li><a href="#news" class="new-post" onclick="toPost()">
-                    <img src="pictures/NuevaPublicacion.png" alt="MyTomillo">
-                    </a></li>
-                <li class="search-container" style="width: 60%;"><input type="text" placeholder="Buscar publicación..." class="search-bar"></li>
-                <li><a href="#about" class="advanced-search" onclick="toAdvancedSearch()">
-                    <img src="pictures/Busqueda Avanzada.png" alt="MyTomillo">
+                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost()">Nueva Publicación
+                    <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
+                    </a> </li>
+                <li class="row search-container" style="width: 61%;">
+                    <form>
+                        <div class="input-group mb-6">
+                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <button class="button-normal" type="submit" style="width: 10%;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+                <li style="text-align: left; width: 12%;"><a href="#about" class="advanced-search" onclick="toAdvancedSearch()"> Búsqueda Avanzada
+                    <img src="pictures/AdvancedSearch.png" alt="Busqueda Avanzada" style="width: 18%;">
                 </a></li>
-                <li><a href="#perfil" onclick="toProfile()">
-                    <img src="pictures/TomilloProfileShadow.png" alt="MyTomillo">
+                <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
+                    <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
+                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                    </span>
+                    Perfil
                 </a></li>
             </ul>    
         </nav>
