@@ -546,6 +546,8 @@ label{
     border: solid rgba(139, 217, 133, 0.5) 0.3rem; 
     border-radius: 1.5rem;
     background-color: #b9ddae71;
+    position: relative;
+    align-content: center;
 }
 
 /*textarea post*/

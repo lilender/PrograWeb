@@ -33,11 +33,11 @@
             <div class="grey-background col-md-6">
                 <img src="pictures/MyTomilloText.png" alt="MyTomillo" style="width: 35%; padding: 1rem;">
                 
-                <form>
+                <form action="Dashboard.html" method="get">
                     <div class="align-self-center box-input">
-                            <div class="d-flex justify-content-center">
-                                <input class="input-login" type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <input class="input-login" type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">
+                        </div>
                     </div>
                     
                     <div class="box-input">
@@ -45,7 +45,7 @@
                     </div>
                     
                     <div class="box-input">
-                        <input class="button-login" value="Log In">
+                        <input class="button-login" type="submit" value="Log In">
                     </div>
                 </form>
                 
@@ -66,13 +66,5 @@
     </body>
 
     <!--Scripts-->
-    <script>
-        function toSignIn() {
-          window.location.href = 'SignIn.html';
-        }
-        function toDashboard(){
-          window.location.href = 'Dashboard.html';
-        }
-    </script>
-    
+    <script src="script.js"></script>
 </html>

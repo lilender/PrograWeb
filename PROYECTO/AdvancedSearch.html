@@ -58,44 +58,47 @@
             <h4>Búsqueda Avanzada</h4>
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <div class="card-back" style="margin-top: 3rem; margin-bottom: 3rem;">
+                <div class="card-back" style="margin-top: 1.5rem; margin-bottom: 3rem;">
                     <p class="row align-items-center" style="font-size: 1rem; display: block;">Aquí puedes buscar una publicación con más detalle</p>
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <p style="display: inline-block; margin: 0rem;">Buscar desde el día...</p>
-
-                            <div class="custom-date-wrapper" style="display: inline-block;">
-                                <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" id="datePicker">
-                                <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
-                            </div>
-                            
-                            <p style="display: inline-block; margin: 0rem;">hasta el día...</p>
-                            <div class="custom-date-wrapper" style="display: inline-block;">
-                                <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" id="datePicker">
-                                <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin: 0.5rem;">
-                        <div class="col-md-12">
+                    <form action="Dashboard.html" method="get">
+                        <div class="row justify-content-center">
                             <div class="col-md-12">
-                                <div class="dropdown-center">
-                                    <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                                      Selecciona una Categoría
-                                    </button>
-                                    <ul class="dropdown-menu content">
-                                      <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
-                                      <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
-                                    </ul>
+                                <p style="display: inline-block; margin: 0rem;">Buscar desde el día...</p>
+    
+                                <div class="custom-date-wrapper" style="display: inline-block;">
+                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" id="datePicker">
+                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
+                                </div>
+                                
+                                <p style="display: inline-block; margin: 0rem;">hasta el día...</p>
+                                <div class="custom-date-wrapper" style="display: inline-block;">
+                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" id="datePicker">
+                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem; padding: 2rem;" placeholder="Escribe lo que recuerdas..."></textarea>
+                        <div class="row" style="margin: 0.5rem;">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="dropdown-center">
+                                        <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                          Selecciona una Categoría
+                                        </button>
+                                        <ul class="dropdown-menu content">
+                                          <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
+                                          <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem; padding: 2rem;" placeholder="Escribe lo que recuerdas..."></textarea>
+                            </div>
+                        </div>
+                        <input class="button-login" type="submit" value="Buscar">
+                    </form>
                 </div>
             </div>
             <div class="col-md-2"></div>
@@ -111,30 +114,8 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!--SCRIPTS-->
-    <script>
-        $(document).ready(function(){
-            $('.dropdown-item').click(function(){
-                var text = $(this).text(); // Obtener el texto de la opción seleccionada
-                $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
-            });
-        });
-
-        function toHome(){
-            window.location.href = 'Dashboard.html';
-        }
-        function toPost(){
-            window.location.href = 'Post.html';
-        }
-        function toAdvancedSearch(){
-            window.location.href = 'AdvancedSearch.html';
-        }
-        function toProfile(){
-            window.location.href = 'Profile.html';
-        }
-    </script>
 </html>
