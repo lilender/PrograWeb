@@ -24,6 +24,10 @@ function logOut(){
     window.location.href = 'LogIn.html';
 }
 
+function toDashboard(){
+    window.location.href = 'Dashboard.html';
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener la fecha actual
     var fechaActual = new Date();
@@ -72,7 +76,9 @@ $("#BEditData").click(function(){
 });
 
 $("#BSaveData").click(function(){
-    $("#profile-publications").toggle();
+    $("#editButtons").toggle();
+    $("#editButtons2").toggle();
+    $("#editButtons3").toggle();
 
     $("#Susername").toggle();
     $("#Sname").toggle();

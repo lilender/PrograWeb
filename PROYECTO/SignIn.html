@@ -45,24 +45,26 @@
                         <div class="box d-flex justify-content-center">
                             <input type="email" id="Imail" name="Imail" placeholder="Ingrese correo electrónico" style="width: 100%; margin: .7rem; margin-bottom: 1.5rem;">                        
                         </div>
-
                         
                         <div class="box d-flex justify-content-center" style="margin-right: 8rem;">
                             <div class="box-input">
-                                <img src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 50%; margin-bottom: 1rem;">
+                                <img src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 70%; margin-bottom: 1rem;">
                                 <br>
-                                <input type="file" name="file" id="file" class="inputfile">
-                                <label class="label-file" for="file"></label>
+                                <input type="file" name="file" id="file" class="inputfile" style="height: 2.7rem;">
+                                <label class="label-file" for="file" style="height: 2.7rem;"></label>
                             </div>
-                            <div class="box-input">
+                            <div class="box-input" style="margin-bottom: 0rem;">
+                                <p style="margin: 0.1rem;">Ingrese fecha de nacimiento:</p>
+                                <div class="custom-date-wrapper" style="width: 16rem;">
+                                    <input type="date" style="margin: 0.9rem; padding : 0rem; width: 16rem" id="datePicker">
+                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
+                                </div>
                                 <input type="text" id="Iusername" name="Iusername" placeholder="Ingrese nombre de usuario" style="width: 100%; margin: .9rem;">                        
                                 <input type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese contraseña" style="width: 100%; margin: .9rem;">                        
                                 <input type="password" id="Ipassword" name="Ipassword" placeholder="Confirme contraseña" style="width: 100%; margin: .9rem;">                        
                             </div>
                         </div>
-                        <div class="box-input">
-                            <input class="button-primary" type="submit" value="Sign In" style="width: 25%; margin: 0.1rem;">
-                        </div>
+                        <button class="button-primary" type="submit" style="width: 25%; margin: 1rem;">Sign In</button>
                     </form>  
                     
             </div>
