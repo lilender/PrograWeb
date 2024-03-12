@@ -22,8 +22,37 @@
         
     </head>
 
-    <body class="container-fluid">
-        <div class="row">
+    <body onload="myFunction()" class="container-fluid">
+        <div class="loader-section" id="loader">
+            <div class="cs-loader">
+              <div class="cs-loader-inner">
+                <div class="sheep"></div>
+                <div class="sheep"></div>
+                <div class="sheep"></div>
+                <div class="sheep"></div>
+                <div class="sheep"></div>
+                <div class="sheep"></div>
+              </div>        
+            </div>
+            <div style="position: absolute; top:52%; left: 45%">
+                <div class="intern"></div>
+            </div>
+            <div class="fence">
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="panel"></div>
+              <div class="grass"></div>
+            </div>
+          </div>
+
+        <div class="row animate-bottom" id="myDiv" style="display: none;">
             <div class="light-background col-md-6">
                 <h1>BIENVENIDO</h1>
                 <h2>a la comunidad de ovejas</h2>
@@ -57,12 +86,14 @@
                 <button class="button-secondary" onclick="toDashboard()">Ingresar sin cuenta</button>
             </div>
         </div>
-        <div class="row align-items-center">
+        <div  style="display: none;" class="row align-items-center" id="myFoot">
             <footer class="container-fluid">
                 <h3 style="padding-top: 0.5rem;">Contáctanos</h3>
                 <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
             </footer>
         </div>
+
+        
     </body>
 
     <!--Scripts-->

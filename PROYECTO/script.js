@@ -1,8 +1,22 @@
+//Loader
+var timeOut;
+function myFunction() {
+    timeOut = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "flex";
+  document.getElementById("myFoot").style.display = "flex";
+}
+
+//-----------------------------------Dropdown aka select
 $('.dropdown-item').click(function(){
     var text = $(this).text(); // Obtener el texto de la opción seleccionada
     $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
 });
 
+//-----------------------------------Funciones para desplazarse entre las vistas
 function toSignIn() {
     window.location.href = 'SignIn.html';
   }
@@ -28,6 +42,7 @@ function toDashboard(){
     window.location.href = 'Dashboard.html';
 }
 
+//-----------------------------------Obtiene la fecha actual
 document.addEventListener("DOMContentLoaded", function() {
     // Obtener la fecha actual
     var fechaActual = new Date();
@@ -44,18 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('H3Date').textContent = fechaFormateada;
 });
 
-$(document).ready(function(){
-    $('.dropdown-item').click(function(){
-        var text = $(this).text(); // Obtener el texto de la opción seleccionada
-        $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
-    });
-});
-
+//--------------------------------PROFILE FUNCTIONS
+//Editar información
 $("#BEditData").click(function(){
-    $("#editButtons").toggle();
-    $("#editButtons2").toggle();
-    $("#editButtons3").toggle();
-
     $("#Susername").toggle();
     $("#Sname").toggle();
     $("#Smail").toggle();
@@ -75,6 +81,7 @@ $("#BEditData").click(function(){
     $("#BEditData").toggle();
 });
 
+//Guardar información
 $("#BSaveData").click(function(){
     $("#editButtons").toggle();
     $("#editButtons2").toggle();
@@ -104,6 +111,7 @@ $("#BSaveData").click(function(){
 
 });
 
+//Editar contraseña
 $("#BEditPassword").click(function(){
     var contraseña = prompt("Ingrese su contraseña para confirmar el cambio:");
     if (contraseña != null && contraseña != "") {
@@ -114,6 +122,7 @@ $("#BEditPassword").click(function(){
     }
 });
 
+//Editar post
 $('.BEditPost').click(function(){
     var post = $(this).closest('.post-text');
     var title = post.find('.title').text();
@@ -143,6 +152,7 @@ $('.BEditPost').click(function(){
     var BDeletePost = post.find('.BDeletePost').toggle();
 });
 
+//Nuevo post
 $('.BNewPost').click(function(){
     var post = $(this).closest('.post-text');
     var title2 = post.find('.title').toggle();
@@ -154,6 +164,7 @@ $('.BNewPost').click(function(){
     var form = post.find('.formEdit').toggle();
 });
 
+//Borrar post
 $('.BDeletePost').click(function(){
     var post = $(this).closest('.post-text');
     post.remove();
