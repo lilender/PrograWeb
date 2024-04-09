@@ -672,3 +672,210 @@ input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
     display: none;   
 }
 
+/*Sheeps*/
+.loader-section{
+    zoom: 50%
+}
+
+.sheep {
+    background:url(https://static.wixstatic.com/media/0d6b5d_ee4d69caedbb4e6f8fd731f0f17170e5~mv2.png/v1/fill/w_140,h_140,al_c,lg_1/0d6b5d_ee4d69caedbb4e6f8fd731f0f17170e5~mv2.png) no-repeat;
+    width:60px;
+    height:60px;
+    background-size:contain;
+  }
+  
+  .cs-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .cs-loader-inner {
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    width: calc(100% - 200px);
+    color: #FFF;
+    padding: 0 100px;
+    text-align: center;
+    animation: curvedline 3s infinite ease-in-out;
+  }
+  
+  .cs-loader-inner .sheep {
+    font-size: 20px;
+    opacity: 0;
+    display:inline-block;
+    margin-left:10px;
+  }
+  @keyframes curvedline {
+    50% {
+      transform: translate3D(-50px, -50px, 0);
+    }
+  }
+  @keyframes lol {
+    0% {
+      opacity: 0;
+      transform: translateX(-300px);
+    }
+    33% {
+      opacity: 1;
+      transform: translateY(70px);
+      transform: translateX(10px);
+    }
+    66% {
+      opacity: 1;
+      transform: translateX(200px);
+      transform: translateY(-150px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(300px);
+      transform: translateY(0px);
+    }
+  }
+  
+  @-webkit-keyframes lol {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-300px);
+    }
+    33% {
+      opacity: 1;
+      -webkit-transform: translateX(0px);
+    }
+    66% {
+      opacity: 1;
+      -webkit-transform: translateX(100px);
+    }
+    100% {
+      opacity: 0;
+      -webkit-transform: translateX(300px);
+    }
+  }
+  
+  .cs-loader-inner .sheep:nth-child(4) {
+    -webkit-animation: lol 3s 200ms infinite ease-in-out;
+    animation: lol 3s 200ms infinite ease-in-out;
+  }
+  
+  .cs-loader-inner .sheep:nth-child(3) {
+    transform-origin: 50% 100%;
+    -webkit-animation: lol 3s 300ms infinite ease-in-out;
+    animation: lol 3s 300ms infinite ease-in-out;
+  }
+  
+  .cs-loader-inner .sheep:nth-child(2) {
+    -webkit-animation: lol 3s 400ms infinite ease-in-out;
+    animation: lol 3s 400ms infinite ease-in-out;
+  }
+  
+  .cs-loader-inner .sheep:nth-child(1) {
+    -webkit-animation: lol 3s 500ms infinite ease-in-out;
+    animation: lol 3s 500ms infinite ease-in-out;
+  }
+
+  .fence {
+    position: absolute;
+    display: flex;
+    width: 15rem;
+    height: 15rem;
+    top: 47.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+     animation: loading-fence 3s ease-in-out infinite;
+  }
+
+  @keyframes loading-fence {
+    0% {
+        opacity: 0;
+        transform: translateX(300px);
+      }
+      33% {
+        opacity: 1;
+        transform: translateX(20px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-600px);
+      }
+  }
+  
+  .panel {
+    background: rgb(206, 163, 127);
+    position: relative;
+    width: 0.2rem;
+    height: 2rem;
+    border-left: 0.2rem solid rgb(168, 133, 104);
+    border-right: 0.8rem solid rgb(206, 163, 127);
+  }
+  
+  .panel::before {
+    content: '';
+    position: absolute;
+    left: -0.2rem;
+    top: -0.6rem;
+    width: 1rem; 
+    height: 0.5rem; 
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.6rem solid rgb(206, 163, 127);
+  }
+
+  .grass{
+    position: absolute;
+    width: 75rem; 
+    height: 1rem;
+    border-radius: 20rem 20rem 5rem 5rem;
+    left: -35rem;
+    top: 2rem;
+    background: #6bbd75;
+  }
+
+ 
+  .intern {
+    width: fit-content;
+    font-weight: bold;
+    font-family: "Chelsea Market";
+    white-space: pre;
+    font-size: 2rem;
+    line-height: 1.2em;
+    height: 1.2em;
+    overflow: hidden;
+    color: whitesmoke;
+    top: 52%;
+    left: 50%;
+  }
+  
+  .intern::before {
+    content: "Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔";
+    white-space: pre;
+    display: inline-block;
+    animation: l39 1s infinite steps(11) alternate;
+  }
+
+  @keyframes l39 {
+    100% {
+      transform: translateY(-100%)
+    }
+  }
+
+  .animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+  }
+  
+  @-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+  }
+  
+  @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+  }
+  
