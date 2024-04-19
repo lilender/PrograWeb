@@ -1,17 +1,235 @@
-<%-- 
-    Document   : dashboard
-    Created on : 8 abr. 2024, 21:35:13
-    Author     : estra
---%>
-
+<%@ page import="entidades.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!--Fonts-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Sketch">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mansalva">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea+Market">
+        
+        <!--CSS-->
+        <link rel="stylesheet" href="Style.css">
+
+        <title>MyTomillo</title>
+        <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
     </head>
-    <body>
-        <h1>DASHBOARD!</h1>
+
+    <header>
+        <nav class="row">
+            <ul class="d-flex justify-content-between align-items-center">
+                <li style="width: 8%;"><a href="#home" onclick="toHome()" style="margin-left: 1rem; margin-right: 2rem;">
+                    <img src="pictures/MyTomilloShadow.png" alt="MyTomillo" style="margin-bottom: 0rem;">MyTomillo
+                    </a></li>
+                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost()">Nueva Publicación
+                    <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
+                    </a> </li>
+                <li class="row search-container" style="width: 61%;">
+                    <form action="Dashboard.html" method="get">
+                        <div class="input-group mb-6">
+                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <button class="button-normal" type="submit" style="width: 10%;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+                <li style="text-align: left; width: 12%;"><a href="#about" class="advanced-search" onclick="toAdvancedSearch()"> Búsqueda Avanzada
+                    <img src="pictures/AdvancedSearch.png" alt="Busqueda Avanzada" style="width: 18%;">
+                </a></li>
+                <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
+                    <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
+                        
+                        <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        
+                    </span>
+                    <%
+                    if(request.getAttribute("Usuario") != null){
+                        Usuario usuario = (Usuario) request.getAttribute("Usuario");
+                        out.print(usuario.getUsername());
+                    } else {
+                        %>Perfil<%
+                    }
+                    %>
+                </a></li>
+            </ul>    
+        </nav>
+    </header>
+
+    <body class="container-fluid">
+        <div class="second-grey-background row align-items-center">
+            <h4>Entérate de todas las noticias del rebaño</h4>
+
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, consecse kvna ev na wifna lnv jaenvj aenoiaeio jeaiof jenva lnv kldm vaej fiejof ao ijfk laj ojei fjoi eaj fi oje  oeiaf jo aejfoaiejfojaeftetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="post-text">
+                <h3>09/02/2024</h3>
+                <h4>LittleEnder</h4>
+                <br>
+                <h1>Hoy compré una oveja</h1>
+                <h2>Mascotas</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
+            </div>
+            <div class="post-text">
+                <h3>09/02/2024</h3>
+                <h4>LittleEnder</h4>
+                <br>
+                <h1>Hoy compré una oveja</h1>
+                <h2>Mascotas</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
+            </div>
+            <div class="post-text">
+                <h3>09/02/2024</h3>
+                <h4>LittleEnder</h4>
+                <br>
+                <h1>Hoy compré una oveja</h1>
+                <h2>Mascotas</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
+            </div>
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="post-text">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stack">
+                            <div class="card">
+                                <div class="post-img">
+                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>09/02/2024</h3>
+                        <h4>LittleEnder</h4>
+                        <br>
+                        <h1>Hoy compré una oveja</h1>
+                        <h2>Mascotas</h2>
+                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row align-items-center">
+            <footer class="container-fluid">
+                <h3>Contáctanos</h3>
+                <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+            </footer>
+        </div>
     </body>
+
+    <!--SCRIPTS-->
+    <script src="script.js"></script>
+
 </html>

@@ -17,8 +17,8 @@ public class LogInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("LOGIN POST");
-        String user = request.getParameter("fusuario");
-        String pass = request.getParameter("fcontra");
+        String user = request.getParameter("Iusername");
+        String pass = request.getParameter("Ipassword");
         
         DAOUsuario daoUsu = new DAOUsuario();
         Usuario usuario = new Usuario(user, pass);
@@ -34,7 +34,8 @@ public class LogInServlet extends HttpServlet {
             pantalla = "dashboard.jsp";
             request.setAttribute("Usuario", usu);
         }else{
-            pantalla = "AA.jsp";
+            pantalla = "login.jsp";
+            request.setAttribute("mensaje", "Usuario o contraseña incorrectos");
         }
         
         RequestDispatcher rd = request.getRequestDispatcher(pantalla);
