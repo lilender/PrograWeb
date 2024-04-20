@@ -35,7 +35,7 @@ public class LogInServlet extends HttpServlet {
             request.setAttribute("Usuario", usu);
         }else{
             pantalla = "login.jsp";
-            request.setAttribute("mensaje", "Usuario o contraseña incorrectos");
+            request.setAttribute("error", "Usuario o contraseña incorrectos");
         }
         
         RequestDispatcher rd = request.getRequestDispatcher(pantalla);

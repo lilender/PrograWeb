@@ -37,8 +37,8 @@ function toPost(){
 function toAdvancedSearch(){
     window.location.href = 'AdvancedSearch.html';
 }
-function toProfile(){
-    window.location.href = 'Profile.html';
+function toProfile() {
+    window.location.href = 'profile.jsp';
 }
 
 function logOut(){
@@ -136,7 +136,7 @@ $('.BEditPost').click(function(){
     var classc = post.find('.class').text();
     var contentPost = post.find('.content-post').text();
 
-    var form = '<div class="formEdit"><form method="post" enctype="multipart/form-data" action="Profile.html">'+
+    var form = '<div class="formEdit"><form method="post" enctype="multipart/form-data" action="profile.jsp">'+
         '<div class="row justify-content-center"><div class="col-md-3 align-self-center"><div class="square-bg-photo">'+
         '<img src="pictures/PhotoDefault.png" alt="MyTomillo"></div><div class="box-input">' +
         '<input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;">' +

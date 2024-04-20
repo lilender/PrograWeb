@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -30,7 +31,7 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form>
+                    <form action="dashboard.jsp">
                         <div class="input-group mb-6">
                             <input type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">

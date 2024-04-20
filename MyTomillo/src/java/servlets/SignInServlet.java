@@ -74,7 +74,7 @@ public class SignInServlet extends HttpServlet {
         String pass = request.getParameter("Ipassword");
         String pass2 = request.getParameter("Ipassword2");
         if(!pass.equals(pass2)){
-            request.setAttribute("mensaje", "Las contraseñas no coinciden.");
+            request.setAttribute("error", "Las contraseñas no coinciden.");
             RequestDispatcher rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
         } else {
@@ -86,10 +86,10 @@ public class SignInServlet extends HttpServlet {
             
             String pantalla;
             if(aceptado){
-                request.setAttribute("mensaje", "Usuario registrado correctamente. Inicie sesión.");
+                request.setAttribute("success", "Usuario registrado correctamente. Inicie sesión.");
                 pantalla = "login.jsp";
             }else{
-                request.setAttribute("mensaje", "No se pudo registrar el usuario, intente de nuevo.");
+                request.setAttribute("error", "No se pudo registrar el usuario, intente de nuevo.");
                 pantalla = "signin.jsp";
             }
             

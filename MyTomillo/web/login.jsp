@@ -23,7 +23,7 @@
         
     </head>
 
-    <body onload="myFunction('<%= request.getAttribute("mensaje") %>')" class="container-fluid">
+    <body onload="myFunction('<%= request.getAttribute("error") %>')" class="container-fluid">
 
         <div class="loader-section" id="loader">
             <div class="cs-loader">
@@ -63,10 +63,18 @@
             
             <div class="grey-background col-md-6">
                 <%
-                if(request.getAttribute("mensaje") != null){
+                if(request.getAttribute("error") != null){
                     %>
-                    <div class="alert alert-dismissible fade show" role="alert">
-                        <strong><%= request.getAttribute("mensaje") %></strong>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><%= request.getAttribute("error") %></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <%
+                }
+                if(request.getAttribute("success") != null){
+                    %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><%= request.getAttribute("success") %></strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <%

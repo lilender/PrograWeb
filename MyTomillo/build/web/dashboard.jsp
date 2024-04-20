@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="Style.css">
 
         <title>MyTomillo</title>
-        <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
+        <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">        
     </head>
 
     <header>
@@ -32,7 +32,7 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form action="Dashboard.html" method="get">
+                    <form action="dashboard.jsp" method="get">
                         <div class="input-group mb-6">
                             <input type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
