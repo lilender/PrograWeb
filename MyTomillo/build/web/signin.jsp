@@ -93,6 +93,27 @@
                                 <input type="password" id="Ipassword2" name="Ipassword2" placeholder="Confirme contraseña" style="width: 100%; margin: .9rem;">                        
                             </div>
                         </div>
+                        <p style="margin: 0.1rem;">Seleccione su género:</p>
+                        <div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Iradio" id="Iradio1" value="M" checked>
+                            <label class="form-check-label" for="Iradio1">
+                                Masculino
+                            </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Iradio" value="F" id="Iradio2">
+                            <label class="form-check-label" for="Iradio2">
+                                Femenino
+                            </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Iradio" value="N" id="Iradio3">
+                            <label class="form-check-label" for="Iradio3">
+                                Prefiero no especificar
+                            </label>
+                            </div>
+                        </div>
                         <button class="button-primary" type="submit" style="width: 25%; margin: 1rem;">Sign In</button>
                     </form>  
                     

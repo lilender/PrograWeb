@@ -1,5 +1,5 @@
-<%@ page import="entidades.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="entidades.Usuario" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -53,8 +53,8 @@
                         
                     </span>
                     <%
-                    if(request.getAttribute("Usuario") != null){
-                        Usuario usuario = (Usuario) request.getAttribute("Usuario");
+                    if(session.getAttribute("Usuario") != null){
+                        Usuario usuario = (Usuario) session.getAttribute("Usuario");
                         out.print(usuario.getUsername());
                     } else {
                         %>Perfil<%

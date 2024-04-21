@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.sql.Date;
 import java.sql.Blob;
+import java.time.DateTimeException;
 
 public class Usuario {
     private int IdUsuario;
@@ -24,7 +25,7 @@ public class Usuario {
         this.Contra = contra;
     }
 
-    public Usuario(String Username, String Correo, String Contra, String Nombres, String ApellidoP, String ApellidoM, Date FechaNacimiento, Blob Imagen) {
+    public Usuario(String Username, String Correo, String Contra, String Nombres, String ApellidoP, String ApellidoM, Date FechaNacimiento, Blob Imagen, String Genero) {
         this.Username = Username;
         this.Correo = Correo;
         this.Contra = Contra;
@@ -34,6 +35,7 @@ public class Usuario {
         this.FechaNacimiento = FechaNacimiento;
         this.Imagen = Imagen;
         this.Edad = calculateAge(FechaNacimiento);
+        this.Genero = Genero;
     }
 
     private String calculateAge(Date fechaNacimiento) {
@@ -41,9 +43,18 @@ public class Usuario {
 
         LocalDate currentDate = LocalDate.now();
 
-        Period period = Period.between(birthDate, currentDate);
+        String years = "";
+        try {
+            Period period = Period.between(birthDate, currentDate);
+            if (period.getYears() < 1 || period.getYears() > 150) {
+                return years;
+            } else{
+                return String.valueOf(period.getYears());
+            }
+        } catch (DateTimeException e) {
+            return years;
+        }
 
-        return String.valueOf(period.getYears());
     }
 
 

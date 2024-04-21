@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "LogInServlet", urlPatterns = {"/LogInServlet"})
 public class LogInServlet extends HttpServlet {
@@ -29,17 +30,17 @@ public class LogInServlet extends HttpServlet {
         Usuario usu = new Usuario();
         usu = (Usuario)loginUsuario;
         
-        String pantalla;
         if(usu.getIdUsuario()!= 0){
-            pantalla = "dashboard.jsp";
-            request.setAttribute("Usuario", usu);
+            HttpSession session = request.getSession();
+            session.setAttribute("Usuario", usu);
+            response.sendRedirect("dashboard.jsp");
         }else{
-            pantalla = "login.jsp";
             request.setAttribute("error", "Usuario o contraseña incorrectos");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
         }
         
-        RequestDispatcher rd = request.getRequestDispatcher(pantalla);
-        rd.forward(request, response);
+        
         
     }
     

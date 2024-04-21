@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import modelos.Database;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class DAOUsuario {
     Usuario usu = new Usuario();
@@ -18,7 +19,7 @@ public class DAOUsuario {
         Connection con;
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "SELECT * FROM TB_USUARIOS WHERE USERNAME = ? AND CONTRA = ?";
+        String sql = "SELECT * FROM TB_USUARIOS WHERE USERNAME = ? COLLATE utf8mb4_bin AND CONTRA = ? COLLATE utf8mb4_bin";
         
         Usuario log = new Usuario();
         try {
@@ -57,7 +58,7 @@ public class DAOUsuario {
         
     }
 
-    public boolean signin(Object obj) {
+    public int signin(Object obj) {
         usu = (Usuario)obj;
         
         Connection con;
@@ -65,8 +66,10 @@ public class DAOUsuario {
         ResultSet rs;
         String sql = "INSERT INTO TB_USUARIOS (USERNAME, CORREO, CONTRA, NOMBRES, APELLIDO_P, APELLIDO_M, F_NACIMIENTO, IMAGEN, EDAD, GENERO) VALUES(?,?,?,?,?,?,?,?,?,?)";
         
-        boolean aceptado = false;
-
+        int result = 0;
+        if("".equals(usu.getEdad())){
+            return 3;
+        }
         try {
             Class.forName(db.getDriver());
             con = DriverManager.getConnection(
@@ -88,12 +91,15 @@ public class DAOUsuario {
             ps.executeUpdate();
             
             con.close();
-            aceptado = true;
+            result = 1;
             
-        } catch(SQLException | ClassNotFoundException e){
-            System.out.println("Error en SignIn " + e.getMessage());
+        } catch (SQLIntegrityConstraintViolationException e){
+            result = 2;
+        } 
+        catch(SQLException | ClassNotFoundException e){
+            result = 0;
         } finally {
-            return aceptado;
+            return result;
         }
     }
 }

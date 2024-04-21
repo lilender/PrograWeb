@@ -1,4 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="entidades.Usuario"%>
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+
+if (usuario == null){
+    response.sendRedirect("dashboard.jsp");
+} else {
+    out.println(usuario.getUsername());
+}
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -49,7 +59,7 @@
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
                         <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
                     </span>
-                    Perfil
+                    <%out.println(usuario.getUsername());%>
                 </a></li>
             </ul>    
         </nav>
@@ -65,15 +75,15 @@
                         </span>
                     <div class="row align-items-center">
                         <div class="col-md-12 align-items-center">
-                            <span><h1 id="Susername">LittleEnder</h1></span>
+                            <span><h1 id="Susername"><%out.println(usuario.getUsername());%></h1></span>
                             <div class="box-input">
                                 <form action="/upload" method="post" enctype="multipart/form-data">
-                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="LittleEnder" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="Iname" name="Iname" placeholder="Marla Judith" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="ILastname" name="ILastname" placeholder="Estrada" style="margin: .7rem; display: none;">                        
-                                    <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="Valdez" style="margin: .7rem; display: none;">       
-                                    <input class="input" type="email" id="Imail" name="Imail" placeholder="tomillo@uanl.edu.mx" style="margin: .7rem; display: none;">    
-                                    <input class="input" type="password" id="Ipassword" name="Imail" placeholder="password" style="margin: .7rem; display: none;">
+                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="<%out.println(usuario.getUsername());%>" style="margin: .7rem; display: none;">
+                                    <input class="input" type="text" id="Iname" name="Iname" placeholder="<%out.println(usuario.getNombres());%>" style="margin: .7rem; display: none;">
+                                    <input class="input" type="text" id="ILastname" name="ILastname" placeholder="<%out.println(usuario.getApellidoP());%>" style="margin: .7rem; display: none;">                        
+                                    <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="<%out.println(usuario.getApellidoM());%>" style="margin: .7rem; display: none;">       
+                                    <input class="input" type="email" id="Imail" name="Imail" placeholder="<%out.println(usuario.getCorreo());%>" style="margin: .7rem; display: none;">    
+                                    <input class="input" type="password" id="Ipassword" name="Imail" placeholder="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
 
                                     <div class="box-input">
                                         <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;">
@@ -81,9 +91,9 @@
                                     </div>                                    
                                 </form>
                             </div>
-                            <span><p id="Sname">Marla Judith Estrada Valdez </p></span>
-                            <span><p id="Sage">19 años</p></span>
-                            <span><p id="Smail">tomillo@uanl.edu.mx</p></span>
+                            <span><p id="Sname"><%out.println(usuario.getNombres());%></p></span>
+                            <span><p id="Sage"><%out.println(usuario.getEdad());%></p></span>
+                            <span><p id="Smail"><%out.println(usuario.getCorreo());%></p></span>
                             <button id="BEditData" class="button-primary">Editar Perfil</button>
                             <button id="BEditPassword" class="button-primary" style="display: none;">Editar Contraseña</button>
                             <button id="BSaveData" class=" button-primary" style="display: none;">Guardar Información</button>
@@ -99,7 +109,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12 align-items-center">
 
-                            <h1 style="font-size: 2.6rem; color: #f6f3f0; -webkit-text-stroke: .01rem #f6f3f0;">Publicaciones de LittleEnder</h1>
+                            <h1 style="font-size: 2.6rem; color: #f6f3f0; -webkit-text-stroke: .01rem #f6f3f0;">Publicaciones de <%out.println(usuario.getUsername());%></h1>
 
                             <div class="post-text" style="width: 100%;">
                                 <div class="row">
