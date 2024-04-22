@@ -1,5 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entidades.Usuario" %>
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+
+if (usuario == null){
+    response.sendRedirect("dashboard.jsp");
+} else {
+    out.println(usuario.getUsername());
+}
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -49,12 +57,11 @@
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
                         
-                        <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
                         
                     </span>
                     <%
                     if(session.getAttribute("Usuario") != null){
-                        Usuario usuario = (Usuario) session.getAttribute("Usuario");
                         out.print(usuario.getUsername());
                     } else {
                         %>Perfil<%

@@ -4,6 +4,8 @@ import java.time.Period;
 import java.sql.Date;
 import java.sql.Blob;
 import java.time.DateTimeException;
+import java.util.Base64;
+import java.sql.SQLException;
 
 public class Usuario {
     private int IdUsuario;
@@ -57,6 +59,17 @@ public class Usuario {
 
     }
 
+    public String getImageAsBase64() {
+        if (Imagen == null) {
+            return null;
+        }
+        try {
+            byte[] bytes = Imagen.getBytes(1, (int) Imagen.length());
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public int getIdUsuario() {
         return IdUsuario;

@@ -57,7 +57,7 @@ if (usuario == null){
                 </a></li>
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
-                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <img src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
                     </span>
                     <%out.println(usuario.getUsername());%>
                 </a></li>
@@ -71,7 +71,7 @@ if (usuario == null){
             <div class="col-md-5">
                 <div class="card-back">
                         <span class="profile-image">
-                            <img src="pictures/tomilloprofile.png" alt="Profile">
+                            <img src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="Profile">
                         </span>
                     <div class="row align-items-center">
                         <div class="col-md-12 align-items-center">
