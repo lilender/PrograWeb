@@ -37,7 +37,7 @@ function toPost(){
 function toAdvancedSearch(){
     window.location.href = 'AdvancedSearch.html';
 }
-function toProfile() {
+function toProfile(){
     window.location.href = 'profile.jsp';
 }
 
