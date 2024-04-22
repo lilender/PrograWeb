@@ -435,6 +435,32 @@ input[class="input-login"]::-webkit-input-placeholder{
     text-align: center;
 }
 
+/*Radio*/
+.button-radio{
+  position: relative;
+  color: #20552bc2;
+  background-color: rgba(139, 217, 133, 0.5);
+  font-family: "Chelsea Market";
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 10rem;
+  transition: all 200ms;
+  transform: translateX(0);
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0rem;
+  width: 8rem;
+}
+
+.button-radio:hover{
+  background-color: #ffffff00;
+  color: #1a6f24;
+  font-size: 0.9rem;
+}
+
 /*Botones*/
 .button-normal{
     position: relative;
@@ -446,6 +472,8 @@ input[class="input-login"]::-webkit-input-placeholder{
     border: none;
     border-radius: 10rem;
     flex-direction: column;
+    transition: all 200ms;
+    transform: translateX(0);
     text-align: right;
     cursor: pointer;
     margin: 0rem;
@@ -453,8 +481,10 @@ input[class="input-login"]::-webkit-input-placeholder{
 }
 
 .button-normal:hover{
-    background-color: #42952d8d;
-    color: #1a6f24;
+  background-color: #ffffff00;
+  color: #1a6f24;
+  border: solid 5px #1a6f24;
+  font-size: 0.92rem;
 }
 
 .button-primary{
@@ -678,7 +708,7 @@ input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
 }
 
 .sheep {
-    background:url(https://static.wixstatic.com/media/0d6b5d_ee4d69caedbb4e6f8fd731f0f17170e5~mv2.png/v1/fill/w_140,h_140,al_c,lg_1/0d6b5d_ee4d69caedbb4e6f8fd731f0f17170e5~mv2.png) no-repeat;
+    background:url(pictures/sheeps.png) no-repeat;
     width:60px;
     height:60px;
     background-size:contain;
@@ -849,7 +879,7 @@ input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
   }
   
   .intern::before {
-    content: "Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔";
+    content: "Loading...\A~oading...\A~~ading...\A~~~ding...\A~~~~ing...\A~~~~~ng...\A~~~~~~g...\A~~~~~~~...\A~~~~~~~~..\A~~~~~~~~~.\A~~~~~~~~~~";
     white-space: pre;
     display: inline-block;
     animation: l39 1s infinite steps(11) alternate;

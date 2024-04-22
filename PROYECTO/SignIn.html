@@ -48,7 +48,11 @@
                         
                         <div class="box d-flex justify-content-center" style="margin-right: 8rem;">
                             <div class="box-input">
-                                <img src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 70%; margin-bottom: 1rem;">
+                                <br>
+                                <span class="profile-image" style="width: 10rem; height: 10rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
+                                    <img src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 100%; margin-bottom: 1rem; border: 0.01rem solid #476c58;">
+                                </span>
+                                <br>
                                 <br>
                                 <input type="file" name="file" id="file" class="inputfile" style="height: 2.7rem;">
                                 <label class="label-file" for="file" style="height: 2.7rem;"></label>
@@ -64,6 +68,27 @@
                                 <input type="password" id="Ipassword" name="Ipassword" placeholder="Confirme contraseña" style="width: 100%; margin: .9rem;">                        
                             </div>
                         </div>
+                        <p style="margin: 0.1rem;">Seleccione su género:</p>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                <input class="btn-check form-check-input" type="radio" name="Iradio" id="Iradio1" value="M" checked  autocomplete="off">
+                                <label class="form-check-label btn button-radio" for="Iradio1">
+                                    Masculino
+                                </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                <input class="btn-check form-check-input" type="radio" name="Iradio" value="F" id="Iradio2" autocomplete="off">
+                                <label class="form-check-label btn button-radio" for="Iradio2">
+                                    Femenino
+                                </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                <input class="btn-check form-check-input" type="radio" name="Iradio" value="N" id="Iradio3" autocomplete="off">
+                                <label class="form-check-label btn button-radio" for="Iradio3">
+                                    Prefiero no especificar
+                                </label>
+                                </div>
+                            </div>
                         <button class="button-primary" type="submit" style="width: 25%; margin: 1rem;">Sign In</button>
                     </form>  
                     
