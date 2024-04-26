@@ -66,6 +66,34 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('H3Date').textContent = fechaFormateada;
 });
 
+//--------------------------------LOGIN FUNCTIONS
+function validacionLogIn() {
+    var usernameInput = document.getElementById("Iusername");
+    var passwordInput = document.getElementById("Ipassword");
+    var alertbox = document.getElementById("alert");
+    if (usernameInput.value.trim() === "") {
+        alertbox.appendChild(
+        '<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
+        '    <strong>Ingrese su nombre de usuario</strong>'+
+        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'+
+        '</div>'
+        )
+        return false; // Prevent form submission
+    }
+    if (passwordInput.value.trim() === "") {
+        alertbox.appendChild(
+        '<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
+        '    <strong>Ingrese su contraseña</strong>'+
+        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'+
+        '</div>'
+        )
+        return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission
+}
+
+
 //--------------------------------PROFILE FUNCTIONS
 //Editar información
 $("#BEditData").click(function(){
