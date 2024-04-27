@@ -32,17 +32,13 @@ function toHome(){
     window.location.href = 'dashboard.jsp';
 }
 function toPost(){
-    window.location.href = 'Post.html';
+    window.location.href = 'post.jsp';
 }
 function toAdvancedSearch(){
     window.location.href = 'AdvancedSearch.html';
 }
 function toProfile() {
     window.location.href = 'profile.jsp';
-}
-
-function logOut(){
-    window.location.href = 'login.jsp';
 }
 
 function toDashboard(){
@@ -71,30 +67,329 @@ function validacionLogIn() {
     var usernameInput = document.getElementById("Iusername");
     var passwordInput = document.getElementById("Ipassword");
     var alertbox = document.getElementById("alert");
+
     if (usernameInput.value.trim() === "") {
-        alertbox.appendChild(
-        '<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
-        '    <strong>Ingrese su nombre de usuario</strong>'+
-        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'+
-        '</div>'
-        )
+        var alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+        alertDiv.setAttribute('role', 'alert');
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su nombre de usuario</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
+
     if (passwordInput.value.trim() === "") {
-        alertbox.appendChild(
-        '<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
-        '    <strong>Ingrese su contraseña</strong>'+
-        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'+
-        '</div>'
-        )
+        var alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+        alertDiv.setAttribute('role', 'alert');
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su contraseña</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
 
     return true; // Allow form submission
 }
+//--------------------------------SIGNIN FUNCTIONS
+function previewFile() {
+    var preview = document.getElementById('previewImage');
+    var file = document.getElementById('file').files[0];
+    var reader = new FileReader();
 
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    };
 
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "pictures/TomilloProfileShadow.png";
+    }
+}
+function validacionSignIn() {
+    var nameInput = document.getElementById("Iname");
+    var lastnameInput = document.getElementById("ILastname");
+    var lastname2Input = document.getElementById("ILastname2");
+    var mailInput = document.getElementById("Imail");
+    var fileInput = document.getElementById("file");
+    var dateInput = document.getElementById("datePicker");
+    var usernameInput = document.getElementById("Iusername");
+    var passInput = document.getElementById("Ipassword");
+    var pass2Input = document.getElementById("Ipassword2");
+    
+    var alertbox = document.getElementById("alert");
+    var alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+    alertDiv.setAttribute('role', 'alert');
+    
+    const nameRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+
+    
+    if (nameInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su nombre</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(nameInput.value)) {
+            alertDiv.innerHTML = 
+            '<strong>Nombre inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+    if (lastnameInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su apellido paterno</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(lastnameInput.value)) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido paterno inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+    if (lastname2Input.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su apellido materno</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(lastname2Input.value)) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido materno inválido. Recuerde solo usar caracteres alfanuméricos.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+
+    if (mailInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su correo electrónico</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
+        if (!regex.test(mailInput.value)) {
+            alertDiv.innerHTML = 
+            '<strong>Correo electrónico inválido. Recuerde usar un formato válido de correo.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+    
+    if (fileInput.files.length === 0) {
+        alertDiv.innerHTML = 
+            '<strong>Seleccione una imágen.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+    
+    if (dateInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su fecha de nacimiento</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+    if (usernameInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su nombre de usuario</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+    if (passInput.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese su contraseña</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,}$/;
+        if (!regex.test(passInput.value)) {
+            alertDiv.innerHTML = 
+            '<strong>Contraseña inválida. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+
+    if (pass2Input.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese la confirmación de su contraseña</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } else {
+        if (pass2Input !== passInput) {
+            alertDiv.innerHTML = 
+            '<strong>Las contraseñas no coinciden.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+    }
+
+    return true; // Allow form submission
+}
 //--------------------------------PROFILE FUNCTIONS
+function validacionProfile(printalert){
+    var nameInput = document.getElementById("Iname");
+    var lastnameInput = document.getElementById("ILastname");
+    var lastname2Input = document.getElementById("ILastname2");
+    var mailInput = document.getElementById("Imail");
+    var fileInput = document.getElementById("file");
+    var usernameInput = document.getElementById("Iusername");
+    var passInput = document.getElementById("Ipassword");
+    
+    var alertbox = document.getElementById("alert");
+    var alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+    alertDiv.setAttribute('role', 'alert');
+    
+    const nameRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+    
+    if (usernameInput.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+            '<strong>Ingrese su nombre de usuario</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    }
+    if (nameInput.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+                '<strong>Ingrese su nombre</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(nameInput.value)) {
+            if(printalert){
+                alertDiv.innerHTML = 
+                '<strong>Nombre inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                alertbox.appendChild(alertDiv);
+            }
+            return false;
+        }
+    }
+    if (lastnameInput.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+                '<strong>Ingrese su apellido paterno</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(lastnameInput.value)) {
+            if(printalert){
+                alertDiv.innerHTML = 
+                '<strong>Apellido paterno inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                alertbox.appendChild(alertDiv);
+            }
+            return false;
+        }
+    }
+    if (lastname2Input.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+                '<strong>Ingrese su apellido materno</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    } else {
+        if (!nameRegex.test(lastname2Input.value)) {
+            if(printalert){
+                alertDiv.innerHTML = 
+                '<strong>Apellido materno inválido. Recuerde solo usar caracteres alfanuméricos.</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                alertbox.appendChild(alertDiv);
+            }
+            return false;
+        }
+    }
+
+    if (mailInput.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+                '<strong>Ingrese su correo electrónico</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    } else {
+        const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
+        if (!regex.test(mailInput.value)) {
+            if(printalert){
+                alertDiv.innerHTML = 
+                '<strong>Correo electrónico inválido. Recuerde usar un formato válido de correo.</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                alertbox.appendChild(alertDiv);
+            }
+            return false;
+        }
+    }
+    if (passInput.value.trim() === "") {
+        if(printalert){
+            alertDiv.innerHTML = 
+                '<strong>Ingrese su contraseña</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        }
+        return false; // Prevent form submission
+    } else {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,}$/;
+        if (!regex.test(passInput.value)) {
+            if(printalert){
+                alertDiv.innerHTML = 
+                '<strong>Contraseña inválida. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                alertbox.appendChild(alertDiv);
+            }
+            return false;
+        }
+    }
+    
+    return true; // Allow form submission
+}
+
 //Editar información
 $("#BEditData").click(function(){
     $("#Susername").toggle();
@@ -118,38 +413,41 @@ $("#BEditData").click(function(){
 
 //Guardar información
 $("#BSaveData").click(function(){
-    $("#editButtons").toggle();
-    $("#editButtons2").toggle();
-    $("#editButtons3").toggle();
-
-    $("#Susername").toggle();
-    $("#Sname").toggle();
-    $("#Smail").toggle();
-    $("#Sage").toggle();
-
-    $("#Iusername").toggle();
-    $("#Iname").toggle();
-    $("#ILastname").toggle();
-    $("#ILastname2").toggle();
-    $("#Imail").toggle();
-
-    $("#file").toggle();
-    $("#Ifile").toggle();
-
-    $("#BSaveData").toggle();
-    $("#BEditPassword").toggle();
-    $("#BEditData").toggle();
-
-    if($("#Ipassword").is(":visible")){
-        $("#Ipassword").hide(); // Ocultar el input
-    }
-
+//    if(validacionProfile(false)){
+//        $("#editButtons").toggle();
+//        $("#editButtons2").toggle();
+//        $("#editButtons3").toggle();
+//
+//        $("#Susername").toggle();
+//        $("#Sname").toggle();
+//        $("#Smail").toggle();
+//        $("#Sage").toggle();
+//
+//        $("#Iusername").toggle();
+//        $("#Iname").toggle();
+//        $("#ILastname").toggle();
+//        $("#ILastname2").toggle();
+//        $("#Imail").toggle();
+//
+//        $("#file").toggle();
+//        $("#Ifile").toggle();
+//
+//        $("#BSaveData").toggle();
+//        $("#BEditPassword").toggle();
+//        $("#BEditData").toggle();
+//
+//        if($("#Ipassword").is(":visible")){
+//            $("#Ipassword").hide(); // Ocultar el input
+//        }
+//
+//    }
+    
 });
 
 //Editar contraseña
 $("#BEditPassword").click(function(){
     var contraseña = prompt("Ingrese su contraseña para confirmar el cambio:");
-    if (contraseña != null && contraseña != "") {
+    if (contraseña !== null && contraseña !== "") {
         alert("Contraseña confirmada. Procediendo con el cambio de contraseña.");
         $("#Ipassword").toggle();
     } else {

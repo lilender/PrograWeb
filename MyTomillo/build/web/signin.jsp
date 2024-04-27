@@ -26,6 +26,7 @@
         <div class="light-background row">
             
             <div class="col-md-6">
+                <div id="alert">
                 <%
                 if(request.getAttribute("error") != null){
                     %>
@@ -36,6 +37,7 @@
                     <%
                 }
                 %>
+                </div>
                 <h1>BIENVENIDO</h1>
                 <h2>a la comunidad de ovejas</h2>
                 <br>
@@ -44,7 +46,7 @@
                     <p style="padding: 1rem;">Para formar parte de la comunidad de ovejas, por favor, ayúdanos llenano la siguiente información</p>
                 </div>
                 
-                    <form action="SignInServlet" method="post" enctype="multipart/form-data">
+                    <form action="SignInServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionSignIn()">
                         <div class="box d-flex justify-content-center">
                             <input type="text" id="Iname" name="Iname" placeholder="Ingrese Nombre(s)" style="width: 100%; margin: .7rem;">
                         </div>
@@ -63,23 +65,6 @@
                                 <img id="previewImage" src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 70%; margin-bottom: 1rem;">
                                 <br>
                                 <input type="file" name="file" id="file" class="inputfile" style="height: 2.7rem;" onchange="previewFile()">
-                                <script>
-                                    function previewFile() {
-                                        var preview = document.getElementById('previewImage');
-                                        var file = document.getElementById('file').files[0];
-                                        var reader = new FileReader();
-
-                                        reader.onloadend = function () {
-                                            preview.src = reader.result;
-                                        };
-
-                                        if (file) {
-                                            reader.readAsDataURL(file);
-                                        } else {
-                                            preview.src = "pictures/TomilloProfileShadow.png";
-                                        }
-                                    }
-                                </script>
                                 <label class="label-file" for="file" style="height: 2.7rem;"></label>
                             </div>
                             <div class="box-input" style="margin-bottom: 0rem;">

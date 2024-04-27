@@ -102,4 +102,105 @@ public class DAOUsuario {
             return result;
         }
     }
+    
+    public int update(Object obj){
+        usu = (Usuario)obj;
+        
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        String sql;
+
+        if(usu.getImagen() == null){
+            sql = "UPDATE TB_USUARIOS SET USERNAME = ?, CORREO = ?, CONTRA = ?, NOMBRES = ?, APELLIDO_P = ?, APELLIDO_M = ? WHERE ID_USUARIO = ?";
+
+        } else {
+            sql = "UPDATE TB_USUARIOS SET USERNAME = ?, CORREO = ?, CONTRA = ?, NOMBRES = ?, APELLIDO_P = ?, APELLIDO_M = ?, IMAGEN = ? WHERE ID_USUARIO = ?";
+
+        }
+        
+        
+        int result = 0;
+        
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usu.getUsername());
+            ps.setString(2, usu.getCorreo());
+            ps.setString(3, usu.getContra());
+            ps.setString(4, usu.getNombres());
+            ps.setString(5, usu.getApellidoP());
+            ps.setString(6, usu.getApellidoM());
+            if(usu.getImagen() == null){
+                ps.setInt(7, usu.getIdUsuario());
+            } else {
+                ps.setBlob(7, usu.getImagen());
+                ps.setInt(8, usu.getIdUsuario());
+            }
+            
+            
+            ps.executeUpdate();
+            
+            con.close();
+            result = 1;
+            
+        } catch (SQLIntegrityConstraintViolationException e){
+            result = 2;
+        } 
+        catch(SQLException | ClassNotFoundException e){
+            result = 0;
+        } finally {
+            return result;
+        }
+        
+    }
+    
+    public Object getusuario(Object obj){
+        usu = (Usuario)obj;
+        
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT * FROM TB_USUARIOS WHERE ID_USUARIO = ?";
+        
+        Usuario log = new Usuario();
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, usu.getIdUsuario());
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                log.setIdUsuario(rs.getInt("ID_USUARIO"));
+                log.setUsername(rs.getString("USERNAME"));
+                log.setCorreo(rs.getString("CORREO"));
+                log.setContra(rs.getString("CONTRA"));
+                log.setNombres(rs.getString("NOMBRES"));
+                log.setApellidoP(rs.getString("APELLIDO_P"));
+                log.setApellidoM(rs.getString("APELLIDO_M"));
+                log.setFechaNacimiento(rs.getDate("F_NACIMIENTO"));
+                log.setImagen(rs.getBlob("IMAGEN"));
+                log.setEdad(rs.getString("EDAD"));
+                log.setGenero(rs.getString("GENERO"));
+                
+            }
+            con.close();
+            
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println("Error en LogIn " + e.getMessage());
+        } finally {
+            return log;
+        }
+        
+    }
 }

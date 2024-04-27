@@ -26,6 +26,17 @@ public class Usuario {
         this.Username = username;
         this.Contra = contra;
     }
+    
+    public Usuario(int IdUsuario, String Username, String Nombres, String ApellidoP, String ApellidoM, String Correo, String Contra, Blob Imagen){
+        this.IdUsuario = IdUsuario;
+        this.Username = Username;
+        this.Correo = Correo;
+        this.Contra = Contra;
+        this.Nombres = Nombres;
+        this.ApellidoP = ApellidoP;
+        this.ApellidoM = ApellidoM;
+        this.Imagen = Imagen;
+    }
 
     public Usuario(String Username, String Correo, String Contra, String Nombres, String ApellidoP, String ApellidoM, Date FechaNacimiento, Blob Imagen, String Genero) {
         this.Username = Username;

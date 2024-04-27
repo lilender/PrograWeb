@@ -70,35 +70,57 @@ if (usuario == null){
             
             <div class="col-md-5">
                 <div class="card-back">
+                    <div id="alert">
+                        <%
+                        if(request.getAttribute("error") != null){
+                            %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("error") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        if(request.getAttribute("success") != null){
+                            %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("success") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        %>
+                    </div>
                         <span class="profile-image">
-                            <img src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="Profile">
+                            <img id="previewImage" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="Profile">
                         </span>
                     <div class="row align-items-center">
-                        <div class="col-md-12 align-items-center">
+                        <form class="col-md-12 align-items-center" action="ProfileServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionProfile(true)">
                             <span><h1 id="Susername"><%out.println(usuario.getUsername());%></h1></span>
                             <div class="box-input">
-                                <form action="/upload" method="post" enctype="multipart/form-data">
-                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="<%out.println(usuario.getUsername());%>" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="Iname" name="Iname" placeholder="<%out.println(usuario.getNombres());%>" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="ILastname" name="ILastname" placeholder="<%out.println(usuario.getApellidoP());%>" style="margin: .7rem; display: none;">                        
-                                    <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="<%out.println(usuario.getApellidoM());%>" style="margin: .7rem; display: none;">       
-                                    <input class="input" type="email" id="Imail" name="Imail" placeholder="<%out.println(usuario.getCorreo());%>" style="margin: .7rem; display: none;">    
-                                    <input class="input" type="password" id="Ipassword" name="Imail" placeholder="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
+                                <input type="hidden" id="IuserId" name="IuserId" value="<%out.println(usuario.getIdUsuario());%>">
+                                <input class="input" type="text" id="Iusername" name="Iusername" value="<%out.println(usuario.getUsername());%>" style="margin: .7rem; display: none;">
+                                <input class="input" type="text" id="Iname" name="Iname" value="<%out.println(usuario.getNombres());%>" style="margin: .7rem; display: none;">
+                                <input class="input" type="text" id="ILastname" name="ILastname" value="<%out.println(usuario.getApellidoP());%>" style="margin: .7rem; display: none;">                        
+                                <input class="input" type="text" id="ILastname2" name="ILastname2" value="<%out.println(usuario.getApellidoM());%>" style="margin: .7rem; display: none;">       
+                                <input class="input" type="email" id="Imail" name="Imail" value="<%out.println(usuario.getCorreo());%>" style="margin: .7rem; display: none;">    
+                                <input class="input" type="password" id="Ipassword" name="Ipassword" value="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
 
-                                    <div class="box-input">
-                                        <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;">
-                                        <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
-                                    </div>                                    
-                                </form>
+                                <div class="box-input">
+                                    <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;" onchange="previewFile()">
+                                    <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
+                                </div>
                             </div>
                             <span><p id="Sname"><%out.println(usuario.getNombres());%></p></span>
                             <span><p id="Sage"><%out.println(usuario.getEdad());%></p></span>
                             <span><p id="Smail"><%out.println(usuario.getCorreo());%></p></span>
-                            <button id="BEditData" class="button-primary">Editar Perfil</button>
-                            <button id="BEditPassword" class="button-primary" style="display: none;">Editar Contraseña</button>
-                            <button id="BSaveData" class=" button-primary" style="display: none;">Guardar Información</button>
-                            <button id="BLogOut" class="button-primary" style="display: flex; margin: 0 auto" onclick="logOut()">Cerrar Sesión</button>
-                        </div>
+                            <button id="BEditData" type="button" class="button-primary">Editar Perfil</button>
+                            <button id="BEditPassword" type="button" class="button-primary" style="display: none;">Editar Contraseña</button>
+                            <button id="BSaveData" type="submit" class=" button-primary" style="display: none;">Guardar Información</button>
+                        </form>
+                        <form action="LogOutServlet" method="post">
+                            <button id="BLogOut" type="submit" class="button-primary" style="display: flex; margin: 0 auto">Cerrar Sesión</button>
+                        </form>
+                            
                     </div>
                     
                 </div>

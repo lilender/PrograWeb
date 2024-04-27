@@ -1,3 +1,14 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="entidades.Usuario"%>
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+
+if (usuario == null){
+    response.sendRedirect("dashboard.jsp");
+} else {
+    out.println(usuario.getUsername());
+}
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -31,7 +42,7 @@
                 <li class="row search-container" style="width: 61%;">
                     <form action="dashboard.jsp">
                         <div class="input-group mb-6">
-                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <input type="text" placeholder="Buscar publicaciÃ³n..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -45,9 +56,19 @@
                 </a></li>
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
-                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        if(usuario != null){
+                        %>
+                            <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        } else {
+                        %>
+                            <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        }
+                        %>
                     </span>
-                    Perfil
+                    <%out.print(usuario.getUsername());%>
                 </a></li>
             </ul>    
         </nav>
@@ -58,7 +79,7 @@
             <h4>Dile al rebaño lo que piensas</h4>
 
             <div class="post-text" style="width: 80%; padding: 1rem;">
-                <form action="Post.html" method="post" enctype="multipart/form-data">
+                <form action="PostServlet" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 align-self-center">
                             <div class="square-bg-photo">
@@ -71,7 +92,7 @@
                         </div>
                         <div class="col-md-8">
                             <h3 id="H3Date"></h3>
-                            <h4>LittleEnder</h4>
+                            <h4><%out.print(usuario.getUsername());%></h4>
                             <br>
                             <div class="row justify-content-center" style="margin: 1rem;">
                                 <div class="col-md-6 align-items-center">
@@ -82,11 +103,13 @@
                                 <div class="row">
                                     <div class="dropdown-center">
                                         <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                                          Selecciona una Categoría
+                                          Selecciona una Categorí­a
                                         </button>
                                         <ul class="dropdown-menu content">
-                                          <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
-                                          <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
+                                          <li class="dropdown-item content-item">Hobbies</li>
+                                          <li class="dropdown-item content-item">Mascotas</li>
+                                          <li class="dropdown-item content-item"><input type="text" placeholder="Nueva Categoría" style="width: 100%;"></li>
+
                                         </ul>
                                     </div>
                                 </div>
