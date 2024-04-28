@@ -1,12 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <%@ page import="entidades.Usuario" %>
+<%@ page import="entidades.Publicacion" %>
 <%Usuario usuario = (Usuario)session.getAttribute("Usuario");
-
-if (usuario == null){
-    response.sendRedirect("dashboard.jsp");
-} else {
-    out.println(usuario.getUsername());
-}
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,12 +52,20 @@ if (usuario == null){
                 </a></li>
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
-                        
-                        <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
-                        
+                        <%
+                        if(usuario != null){
+                        %>
+                            <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        } else {
+                        %>
+                            <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        }
+                        %>
                     </span>
                     <%
-                    if(session.getAttribute("Usuario") != null){
+                    if(usuario != null){
                         out.print(usuario.getUsername());
                     } else {
                         %>Perfil<%
@@ -74,158 +78,69 @@ if (usuario == null){
 
     <body class="container-fluid">
         <div class="second-grey-background row align-items-center">
+            <div id="alert">
+                        <%
+                        if(request.getAttribute("error") != null){
+                            %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("error") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        if(request.getAttribute("success") != null){
+                            %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("success") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        %>
+            </div>
             <h4>Entérate de todas las noticias del rebaño</h4>
-
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
+            <%
+                List<Publicacion> publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                for (Publicacion post : publicaciones) {
+                    if(post.getImagen() != null){
+                    %>
+                    <div class="post-text">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="stack">
+                                    <div class="card">
+                                        <div class="post-img">
+                                            <img class="image" src="data:image/jpeg;base64,<%=post.getImageAsBase64()%>">
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-md-9" style="font-size: 2.6rem;">
+                                <h3><%out.println(post.getFormattedDate());%></h3>
+                                <h4><%out.println(post.getUsuario());%></h4>
+                                <br>
+                                <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                <p class="content-post"><%out.println(post.getContenido());%></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
+                    <%
+                    } else {
+                    %>
+                    <div class="post-text">
+                        <h3><%out.println(post.getFormattedDate());%></h3>
+                        <h4><%out.println(post.getUsuario());%></h4>
                         <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
+                        <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                        <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                        <p class="content-post"><%out.println(post.getContenido());%></p>
                     </div>
-                </div>
-            </div>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, consecse kvna ev na wifna lnv jaenvj aenoiaeio jeaiof jenva lnv kldm vaej fiejof ao ijfk laj ojei fjoi eaj fi oje  oeiaf jo aejfoaiejfojaeftetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="post-text">
-                <h3>09/02/2024</h3>
-                <h4>LittleEnder</h4>
-                <br>
-                <h1>Hoy compré una oveja</h1>
-                <h2>Mascotas</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-            </div>
-            <div class="post-text">
-                <h3>09/02/2024</h3>
-                <h4>LittleEnder</h4>
-                <br>
-                <h1>Hoy compré una oveja</h1>
-                <h2>Mascotas</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-            </div>
-            <div class="post-text">
-                <h3>09/02/2024</h3>
-                <h4>LittleEnder</h4>
-                <br>
-                <h1>Hoy compré una oveja</h1>
-                <h2>Mascotas</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-            </div>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
-                    </div>
-                </div>
-            </div>
+                    <%
+                    }
+                }
+            %>
+            
         </div>
         
         <div class="row align-items-center">

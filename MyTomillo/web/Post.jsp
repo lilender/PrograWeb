@@ -1,3 +1,9 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="entidades.Usuario"%>
+
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -5,6 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
         <!--Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Sketch">
@@ -14,7 +22,7 @@
         
         <!--CSS-->
         <link rel="stylesheet" href="Style.css">
-
+        
         <title>MyTomillo</title>
         <link rel="icon"  type="image/png" href="pictures/MyTomillo.png">
     </head>
@@ -45,9 +53,19 @@
                 </a></li>
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
-                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        if(usuario != null){
+                        %>
+                            <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        } else {
+                        %>
+                            <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        }
+                        %>
                     </span>
-                    Perfil
+                    <%out.print(usuario.getUsername());%>
                 </a></li>
             </ul>    
         </nav>
@@ -58,20 +76,43 @@
             <h4>Dile al rebaño lo que piensas</h4>
 
             <div class="post-text" style="width: 80%; padding: 1rem;">
-                <form action="Post.html" method="post" enctype="multipart/form-data">
+                <div id="alert">
+                        <%
+                        if(request.getAttribute("error") != null){
+                            %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("error") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        if(request.getAttribute("success") != null){
+                            %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("success") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        %>
+                    </div>
+                <form action="PostServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionPost()">
+                    <input type="hidden" id="IuserId" name="IuserId" value="<%out.println(usuario.getIdUsuario());%>">
+                    <input type="hidden" id="CategoriaSeleccionada" name="CategoriaSeleccionada" value="">
+
                     <div class="row">
                         <div class="col-md-4 align-self-center">
                             <div class="square-bg-photo">
-                                <img src="pictures/PhotoDefault.png" alt="MyTomillo">
+                                <img id="previewImage" src="pictures/PhotoDefault.png" alt="MyTomillo">
                             </div>
                             <div class="box-input" >
-                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;">
+                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile()">
                                 <label class="label-file" for="file" style="width: 70%; height: 100%; background: #a4c780b7;">Agregar imagen</label>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <h3 id="H3Date"></h3>
-                            <h4>LittleEnder</h4>
+                            <h4><%out.print(usuario.getUsername());%></h4>
                             <br>
                             <div class="row justify-content-center" style="margin: 1rem;">
                                 <div class="col-md-6 align-items-center">
@@ -82,17 +123,27 @@
                                 <div class="row">
                                     <div class="dropdown-center">
                                         <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                                          Selecciona una Categoría
+                                          Selecciona una Categorí­a
                                         </button>
-                                        <ul class="dropdown-menu content">
-                                          <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
-                                          <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
+                                        <ul class="dropdown-menu content" id="categoryList">
+                                            <%
+                                            List<String> categorias = (List<String>)request.getAttribute("categorias");
+
+                                            for (String cat : categorias) {
+                                                out.println("<li class=\"dropdown-item content-item\">" + cat + "</li>");
+                                            }
+                                            %>
+                                          <li class="">
+                                                <input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 60%">
+                                                <button type="button" id="addCategoryButton">Agregar</button>
+                                          </li>
+
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-12">
-                                        <textarea id="post" class="input" type="text" style="width: 100%; height:19rem; resize: none;" placeholder="Escribe lo que piensas..."></textarea>
+                                        <textarea id="post" name="post" class="input" type="text" style="width: 100%; height:19rem; resize: none;" placeholder="Escribe lo que piensas..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -110,12 +161,32 @@
         </div>
     </body>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--JQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+        <script>
+        $(document).ready(function() {
+            $("#addCategoryButton").click(function() {
+                var newCategoryInput = document.getElementById("newCategoryInput");
+                var newCategoryName = newCategoryInput.value.trim();
+                if (newCategoryName !== "") {
+                    var newItem = document.createElement("li");
+                    newItem.classList.add("dropdown-item", "content-item");
+                    newItem.textContent = newCategoryName;
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-    <!--SCRIPTS-->
-    <script src="script.js"></script>
+                    var categoryList = document.getElementById("categoryList");
+                    categoryList.insertBefore(newItem, categoryList.lastElementChild);
+                    
+                    $('.dropdown-item').click(function(){
+                        var text = $(this).text(); // Obtener el texto de la opción seleccionada
+                        $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
+                        $('#CategoriaSeleccionada').val(text);
+                    });
+
+                    newCategoryInput.value = "";
+                }
+            });
+        });
+        </script>
+
 </html>

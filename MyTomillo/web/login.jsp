@@ -62,27 +62,29 @@
             </div>
             
             <div class="grey-background col-md-6">
-                <%
-                if(request.getAttribute("error") != null){
-                    %>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong><%= request.getAttribute("error") %></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                <div id="alert">
                     <%
-                }
-                if(request.getAttribute("success") != null){
+                    if(request.getAttribute("error") != null){
+                        %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= request.getAttribute("error") %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <%
+                    }
+                    if(request.getAttribute("success") != null){
+                        %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong><%= request.getAttribute("success") %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <%
+                    }
                     %>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong><%= request.getAttribute("success") %></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <%
-                }
-                %>
+                </div>
                 <img src="pictures/MyTomilloText.png" alt="MyTomillo" style="width: 35%; padding: 1rem;">
                 
-                <form id ="formLogin" action="LogInServlet" method="post">
+                <form id ="formLogin" action="LogInServlet" method="post" onsubmit="return validacionLogIn()">
                     <div class="align-self-center box-input">
                         <div class="d-flex justify-content-center">
                             <input class="input-login" type="text" id="Iusername" name="Iusername" placeholder="Ingrese Nombre de Usuario">

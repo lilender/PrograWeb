@@ -42,10 +42,10 @@ public class SignInServlet extends HttpServlet {
         
         String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$";
         Pattern pattern = Pattern.compile(regex);
-
+        
         String names = request.getParameter("Iname");
         if (!pattern.matcher(names).matches()) {
-            request.setAttribute("error", "Ingrese su nombre. Recuerde solo usar carácteres alfanuméricos.");
+            request.setAttribute("error", "Nombre inválido. Recuerde solo usar carácteres alfanuméricos.");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;
@@ -53,14 +53,14 @@ public class SignInServlet extends HttpServlet {
         
         String lastname = request.getParameter("ILastname");
         if (!pattern.matcher(lastname).matches()){
-            request.setAttribute("error", "Ingrese su apellido paterno. Recuerde solo usar carácteres alfanuméricos.");
+            request.setAttribute("error", "Apellido paterno inválido. Recuerde solo usar carácteres alfanuméricos.");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;
         }
         String lastname2 = request.getParameter("ILastname2");
         if (!pattern.matcher(lastname2).matches()){
-            request.setAttribute("error", "Ingrese su apellido materno. Recuerde solo usar carácteres alfanuméricos.");
+            request.setAttribute("error", "Apellido materno inválido. Recuerde solo usar carácteres alfanuméricos.");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;
@@ -69,7 +69,7 @@ public class SignInServlet extends HttpServlet {
         pattern = Pattern.compile(regex);
         String email = request.getParameter("Imail");
         if (!pattern.matcher(email).matches()){
-            request.setAttribute("error", "Ingrese su correo electrónico. Recuerde usar un formato válido de correo.");
+            request.setAttribute("error", "Correo electrónico inválido. Recuerde usar un formato válido de correo.");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;
@@ -128,14 +128,14 @@ public class SignInServlet extends HttpServlet {
         pattern = Pattern.compile(regex);
         String pass = request.getParameter("Ipassword");
         if (!pattern.matcher(pass).matches()){
-            request.setAttribute("error", "Ingrese su contraseña. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación");
+            request.setAttribute("error", "Contraseña inválida. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;
         }
         String pass2 = request.getParameter("Ipassword2");
         if ("".equals(pass2)){
-            request.setAttribute("error", "Ingrese su contraseña de nuevo.");
+            request.setAttribute("error", "Ingrese la confirmación de su contraseña.");
             rd = request.getRequestDispatcher("signin.jsp");
             rd.forward(request, response);
             return;

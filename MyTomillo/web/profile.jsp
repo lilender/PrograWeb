@@ -1,13 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.List"%>
 <%@page import="entidades.Usuario"%>
-<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+<%@page import="entidades.Publicacion"%>
 
-if (usuario == null){
-    response.sendRedirect("dashboard.jsp");
-} else {
-    out.println(usuario.getUsername());
-}
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,35 +67,57 @@ if (usuario == null){
             
             <div class="col-md-5">
                 <div class="card-back">
+                    <div id="alert">
+                        <%
+                        if(request.getAttribute("error") != null){
+                            %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("error") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        if(request.getAttribute("success") != null){
+                            %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong><%= request.getAttribute("success") %></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <%
+                        }
+                        %>
+                    </div>
                         <span class="profile-image">
-                            <img src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="Profile">
+                            <img id="previewImage" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="Profile">
                         </span>
                     <div class="row align-items-center">
-                        <div class="col-md-12 align-items-center">
+                        <form class="col-md-12 align-items-center" action="ProfileServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionProfile(true)">
                             <span><h1 id="Susername"><%out.println(usuario.getUsername());%></h1></span>
                             <div class="box-input">
-                                <form action="/upload" method="post" enctype="multipart/form-data">
-                                    <input class="input" type="text" id="Iusername" name="Iusername" placeholder="<%out.println(usuario.getUsername());%>" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="Iname" name="Iname" placeholder="<%out.println(usuario.getNombres());%>" style="margin: .7rem; display: none;">
-                                    <input class="input" type="text" id="ILastname" name="ILastname" placeholder="<%out.println(usuario.getApellidoP());%>" style="margin: .7rem; display: none;">                        
-                                    <input class="input" type="text" id="ILastname2" name="ILastname2" placeholder="<%out.println(usuario.getApellidoM());%>" style="margin: .7rem; display: none;">       
-                                    <input class="input" type="email" id="Imail" name="Imail" placeholder="<%out.println(usuario.getCorreo());%>" style="margin: .7rem; display: none;">    
-                                    <input class="input" type="password" id="Ipassword" name="Imail" placeholder="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
+                                <input type="hidden" id="IuserId" name="IuserId" value="<%out.println(usuario.getIdUsuario());%>">
+                                <input class="input" type="text" id="Iusername" name="Iusername" value="<%out.println(usuario.getUsername());%>" style="margin: .7rem; display: none;">
+                                <input class="input" type="text" id="Iname" name="Iname" value="<%out.println(usuario.getNombres());%>" style="margin: .7rem; display: none;">
+                                <input class="input" type="text" id="ILastname" name="ILastname" value="<%out.println(usuario.getApellidoP());%>" style="margin: .7rem; display: none;">                        
+                                <input class="input" type="text" id="ILastname2" name="ILastname2" value="<%out.println(usuario.getApellidoM());%>" style="margin: .7rem; display: none;">       
+                                <input class="input" type="email" id="Imail" name="Imail" value="<%out.println(usuario.getCorreo());%>" style="margin: .7rem; display: none;">    
+                                <input class="input" type="password" id="Ipassword" name="Ipassword" value="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
 
-                                    <div class="box-input">
-                                        <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;">
-                                        <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
-                                    </div>                                    
-                                </form>
+                                <div class="box-input">
+                                    <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;" onchange="previewFile()">
+                                    <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
+                                </div>
                             </div>
                             <span><p id="Sname"><%out.println(usuario.getNombres());%></p></span>
                             <span><p id="Sage"><%out.println(usuario.getEdad());%></p></span>
                             <span><p id="Smail"><%out.println(usuario.getCorreo());%></p></span>
-                            <button id="BEditData" class="button-primary">Editar Perfil</button>
-                            <button id="BEditPassword" class="button-primary" style="display: none;">Editar Contraseña</button>
-                            <button id="BSaveData" class=" button-primary" style="display: none;">Guardar Información</button>
-                            <button id="BLogOut" class="button-primary" style="display: flex; margin: 0 auto" onclick="logOut()">Cerrar Sesión</button>
-                        </div>
+                            <button id="BEditData" type="button" class="button-primary">Editar Perfil</button>
+                            <button id="BEditPassword" type="button" class="button-primary" style="display: none;">Editar Contraseña</button>
+                            <button id="BSaveData" type="submit" class=" button-primary" style="display: none;">Guardar Información</button>
+                        </form>
+                        <form action="LogOutServlet" method="post">
+                            <button id="BLogOut" type="submit" class="button-primary" style="display: flex; margin: 0 auto">Cerrar Sesión</button>
+                        </form>
+                            
                     </div>
                     
                 </div>
@@ -110,105 +129,78 @@ if (usuario == null){
                         <div class="col-md-12 align-items-center">
 
                             <h1 style="font-size: 2.6rem; color: #f6f3f0; -webkit-text-stroke: .01rem #f6f3f0;">Publicaciones de <%out.println(usuario.getUsername());%></h1>
-
-                            <div class="post-text" style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="stack">
-                                            <div class="card">
-                                                <div class="post-img">
-                                                    <img class="image" src="pictures/4.jpg" alt="stock">
+                            <%
+                                List<Publicacion> publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                                for (Publicacion post : publicaciones) {
+                                    if(post.getImagen() != null){
+                                    %>
+                                    <div class="post-text" style="width: 100%;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="stack">
+                                                    <div class="card">
+                                                        <div class="post-img">
+                                                            <img class="image" src="data:image/jpeg;base64,<%=post.getImageAsBase64()%>">
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-9" style="font-size: 2.6rem;">
+                                                <h3><%out.println(post.getFormattedDate());%></h3>
+                                                <h4><%out.println(usuario.getUsername());%></h4>
+                                                <br>
+                                                <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                                <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                                <p class="content-post"><%out.println(post.getContenido());%></p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex flex-row-reverse">
+                                                <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                                      </svg>
+                                                </button>
+                                                <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                      </svg>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9" style="font-size: 2.6rem;">
-                                        <h3>09/02/2024</h3>
-                                        <h4>LittleEnder</h4>
+                                    <%
+                                    } else {
+                                    %>
+                                    <div class="post-text" style="width: 100%;">
+                                        <h3><%out.println(post.getFormattedDate());%></h3>
+                                        <h4><%out.println(usuario.getUsername());%></h4>
                                         <br>
-                                        <h1 class="title">Hoy compré una oveja</h1>
-                                        <h2 class="class">Mascotas</h2>
-                                        <p class="content-post">Lorem ipsum dolor sit amet, ct amet purus.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                              </svg>
-                                        </button>
-                                        <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                              </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                        <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                        <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                        <p class="content-post"><%out.println(post.getContenido());%></p>
 
-                            <div class="post-text" style="width: 100%;">
-                                <h3>09/02/2024</h3>
-                                <h4>LittleEnder</h4>
-                                <br>
-                                <h1 class="title">Hoy compré una oveja</h1>
-                                <h2 class="class">Mascotas</h2>
-                                <p class="content-post">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-                                
-                                <div>
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                              </svg>
-                                        </button>
-                                        <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                              </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="post-text" style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="stack">
-                                            <div class="card">
-                                                <div class="post-img">
-                                                    <img class="image" src="pictures/4.jpg" alt="stock">
-                                                </div>
+                                        <div>
+                                            <div class="d-flex flex-row-reverse">
+                                                <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                                      </svg>
+                                                </button>
+                                                <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                      </svg>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9" style="font-size: 2.6rem;">
-                                        <h3>09/02/2024</h3>
-                                        <h4>LittleEnder</h4>
-                                        <br>
-                                        <h1 class="title">Hoy compré una oveja</h1>
-                                        <h2 class="class">Mascotas</h2>
-                                        <p class="content-post">Lorem ipsum dolor sit amet, ct amet purus.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                              </svg>
-                                        </button>
-                                        <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                              </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                    <%
+                                    }
+                                }
+                            %>
 
                         </div>
                     </div>
