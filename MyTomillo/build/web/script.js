@@ -23,7 +23,7 @@ function toSignIn() {
   }
 
 function toHome(){
-    window.location.href = 'dashboard.jsp';
+    window.location.href = 'DashboardServlet';
 }
 function toPost() {
     window.location.href = 'PostServlet';
@@ -36,7 +36,7 @@ function toProfile() {
 }
 
 function toDashboard(){
-    window.location.href = 'dashboard.jsp';
+    window.location.href = 'DashboardServlet';
 }
 
 //-----------------------------------Obtiene la fecha actual

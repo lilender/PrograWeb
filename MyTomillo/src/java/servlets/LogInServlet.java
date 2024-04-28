@@ -33,7 +33,7 @@ public class LogInServlet extends HttpServlet {
         if(usu.getIdUsuario()!= 0){
             HttpSession session = request.getSession();
             session.setAttribute("Usuario", usu);
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("DashboardServlet");
         }else{
             request.setAttribute("error", "Usuario o contraseña incorrectos");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

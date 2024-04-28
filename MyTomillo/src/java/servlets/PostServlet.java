@@ -92,9 +92,7 @@ public class PostServlet extends HttpServlet {
         switch (result) {
             case 1 -> {
                 request.setAttribute("success", "Publicación creada.");
-                pantalla = "dashboard.jsp";
-                rd = request.getRequestDispatcher(pantalla);
-                rd.forward(request, response);
+                response.sendRedirect("DashboardServlet");
             }
             default -> {
                 request.setAttribute("error", "No se pudo guardar la información, intente de nuevo.");

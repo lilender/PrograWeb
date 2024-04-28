@@ -5,12 +5,6 @@
 <%@page import="entidades.Publicacion"%>
 
 <%Usuario usuario = (Usuario)session.getAttribute("Usuario");
-
-if (usuario == null){
-    response.sendRedirect("dashboard.jsp");
-} else {
-    out.println(usuario.getUsername());
-}
 %>
 <!DOCTYPE html>
 <html lang="es">

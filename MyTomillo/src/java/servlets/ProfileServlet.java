@@ -49,6 +49,9 @@ public class ProfileServlet extends HttpServlet {
         DAOPublicacion daopost = new DAOPublicacion();
         publicaciones = daopost.getUserPosts(usuario.getIdUsuario());
         
+        request.setAttribute("success", request.getAttribute("success"));
+        request.setAttribute("error", request.getAttribute("error"));
+
         request.setAttribute("publicaciones", publicaciones);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
@@ -151,12 +154,18 @@ public class ProfileServlet extends HttpServlet {
         
                 Usuario newUsuario = new Usuario();
                 newUsuario = (Usuario)u;
-                
+//                
+//                HttpSession session = request.getSession();
+//                session.setAttribute("Usuario", newUsuario);
+//                request.setAttribute("success", "Información guardada correctamente.");
+//                rd = request.getRequestDispatcher("ProfileServlet");
+//                response.sendRedirect("ProfileServlet");
+//                rd.forward(request, response);
                 HttpSession session = request.getSession();
                 session.setAttribute("Usuario", newUsuario);
                 request.setAttribute("success", "Información guardada correctamente.");
-                rd = request.getRequestDispatcher("profile.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("ProfileServlet");
+                
             }
             case 2 -> {
                 request.setAttribute("error", "El nombre de usuario ya existe.");

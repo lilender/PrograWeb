@@ -203,4 +203,36 @@ public class DAOUsuario {
         }
         
     }
+    
+    public String getusername(int ID){
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT USERNAME FROM TB_USUARIOS WHERE ID_USUARIO = ?";
+        
+        String usu = "";
+        
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);    
+            ps.setInt(1, ID);
+            rs = ps.executeQuery();
+            
+            
+            while(rs.next()){
+                usu = rs.getString("USERNAME");
+            }
+            con.close();
+            
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println("Error en LogIn " + e.getMessage());
+        } finally {
+            return usu;
+        }
+    }
+    
 }

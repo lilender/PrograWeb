@@ -7,6 +7,7 @@ import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import DAO.DAOCategoria;
+import DAO.DAOUsuario;
 import java.sql.SQLException;
 import java.util.Base64;
 
@@ -45,7 +46,12 @@ public class Publicacion {
     public int getIdUsuario() {
         return IdUsuario;
     }
-
+    
+    public String getUsuario() {
+        DAOUsuario daousu = new DAOUsuario();
+        return daousu.getusername(IdUsuario);
+    }
+    
     public void setIdUsuario(int IdUsuario) {
         this.IdUsuario = IdUsuario;
     }
