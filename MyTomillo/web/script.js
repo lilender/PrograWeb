@@ -17,12 +17,6 @@ function showPage() {
   document.getElementById("myFoot").style.display = "flex";
 }
 
-//-----------------------------------Dropdown aka select
-$('.dropdown-item').click(function(){
-    var text = $(this).text(); // Obtener el texto de la opción seleccionada
-    $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
-});
-
 //-----------------------------------Funciones para desplazarse entre las vistas
 function toSignIn() {
     window.location.href = 'signin.jsp';
@@ -31,14 +25,14 @@ function toSignIn() {
 function toHome(){
     window.location.href = 'dashboard.jsp';
 }
-function toPost(){
-    window.location.href = 'post.jsp';
+function toPost() {
+    window.location.href = 'PostServlet';
 }
 function toAdvancedSearch(){
     window.location.href = 'AdvancedSearch.html';
 }
 function toProfile() {
-    window.location.href = 'profile.jsp';
+    window.location.href = 'ProfileServlet';
 }
 
 function toDashboard(){
@@ -106,8 +100,6 @@ function previewFile() {
 
     if (file) {
         reader.readAsDataURL(file);
-    } else {
-        preview.src = "pictures/TomilloProfileShadow.png";
     }
 }
 function validacionSignIn() {
@@ -502,3 +494,48 @@ $('.BDeletePost').click(function(){
     var post = $(this).closest('.post-text');
     post.remove();
 });
+
+
+//--------------------------------POST FUNCTIONS
+$('.dropdown-item').click(function(){
+    var text = $(this).text(); // Obtener el texto de la opción seleccionada
+    $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
+    $('#CategoriaSeleccionada').val(text);
+});
+
+function validacionPost(){
+    var titulo = document.getElementById("Iname");
+    var contenido = document.getElementById("post");
+    var categoria = document.getElementById("CategoriaSeleccionada");
+    
+    var alertbox = document.getElementById("alert");
+    var alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+    alertDiv.setAttribute('role', 'alert');
+    
+    if (titulo.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese el título de su publicación</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+    if (contenido.value.trim() === "") {
+        alertDiv.innerHTML = 
+                '<strong>Ingrese texto en su post</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } 
+    if (categoria.value.trim() === "") {
+        alertDiv.innerHTML = 
+                '<strong>Seleccione una categoría</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } 
+    
+    return true; // Allow form submission
+}

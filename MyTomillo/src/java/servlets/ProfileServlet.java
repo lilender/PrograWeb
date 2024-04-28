@@ -6,6 +6,8 @@ package servlets;
 
 import DAO.DAOUsuario;
 import entidades.Usuario;
+import entidades.Publicacion;
+import DAO.DAOPublicacion;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +24,7 @@ import java.sql.Date;
 import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -36,7 +39,22 @@ import java.util.regex.Pattern;
                  maxFileSize = 1024 * 1024 * 10,      // 10MB
                  maxRequestSize = 1024 * 1024 * 50)  // 50MB
 public class ProfileServlet extends HttpServlet {
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario)session.getAttribute("Usuario");
+        
+        List<Publicacion> publicaciones;
+        DAOPublicacion daopost = new DAOPublicacion();
+        publicaciones = daopost.getUserPosts(usuario.getIdUsuario());
+        
+        request.setAttribute("publicaciones", publicaciones);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
+        dispatcher.forward(request, response);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
