@@ -95,7 +95,7 @@
                             <%
                         }
                         %>
-                    </div>
+                </div>
                 <form action="PostServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionPost()">
                     <input type="hidden" id="IuserId" name="IuserId" value="<%out.println(usuario.getIdUsuario());%>">
                     <input type="hidden" id="CategoriaSeleccionada" name="CategoriaSeleccionada" value="">

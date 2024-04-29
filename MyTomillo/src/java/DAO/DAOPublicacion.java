@@ -139,4 +139,36 @@ public class DAOPublicacion {
             return log;
         }
     }
+    
+    public int deletepost(int IdPost) {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "UPDATE TB_PUBLICACIONES SET ESTADO = 0 WHERE ID_PUBLICACION = ?";
+        
+        int result = 0;
+
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, IdPost);
+            
+            ps.executeUpdate();
+            
+            con.close();
+            result = 1;
+            
+        } catch (SQLIntegrityConstraintViolationException e){
+            result = 2;
+        } 
+        catch(SQLException | ClassNotFoundException e){
+            result = 0;
+        } finally {
+            return result;
+        }
+    }
 }

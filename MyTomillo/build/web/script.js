@@ -238,7 +238,7 @@ function validacionSignIn() {
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     } else {
-        if (pass2Input !== passInput) {
+        if (pass2Input.value.trim() !== passInput.value.trim()) {
             alertDiv.innerHTML = 
             '<strong>Las contraseñas no coinciden.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -453,47 +453,77 @@ $('.BEditPost').click(function(){
     var title = post.find('.title').text();
     var classc = post.find('.class').text();
     var contentPost = post.find('.content-post').text();
+    var imageSource = post.find('.image').attr('src');
+    if (!imageSource) {
+        imageSource = "pictures/PhotoDefault.png";
+    }
 
-    var form = '<div class="formEdit"><form method="post" enctype="multipart/form-data" action="profile.jsp">'+
-        '<div class="row justify-content-center"><div class="col-md-3 align-self-center"><div class="square-bg-photo">'+
-        '<img src="pictures/PhotoDefault.png" alt="MyTomillo"></div><div class="box-input">' +
-        '<input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;">' +
-        '<label class="label-file" for="file" style="width: 100%; height: 100%; background: #a4c780b7;">Agregar imagen</label></div>'
-        + '</div> <div class="col-md-9">'
-        + '<div class="box-input"><input type="text" id="Iname" name="Iname" placeholder="' + title +
-        '" style="width: 100%;"></div> <div class="row"><div class="dropdown-center">' +
-        '<button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">'
-        + classc + '</button> <ul class="dropdown-menu content"> <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>'
-        + '<li><a class="dropdown-item content-item" href="#">Mascotas</a></li></ul></div></div><div class="row justify-content-center">'
-        + '<div class="col-md-12"><textarea id="post" class="input" type="text" style="width: 100%; height:19rem; resize: none;" placeholder="'
-        + contentPost + '"></textarea></div></div><input type="submit" class="button-login content="Actualizar"></div></form>';
+    post.empty();
+    var form = '<div class="formEdit">' +
+    '<form method="post" enctype="multipart/form-data" action="profile.jsp">' +
+        '<div class="row justify-content-center">' +
+            '<div class="col-md-3 align-self-center">' +
+                '<div class="square-bg-photo">' +
+                    '<img src="' + imageSource + '" alt="MyTomillo">' +
+                '</div>' +
+                '<div class="box-input">' +
+                    '<input type="file" name="filepost" id="filepost" class="inputfile" style="width: 70%; height: 100%;">' +
+                    '<label class="label-file" for="filepost" style="width: 100%; height: 100%; background: #a4c780b7;">Agregar imagen</label>' +
+                '</div>' +
+            '</div>' +
+            '<div class="col-md-9">' +
+                '<div class="box-input">' +
+                    '<input type="text" id="Inamepost" name="Inamepost" value="' + title + '" style="width: 100%;">' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="dropdown-center">' +
+                        '<button id="DDcategoriapost" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">' +
+                            classc +
+                        '</button>' +
+                        '<ul class="dropdown-menu content">' +
+                            '<li><a class="dropdown-item content-item" href="#">Hobbies</a></li>' +
+                            '<li><a class="dropdown-item content-item" href="#">Mascotas</a></li>' +
+                        '</ul>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="row justify-content-center">' +
+                    '<div class="col-md-12">' +
+                        '<textarea id="postpost" class="input" type="text" style="width: 100%; height:19rem; resize: none;">' +
+                            contentPost +
+                        '</textarea>' +
+                    '</div>' +
+                '</div>' +
+                '<input type="submit" class="button-login content="Actualizar">' +
+            '</div>' +
+        '</div>' +
+    '</form>';
 
+    
     post.append(form);
-    var title2 = post.find('.title').toggle();
-    var classc2 = post.find('.class').toggle();
-    var contentPost = post.find('.content-post').toggle();
-    var photo = post.find('.card').toggle();
-    var BEditPost = post.find('.BEditPost').toggle();
-    var BDeletePost = post.find('.BDeletePost').toggle();
 });
 
-//Nuevo post
-$('.BNewPost').click(function(){
-    var post = $(this).closest('.post-text');
-    var title2 = post.find('.title').toggle();
-    var classc2 = post.find('.class').toggle();
-    var contentPost = post.find('.content-post').toggle();
-    var photo = post.find('.card').toggle();
-    var BEditPost = post.find('.BEditPost').toggle();
-
-    var form = post.find('.formEdit').toggle();
-});
+//Nuevo post NO SE USA, NO EXISTE TAL BOTON
+//$('.BNewPost').click(function(){
+//    var post = $(this).closest('.post-text');
+//    var title2 = post.find('.title').toggle();
+//    var classc2 = post.find('.class').toggle();
+//    var contentPost = post.find('.content-post').toggle();
+//    var photo = post.find('.card').toggle();
+//    var BEditPost = post.find('.BEditPost').toggle();
+//
+//    var form = post.find('.formEdit').toggle();
+//});
 
 //Borrar post
-$('.BDeletePost').click(function(){
-    var post = $(this).closest('.post-text');
-    post.remove();
-});
+//$('.BDeletePost').click(function(){
+//    var post = $(this).closest('.post-text');
+//    post.remove();
+//});
+
+function confirmacionBorrarPost(){
+    //    AQUI HAY QUE PROGRAMAR LA CONFIRMACION DE BORRAR BOTON
+    return true;
+}
 
 
 //--------------------------------POST FUNCTIONS
