@@ -106,7 +106,7 @@
                                 <img id="previewImage" src="pictures/PhotoDefault.png" alt="MyTomillo">
                             </div>
                             <div class="box-input" >
-                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile()">
+                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile('previewImage','file')">
                                 <label class="label-file" for="file" style="width: 70%; height: 100%; background: #a4c780b7;">Agregar imagen</label>
                             </div>
                         </div>

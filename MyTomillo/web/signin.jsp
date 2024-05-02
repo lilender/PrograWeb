@@ -64,7 +64,7 @@
                             <div class="box-input">
                                 <img id="previewImage" src="pictures/TomilloProfileShadow.png" alt="Foto de perfil" style="width: 70%; margin-bottom: 1rem;">
                                 <br>
-                                <input type="file" name="file" id="file" class="inputfile" style="height: 2.7rem;" onchange="previewFile()">
+                                <input type="file" name="file" id="file" class="inputfile" style="height: 2.7rem;" onchange="previewFile('previewImage','file')">
                                 <label class="label-file" for="file" style="height: 2.7rem;"></label>
                             </div>
                             <div class="box-input" style="margin-bottom: 0rem;">

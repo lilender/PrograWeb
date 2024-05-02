@@ -23,39 +23,32 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author estra
  */
-@WebServlet(name = "PostServlet", urlPatterns = {"/PostServlet"})
+@WebServlet(name = "EditPostServlet", urlPatterns = {"/EditPostServlet"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-                 maxFileSize = 1024 * 1024 * 50,      // 50MB
-                 maxRequestSize = 1024 * 1024 * 100)  // 100MB
-public class PostServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
-        List<String> categorias;
-        DAOCategoria daocat = new DAOCategoria();
-        categorias = daocat.getcats();
-        
-        request.setAttribute("categorias", categorias);
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("post.jsp");
-        dispatcher.forward(request, response);
-    }
-    
+                 maxFileSize = 1024 * 1024 * 10,      // 10MB
+                 maxRequestSize = 1024 * 1024 * 50)  // 50MB
+public class EditPostServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("POST... POST");
         RequestDispatcher rd;
         
-        int id_usuario = Integer.parseInt(request.getParameter("IuserId").trim());
-        
+String idpost = request.getParameter("IpostId");
+System.out.println("ID Post: " + idpost); // Print the value of idpost to the console
+int id_post = Integer.parseInt(idpost.trim());
+
+
         String titulo = request.getParameter("Iname");
         
         String contenido = request.getParameter("post");
+        
+        //request.getParameter("IpostId")
         
         // Get the Part corresponding to the file input field
         Part filePart = request.getPart("file");
@@ -84,23 +77,27 @@ public class PostServlet extends HttpServlet {
         DAOCategoria daocat = new DAOCategoria();
         cat = daocat.add(cat);
         
-        Publicacion post = new Publicacion(id_usuario, titulo, contenido, image, cat.getIdCategoria());
-        DAOPublicacion daopost = new DAOPublicacion();
         
-        int result = daopost.newpost(post);
+        Publicacion post = new Publicacion( titulo, contenido, image, cat.getIdCategoria(), id_post);
+        
+        
+        DAOPublicacion daopost = new DAOPublicacion();
+        int result = daopost.updatepost(post);
+        
         String pantalla;
         switch (result) {
             case 1 -> {
-                request.setAttribute("success", "Publicación creada.");
-                response.sendRedirect("DashboardServlet");
+                request.setAttribute("success", "Publicación editada.");
+                response.sendRedirect("ProfileServlet");
             }
             default -> {
-                request.setAttribute("error", "No se pudo guardar la información, intente de nuevo.");
-                pantalla = "post.jsp";
+                request.setAttribute("error", "No se pudo editar la publicación, intente de nuevo.");
+                pantalla = "profile.jsp";
                 rd = request.getRequestDispatcher(pantalla);
                 rd.forward(request, response);
             }
         }
+        
     }
 
 

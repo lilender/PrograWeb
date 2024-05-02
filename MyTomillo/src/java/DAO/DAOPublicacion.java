@@ -58,6 +58,44 @@ public class DAOPublicacion {
         }
     }
     
+    public int updatepost(Object obj) {
+        post = (Publicacion)obj;
+        
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "UPDATE TB_PUBLICACIONES SET TITULO = ?, CONTENIDO = ?, IMAGEN = ?, ID_CATEGORIA = ? WHERE ID_PUBLICACION = ?;";
+        
+        int result = 0;
+
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            ps.setString(1, post.getTitulo());
+            ps.setString(2, post.getContenido());
+            ps.setBlob(3, post.getImagen());
+            ps.setInt(4, post.getIdCategoria());
+            ps.setInt(5, post.getIdPublicacion());
+            
+            ps.executeUpdate();
+            
+            con.close();
+            result = 1;
+            
+        } catch (SQLIntegrityConstraintViolationException e){
+            result = 2;
+        } 
+        catch(SQLException | ClassNotFoundException e){
+            result = 0;
+        } finally {
+            return result;
+        }
+    }
+    
     public List<Publicacion> getUserPosts(int IdUser){
         Connection con;
         PreparedStatement ps;

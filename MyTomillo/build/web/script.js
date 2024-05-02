@@ -89,9 +89,9 @@ function validacionLogIn() {
     return true; // Allow form submission
 }
 //--------------------------------SIGNIN FUNCTIONS
-function previewFile() {
-    var preview = document.getElementById('previewImage');
-    var file = document.getElementById('file').files[0];
+function previewFile(idimage, idpost) {
+    var preview = document.getElementById(idimage);
+    var file = document.getElementById(idpost).files[0];
     var reader = new FileReader();
 
     reader.onloadend = function () {
@@ -447,8 +447,9 @@ $("#BEditPassword").click(function(){
     }
 });
 
-//Editar post
-$('.BEditPost').click(function(){
+$(function() {
+    $('.BEditPost').click(function() {
+
     var post = $(this).closest('.post-text');
     var title = post.find('.title').text();
     var classc = post.find('.class').text();
@@ -457,38 +458,56 @@ $('.BEditPost').click(function(){
     if (!imageSource) {
         imageSource = "pictures/PhotoDefault.png";
     }
+    var idpost = post.find("#IpostId").attr('value');
+    idpost = idpost.trim();
+
+    var categorias = post.find("#categoriaspost").attr('value');
+    var categoriesArray = categorias.split(",");
+    
+    categorias = "";
+    categoriesArray.forEach(function(cat) {
+        categorias += '<li class="dropdown-item content-item">' + cat + '</li>';
+    });
+
 
     post.empty();
     var form = '<div class="formEdit">' +
-    '<form method="post" enctype="multipart/form-data" action="profile.jsp">' +
+    '<div id="alert'+idpost+'">' +
+    '</div>' +
+    '<form method="post" enctype="multipart/form-data" action="EditPostServlet" onsubmit="return validacionEditarPost(' + idpost + ')">' +
+        '<input type="hidden" id="IpostId" name="IpostId" value="' + idpost + '">' +
+        '<input type="hidden" id="CategoriaSeleccionada'+idpost+'" name="CategoriaSeleccionada" value="'+classc+'">' +
         '<div class="row justify-content-center">' +
             '<div class="col-md-3 align-self-center">' +
                 '<div class="square-bg-photo">' +
-                    '<img src="' + imageSource + '" alt="MyTomillo">' +
+                    '<img id="previewImage'+idpost+'" src="' + imageSource + '" alt="MyTomillo">' +
                 '</div>' +
                 '<div class="box-input">' +
-                    '<input type="file" name="filepost" id="filepost" class="inputfile" style="width: 70%; height: 100%;">' +
-                    '<label class="label-file" for="filepost" style="width: 100%; height: 100%; background: #a4c780b7;">Agregar imagen</label>' +
+                    '<input type="file" name="file" id="file' + idpost + '" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile(\'previewImage' + idpost + '\', \'file' + idpost + '\')">' +
+                    '<label class="label-file" for="file' + idpost + '" style="width: 100%; height: 100%; background: #a4c780b7;">Agregar imagen</label>' +
                 '</div>' +
             '</div>' +
             '<div class="col-md-9">' +
                 '<div class="box-input">' +
-                    '<input type="text" id="Inamepost" name="Inamepost" value="' + title + '" style="width: 100%;">' +
+                    '<input type="text" id="Iname'+idpost+'" name="Iname" value="' + title + '" style="width: 100%;">' +
                 '</div>' +
                 '<div class="row">' +
                     '<div class="dropdown-center">' +
-                        '<button id="DDcategoriapost" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">' +
+                        '<button id="DDcategoria'+idpost+'" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">' +
                             classc +
                         '</button>' +
-                        '<ul class="dropdown-menu content">' +
-                            '<li><a class="dropdown-item content-item" href="#">Hobbies</a></li>' +
-                            '<li><a class="dropdown-item content-item" href="#">Mascotas</a></li>' +
+                        '<ul class="dropdown-menu content" id="categoryList">' +
+                            categorias +
+                            '<li class="">' +
+                                '<input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 60%">' +
+                                '<button type="button" id="addCategoryButton">Agregar</button>' +
+                            '</li>' +
                         '</ul>' +
                     '</div>' +
                 '</div>' +
                 '<div class="row justify-content-center">' +
                     '<div class="col-md-12">' +
-                        '<textarea id="postpost" class="input" type="text" style="width: 100%; height:19rem; resize: none;">' +
+                        '<textarea id="post'+idpost+'" name="post" class="input" type="text" style="width: 100%; height:19rem; resize: none;">' +
                             contentPost +
                         '</textarea>' +
                     '</div>' +
@@ -500,7 +519,10 @@ $('.BEditPost').click(function(){
 
     
     post.append(form);
+    
+    });
 });
+
 
 //Nuevo post NO SE USA, NO EXISTE TAL BOTON
 //$('.BNewPost').click(function(){
@@ -519,6 +541,43 @@ $('.BEditPost').click(function(){
 //    var post = $(this).closest('.post-text');
 //    post.remove();
 //});
+
+function validacionEditarPost(idpost){
+    var titulo = document.getElementById("Iname"+idpost);
+    var contenido = document.getElementById("post"+idpost);
+    var categoria = document.getElementById("CategoriaSeleccionada"+idpost);
+    
+    var alertbox = document.getElementById("alert"+idpost);
+    var alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+    alertDiv.setAttribute('role', 'alert');
+    
+    if (titulo.value.trim() === "") {
+        alertDiv.innerHTML = 
+            '<strong>Ingrese el título de su publicación</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+    if (contenido.value.trim() === "") {
+        alertDiv.innerHTML = 
+                '<strong>Ingrese texto en su post</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } 
+    if (categoria.value.trim() === "") {
+        alertDiv.innerHTML = 
+                '<strong>Seleccione una categoría</strong>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+            alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    } 
+    
+    return true; // Allow form submission
+}
 
 function confirmacionBorrarPost(){
     //    AQUI HAY QUE PROGRAMAR LA CONFIRMACION DE BORRAR BOTON
@@ -569,3 +628,11 @@ function validacionPost(){
     
     return true; // Allow form submission
 }
+
+
+/*
+ * AJAX
+ * Herramienta para mandar solicitudes http?
+ * no es obligatorio usar ajax
+ * 
+ */

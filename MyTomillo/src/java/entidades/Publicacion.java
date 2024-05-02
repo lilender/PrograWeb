@@ -30,7 +30,13 @@ public class Publicacion {
         this.Imagen = Imagen;
         this.IdCategoria = IdCategoria;
     }
-    
+    public Publicacion(String Titulo, String Contenido, Blob Imagen, int IdCategoria, int IdPublicacion){
+        this.IdPublicacion = IdPublicacion;
+        this.Titulo = Titulo;
+        this.Contenido = Contenido;
+        this.Imagen = Imagen;
+        this.IdCategoria = IdCategoria;
+    }
     public String getImageAsBase64() {
         if (Imagen == null) {
             return null;
