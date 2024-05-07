@@ -130,11 +130,13 @@
                 </div>
             </div>
             <div class="col-md-2"></div>
-            <h4 style="padding: 0.7rem;">Resultados de búsqueda:</h4>
             <%
                 List<Publicacion> publicaciones;
                 if(request.getAttribute("publicaciones") != null) {
                     publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                    %>
+                    <h4 style="padding: 0.7rem;">Resultados de búsqueda:</h4>
+                    <%
                     for (Publicacion post : publicaciones) {
                         if(post.getImagen() != null){
                         %>
