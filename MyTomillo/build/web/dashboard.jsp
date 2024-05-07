@@ -36,9 +36,9 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form action="dashboard.jsp" method="get">
+                    <form action="DashboardServlet" method="post" onsubmit="return validacionBusqueda()">
                         <div class="input-group mb-6">
-                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <input name="busqueda" id="busqueda" type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -98,9 +98,19 @@
                         }
                         %>
             </div>
-            <h4>Entérate de todas las noticias del rebaño</h4>
             <%
-                List<Publicacion> publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                List<Publicacion> publicaciones;
+                if(request.getAttribute("search") != null) {
+                    %>
+                    <h4>Resultados de la búsqueda: "<%out.print(request.getAttribute("searchword"));%>"</h4>
+                    <%
+                    publicaciones = (List<Publicacion>)request.getAttribute("search");
+                } else {
+                    %>
+                    <h4>Entérate de todas las noticias del rebaño</h4>
+                    <%
+                    publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                }
                 for (Publicacion post : publicaciones) {
                     if(post.getImagen() != null){
                     %>

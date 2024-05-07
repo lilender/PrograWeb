@@ -46,6 +46,22 @@ public class DashboardServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
         dispatcher.forward(request, response);
     }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String texto = request.getParameter("busqueda").trim();
 
+        List<Publicacion> publicaciones;
+        DAOPublicacion daopost = new DAOPublicacion();
+        
+        publicaciones = daopost.getSearchPosts(texto,0);
+        
+        request.setAttribute("search", publicaciones);
+        request.setAttribute("searchword", texto);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
+        dispatcher.forward(request, response);
+    }
 
 }

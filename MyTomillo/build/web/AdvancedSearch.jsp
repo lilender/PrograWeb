@@ -1,3 +1,9 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@ page import="entidades.Usuario" %>
+<%@ page import="entidades.Publicacion" %>
+<%Usuario usuario = (Usuario)session.getAttribute("Usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -29,9 +35,9 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form action="dashboard.jsp">
+                    <form action="DashboardServlet" method="post" onsubmit="return validacionBusqueda()">
                         <div class="input-group mb-6">
-                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <input id="busqueda" name="busqueda" type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -45,9 +51,25 @@
                 </a></li>
                 <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
-                        <img src="pictures/TomilloProfile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        if(usuario != null){
+                        %>
+                            <img id="profile" src="data:image/jpeg;base64,<%=usuario.getImageAsBase64()%>" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        } else {
+                        %>
+                            <img id="profile" src="pictures/tomilloprofile.png" alt="MyProfile" class="nav-profile-image" style="padding: 0rem;">
+                        <%
+                        }
+                        %>
                     </span>
-                    Perfil
+                    <%
+                    if(usuario != null){
+                        out.print(usuario.getUsername());
+                    } else {
+                        %>Perfil<%
+                    }
+                    %>
                 </a></li>
             </ul>    
         </nav>
@@ -59,20 +81,21 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div class="card-back" style="margin-top: 1.5rem; margin-bottom: 3rem;">
-                    <p class="row align-items-center" style="font-size: 1rem; display: block;">Aquí puedes buscar una publicación con más detalle</p>
-                    <form action="Dashboard.html" method="get">
+                    <p class="row align-items-center" style="font-size: 1rem; display: block;">Aquí­ puedes buscar una publicación con más detalle</p>
+                    <form action="AdvancedSearchServlet" method="post">
+                        <input type="hidden" id="CategoriaSeleccionada" name="CategoriaSeleccionada" value="">
                         <div class="row justify-content-center">
                             <div class="col-md-12">
-                                <p style="display: inline-block; margin: 0rem;">Buscar desde el día...</p>
+                                <p style="display: inline-block; margin: 0rem;">Buscar desde el dí­a...</p>
     
                                 <div class="custom-date-wrapper" style="display: inline-block;">
-                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" id="datePicker">
+                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" name="datePickerInicio">
                                     <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                                 
                                 <p style="display: inline-block; margin: 0rem;">hasta el día...</p>
                                 <div class="custom-date-wrapper" style="display: inline-block;">
-                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" id="datePicker">
+                                    <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" name="datePickerFin">
                                     <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                             </div>
@@ -82,11 +105,16 @@
                                 <div class="col-md-12">
                                     <div class="dropdown-center">
                                         <button id="DDcategoria" class="btn button-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                                          Selecciona una Categoría
+                                          Selecciona una Categorí­a
                                         </button>
                                         <ul class="dropdown-menu content">
-                                          <li><a class="dropdown-item content-item" href="#">Hobbies</a></li>
-                                          <li><a class="dropdown-item content-item" href="#">Mascotas</a></li>
+                                            <%
+                                            List<String> categorias = (List<String>)request.getAttribute("categorias");
+
+                                            for (String cat : categorias) {
+                                                out.println("<li class=\"dropdown-item content-item\">" + cat + "</li>");
+                                            }
+                                            %>
                                         </ul>
                                     </div>
                                 </div>
@@ -94,7 +122,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-12">
-                                <textarea id="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem; padding: 2rem;" placeholder="Escribe lo que recuerdas..."></textarea>
+                                <textarea id="post" name="post" class="input" type="text" style="width: 90%; height:19rem; border-radius: 3rem; margin-bottom: 1rem; padding: 2rem;" placeholder="Escribe lo que recuerdas..."></textarea>
                             </div>
                         </div>
                         <input class="button-login" type="submit" value="Buscar">
@@ -103,42 +131,56 @@
             </div>
             <div class="col-md-2"></div>
             <h4 style="padding: 0.7rem;">Resultados de búsqueda:</h4>
-            <div class="post-text">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="stack">
-                            <div class="card">
-                                <div class="post-img">
-                                    <img class="image" src="pictures/4.jpg" alt="stock">
+            <%
+                List<Publicacion> publicaciones;
+                if(request.getAttribute("publicaciones") != null) {
+                    publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                    for (Publicacion post : publicaciones) {
+                        if(post.getImagen() != null){
+                        %>
+                        <div class="post-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="stack">
+                                        <div class="card">
+                                            <div class="post-img">
+                                                <img class="image" src="data:image/jpeg;base64,<%=post.getImageAsBase64()%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9" style="font-size: 2.6rem;">
+                                    <h3><%out.println(post.getFormattedDate());%></h3>
+                                    <h4><%out.println(post.getUsuario());%></h4>
+                                    <br>
+                                    <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                    <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                    <p class="content-post"><%out.println(post.getContenido());%></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>09/02/2024</h3>
-                        <h4>LittleEnder</h4>
-                        <br>
-                        <h1>Hoy compré una oveja</h1>
-                        <h2>Mascotas</h2>
-                        <p>Lorem ipsum dolor sit amet, ct amet purus.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="post-text">
-                <h3>09/02/2024</h3>
-                <h4>LittleEnder</h4>
-                <br>
-                <h1>Hoy compré una oveja</h1>
-                <h2>Mascotas</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Cursus in hac habitasse platea dictumst quisque. Ipsum a arcu cursus vitae congue. Eget aliquet nibh praesent tristique magna sit amet purus.</p>
-            </div>
+                        <%
+                        } else {
+                        %>
+                        <div class="post-text">
+                            <h3><%out.println(post.getFormattedDate());%></h3>
+                            <h4><%out.println(post.getUsuario());%></h4>
+                            <br>
+                            <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                            <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                            <p class="content-post"><%out.println(post.getContenido());%></p>
+                        </div>
+                        <%
+                        }
+                    }
+                }
+            %>
         </div>
         </div>
         <div class="row align-items-center">
             <footer class="container-fluid">
-                <h3>Contáctanos</h3>
-                <p>Marla Judith Estrada Valdez <br> Claudia Itzel Hernández Vargas</p>            
+                <h3>ContÃ¡ctanos</h3>
+                <p>Marla Judith Estrada Valdez <br> Claudia Itzel HernÃ¡ndez Vargas</p>            
             </footer>
         </div>
     </body>
@@ -146,7 +188,13 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
-
+    <script>
+    $('.dropdown-item').click(function(){
+        var text = $(this).text(); // Obtener el texto de la opción seleccionada
+        $('#DDcategoria').text(text); // Establecer el texto del botón del dropdown con el texto de la opción seleccionada
+        $('#CategoriaSeleccionada').val(text);
+    });
+    </script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

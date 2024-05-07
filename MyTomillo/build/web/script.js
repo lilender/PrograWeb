@@ -29,7 +29,7 @@ function toPost() {
     window.location.href = 'PostServlet';
 }
 function toAdvancedSearch(){
-    window.location.href = 'AdvancedSearch.html';
+    window.location.href = 'AdvancedSearchServlet';
 }
 function toProfile() {
     window.location.href = 'ProfileServlet';
@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //--------------------------------LOGIN FUNCTIONS
 function validacionLogIn() {
-    var usernameInput = document.getElementById("Iusername");
-    var passwordInput = document.getElementById("Ipassword");
+    var usernameInput = document.getElementById("Iusername").value.trim();
+    var passwordInput = document.getElementById("Ipassword").value.trim();
     var alertbox = document.getElementById("alert");
 
-    if (usernameInput.value.trim() === "") {
+    if (usernameInput === "") {
         var alertDiv = document.createElement('div');
         alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
         alertDiv.setAttribute('role', 'alert');
@@ -73,8 +73,19 @@ function validacionLogIn() {
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
+    if (usernameInput.length > 30) {
+        var alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+        alertDiv.setAttribute('role', 'alert');
+        alertDiv.innerHTML = 
+            '<strong>Número de carácteres excedido</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
-    if (passwordInput.value.trim() === "") {
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
+
+    if (passwordInput === "") {
         var alertDiv = document.createElement('div');
         alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
         alertDiv.setAttribute('role', 'alert');
@@ -85,7 +96,17 @@ function validacionLogIn() {
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
+    if (passwordInput.length > 60) {
+        var alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+        alertDiv.setAttribute('role', 'alert');
+        alertDiv.innerHTML = 
+            '<strong>Número de carácteres excedido</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
     return true; // Allow form submission
 }
 //--------------------------------SIGNIN FUNCTIONS
@@ -103,15 +124,15 @@ function previewFile(idimage, idpost) {
     }
 }
 function validacionSignIn() {
-    var nameInput = document.getElementById("Iname");
-    var lastnameInput = document.getElementById("ILastname");
-    var lastname2Input = document.getElementById("ILastname2");
-    var mailInput = document.getElementById("Imail");
+    var nameInput = document.getElementById("Iname").value.trim();
+    var lastnameInput = document.getElementById("ILastname").value.trim();
+    var lastname2Input = document.getElementById("ILastname2").value.trim();
+    var mailInput = document.getElementById("Imail").value.trim();
     var fileInput = document.getElementById("file");
     var dateInput = document.getElementById("datePicker");
-    var usernameInput = document.getElementById("Iusername");
-    var passInput = document.getElementById("Ipassword");
-    var pass2Input = document.getElementById("Ipassword2");
+    var usernameInput = document.getElementById("Iusername").value.trim();
+    var passInput = document.getElementById("Ipassword").value.trim();
+    var pass2Input = document.getElementById("Ipassword2").value.trim();
     
     var alertbox = document.getElementById("alert");
     var alertDiv = document.createElement('div');
@@ -121,66 +142,98 @@ function validacionSignIn() {
     const nameRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
 
     
-    if (nameInput.value.trim() === "") {
+    if (nameInput === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su nombre</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } else {
-        if (!nameRegex.test(nameInput.value)) {
+    } 
+    else {
+        if (!nameRegex.test(nameInput)) {
             alertDiv.innerHTML = 
             '<strong>Nombre inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
             return false;
         }
+        if (nameInput.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Nombre inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (lastnameInput.value.trim() === "") {
+    if (lastnameInput === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su apellido paterno</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } else {
-        if (!nameRegex.test(lastnameInput.value)) {
+    } 
+    else {
+        if (!nameRegex.test(lastnameInput)) {
             alertDiv.innerHTML = 
             '<strong>Apellido paterno inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
             return false;
         }
+        if (lastnameInput.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido paterno inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (lastname2Input.value.trim() === "") {
+    if (lastname2Input === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su apellido materno</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } else {
-        if (!nameRegex.test(lastname2Input.value)) {
+    } 
+    else {
+        if (!nameRegex.test(lastname2Input)) {
             alertDiv.innerHTML = 
             '<strong>Apellido materno inválido. Recuerde solo usar caracteres alfanuméricos.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
             return false;
         }
+        if (lastname2Input.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido paterno inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
 
-    if (mailInput.value.trim() === "") {
+    if (mailInput === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su correo electrónico</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } else {
+    } 
+    else {
         const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
-        if (!regex.test(mailInput.value)) {
+        if (!regex.test(mailInput)) {
             alertDiv.innerHTML = 
             '<strong>Correo electrónico inválido. Recuerde usar un formato válido de correo.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
+        if (mailInput.length > 255) {
+            alertDiv.innerHTML = 
+            '<strong>Correo electrónico inválido. Máximo de 255 carácteres.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
             return false;
@@ -204,33 +257,45 @@ function validacionSignIn() {
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
-    if (usernameInput.value.trim() === "") {
+    
+    if (usernameInput === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su nombre de usuario</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
+    } 
+    else {
+        if (usernameInput.length > 30) {
+            alertDiv.innerHTML = 
+            '<strong>Nombre de usuario inválido. Máximo de 30 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (passInput.value.trim() === "") {
+    
+    if (passInput === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese su contraseña</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } else {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,}$/;
-        if (!regex.test(passInput.value)) {
+    } 
+    else {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,60}$/;
+        if (!regex.test(passInput)) {
             alertDiv.innerHTML = 
-            '<strong>Contraseña inválida. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación</strong>' +
+            '<strong>Contraseña inválida. Debe incluir:<br/>Mínimo 8 carácteres, máximo 60<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
             return false;
         }
     }
 
-    if (pass2Input.value.trim() === "") {
+    if (pass2Input === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese la confirmación de su contraseña</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -238,7 +303,7 @@ function validacionSignIn() {
         alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     } else {
-        if (pass2Input.value.trim() !== passInput.value.trim()) {
+        if (pass2Input !== passInput) {
             alertDiv.innerHTML = 
             '<strong>Las contraseñas no coinciden.</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -251,13 +316,13 @@ function validacionSignIn() {
 }
 //--------------------------------PROFILE FUNCTIONS
 function validacionProfile(printalert){
-    var nameInput = document.getElementById("Iname");
-    var lastnameInput = document.getElementById("ILastname");
-    var lastname2Input = document.getElementById("ILastname2");
-    var mailInput = document.getElementById("Imail");
+    var nameInput = document.getElementById("Iname").value.trim();
+    var lastnameInput = document.getElementById("ILastname").value.trim();
+    var lastname2Input = document.getElementById("ILastname2").value.trim();
+    var mailInput = document.getElementById("Imail").value.trim();
     var fileInput = document.getElementById("file");
-    var usernameInput = document.getElementById("Iusername");
-    var passInput = document.getElementById("Ipassword");
+    var usernameInput = document.getElementById("Iusername").value.trim();
+    var passInput = document.getElementById("Ipassword").value.trim();
     
     var alertbox = document.getElementById("alert");
     var alertDiv = document.createElement('div');
@@ -266,7 +331,7 @@ function validacionProfile(printalert){
     
     const nameRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
     
-    if (usernameInput.value.trim() === "") {
+    if (usernameInput === "") {
         if(printalert){
             alertDiv.innerHTML = 
             '<strong>Ingrese su nombre de usuario</strong>' +
@@ -275,8 +340,17 @@ function validacionProfile(printalert){
             alertbox.appendChild(alertDiv);
         }
         return false; // Prevent form submission
+    } 
+    else {
+        if (usernameInput.length > 30) {
+            alertDiv.innerHTML = 
+            '<strong>Nombre de usuario inválido. Máximo de 30 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (nameInput.value.trim() === "") {
+    if (nameInput === "") {
         if(printalert){
             alertDiv.innerHTML = 
                 '<strong>Ingrese su nombre</strong>' +
@@ -285,7 +359,7 @@ function validacionProfile(printalert){
         }
         return false; // Prevent form submission
     } else {
-        if (!nameRegex.test(nameInput.value)) {
+        if (!nameRegex.test(nameInput)) {
             if(printalert){
                 alertDiv.innerHTML = 
                 '<strong>Nombre inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
@@ -294,8 +368,15 @@ function validacionProfile(printalert){
             }
             return false;
         }
+        if (nameInput.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Nombre inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (lastnameInput.value.trim() === "") {
+    if (lastnameInput === "") {
         if(printalert){
             alertDiv.innerHTML = 
                 '<strong>Ingrese su apellido paterno</strong>' +
@@ -305,7 +386,7 @@ function validacionProfile(printalert){
         }
         return false; // Prevent form submission
     } else {
-        if (!nameRegex.test(lastnameInput.value)) {
+        if (!nameRegex.test(lastnameInput)) {
             if(printalert){
                 alertDiv.innerHTML = 
                 '<strong>Apellido paterno inválido. Recuerde solo usar carácteres alfanuméricos.</strong>' +
@@ -314,8 +395,15 @@ function validacionProfile(printalert){
             }
             return false;
         }
+        if (lastnameInput.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido paterno inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (lastname2Input.value.trim() === "") {
+    if (lastname2Input === "") {
         if(printalert){
             alertDiv.innerHTML = 
                 '<strong>Ingrese su apellido materno</strong>' +
@@ -325,7 +413,7 @@ function validacionProfile(printalert){
         }
         return false; // Prevent form submission
     } else {
-        if (!nameRegex.test(lastname2Input.value)) {
+        if (!nameRegex.test(lastname2Input)) {
             if(printalert){
                 alertDiv.innerHTML = 
                 '<strong>Apellido materno inválido. Recuerde solo usar caracteres alfanuméricos.</strong>' +
@@ -334,9 +422,16 @@ function validacionProfile(printalert){
             }
             return false;
         }
+        if (lastname2Input.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Apellido paterno inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
 
-    if (mailInput.value.trim() === "") {
+    if (mailInput === "") {
         if(printalert){
             alertDiv.innerHTML = 
                 '<strong>Ingrese su correo electrónico</strong>' +
@@ -347,7 +442,7 @@ function validacionProfile(printalert){
         return false; // Prevent form submission
     } else {
         const regex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/;
-        if (!regex.test(mailInput.value)) {
+        if (!regex.test(mailInput)) {
             if(printalert){
                 alertDiv.innerHTML = 
                 '<strong>Correo electrónico inválido. Recuerde usar un formato válido de correo.</strong>' +
@@ -356,8 +451,15 @@ function validacionProfile(printalert){
             }
             return false;
         }
+        if (mailInput.length > 255) {
+            alertDiv.innerHTML = 
+            '<strong>Correo electrónico inválido. Máximo de 255 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+        }
     }
-    if (passInput.value.trim() === "") {
+    if (passInput === "") {
         if(printalert){
             alertDiv.innerHTML = 
                 '<strong>Ingrese su contraseña</strong>' +
@@ -367,8 +469,8 @@ function validacionProfile(printalert){
         }
         return false; // Prevent form submission
     } else {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,}$/;
-        if (!regex.test(passInput.value)) {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[()¡!"#$%&/=´@¨?¿:;,._\-+*~{}\[\]'|]).{8,60}$/;
+        if (!regex.test(passInput)) {
             if(printalert){
                 alertDiv.innerHTML = 
                 '<strong>Contraseña inválida. Debe incluir:<br/>Mínimo 8 caracteres<br/>Mínimo una letra mayúscula<br/>Mínimo una letra minúscula<br/>Mínimo un número<br/>Mínimo un signo de puntuación</strong>' +
@@ -543,16 +645,16 @@ $(function() {
 //});
 
 function validacionEditarPost(idpost){
-    var titulo = document.getElementById("Iname"+idpost);
-    var contenido = document.getElementById("post"+idpost);
-    var categoria = document.getElementById("CategoriaSeleccionada"+idpost);
+    var titulo = document.getElementById("Iname"+idpost).value.trim();
+    var contenido = document.getElementById("post"+idpost).value.trim();
+    var categoria = document.getElementById("CategoriaSeleccionada"+idpost).value.trim();
     
     var alertbox = document.getElementById("alert"+idpost);
     var alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
     alertDiv.setAttribute('role', 'alert');
     
-    if (titulo.value.trim() === "") {
+    if (titulo === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese el título de su publicación</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -560,14 +662,28 @@ function validacionEditarPost(idpost){
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
-    if (contenido.value.trim() === "") {
+    if (titulo.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Título inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
+    if (contenido === "") {
         alertDiv.innerHTML = 
                 '<strong>Ingrese texto en su post</strong>' +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } 
-    if (categoria.value.trim() === "") {
+    }
+    if (contenido.length > 300) {
+            alertDiv.innerHTML = 
+            '<strong>Contenido inválido. Máximo de 300 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
+    if (categoria === "") {
         alertDiv.innerHTML = 
                 '<strong>Seleccione una categoría</strong>' +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -575,7 +691,13 @@ function validacionEditarPost(idpost){
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     } 
-    
+    if (categoria.length > 15) {
+            alertDiv.innerHTML = 
+            '<strong>Categoria inválida. Máximo de 15 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
     return true; // Allow form submission
 }
 
@@ -593,16 +715,16 @@ $('.dropdown-item').click(function(){
 });
 
 function validacionPost(){
-    var titulo = document.getElementById("Iname");
-    var contenido = document.getElementById("post");
-    var categoria = document.getElementById("CategoriaSeleccionada");
+    var titulo = document.getElementById("Iname").value.trim();
+    var contenido = document.getElementById("post").value.trim();
+    var categoria = document.getElementById("CategoriaSeleccionada").value.trim();
     
     var alertbox = document.getElementById("alert");
     var alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
     alertDiv.setAttribute('role', 'alert');
     
-    if (titulo.value.trim() === "") {
+    if (titulo === "") {
         alertDiv.innerHTML = 
             '<strong>Ingrese el título de su publicación</strong>' +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -610,14 +732,28 @@ function validacionPost(){
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     }
-    if (contenido.value.trim() === "") {
+    if (titulo.length > 60) {
+            alertDiv.innerHTML = 
+            '<strong>Título inválido. Máximo de 60 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
+    if (contenido === "") {
         alertDiv.innerHTML = 
                 '<strong>Ingrese texto en su post</strong>' +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
-    } 
-    if (categoria.value.trim() === "") {
+    }
+    if (contenido.length > 300) {
+            alertDiv.innerHTML = 
+            '<strong>Contenido inválido. Máximo de 300 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
+    if (categoria === "") {
         alertDiv.innerHTML = 
                 '<strong>Seleccione una categoría</strong>' +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
@@ -625,7 +761,30 @@ function validacionPost(){
             alertbox.appendChild(alertDiv);
         return false; // Prevent form submission
     } 
-    
+    if (categoria.length > 15) {
+            alertDiv.innerHTML = 
+            '<strong>Categoria inválida. Máximo de 15 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return false;
+    }
+    return true; // Allow form submission
+}
+
+//--------------------------------Validacion FUNCTIONS
+function validacionBusqueda(){
+    var texto = document.getElementById("busqueda").value.trim();
+    if (texto.length > 60) {
+        var alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', 'alert-danger', 'alert-dismissible', 'fade', 'show');
+        alertDiv.setAttribute('role', 'alert');
+        alertDiv.innerHTML = 
+            '<strong>Número de carácteres excedido</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+        alertbox.appendChild(alertDiv);
+        return false; // Prevent form submission
+    }
     return true; // Allow form submission
 }
 
