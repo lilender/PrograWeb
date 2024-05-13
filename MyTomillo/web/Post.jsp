@@ -33,7 +33,7 @@
                 <li style="width: 8%;"><a href="#home" onclick="toHome()" style="margin-left: 1rem; margin-right: 2rem;">
                     <img src="pictures/MyTomilloShadow.png" alt="MyTomillo" style="margin-bottom: 0rem;">MyTomillo
                     </a></li>
-                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost()">Nueva Publicación
+                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost(<%if(usuario != null){out.print(true);}else{out.print(false);}%>)">Nueva Publicación
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
@@ -51,7 +51,7 @@
                 <li style="text-align: left; width: 12%;"><a href="#about" class="advanced-search" onclick="toAdvancedSearch()"> Búsqueda Avanzada
                     <img src="pictures/AdvancedSearch.png" alt="Busqueda Avanzada" style="width: 18%;">
                 </a></li>
-                <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
+                <li style="width: 7%;"><a href="#perfil" onclick="toProfile(<%if(usuario != null){out.print(true);}else{out.print(false);}%>)" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
                         <%
                         if(usuario != null){

@@ -32,7 +32,7 @@
                 <li style="width: 8%;"><a href="#home" onclick="toHome()" style="margin-left: 1rem; margin-right: 2rem;">
                     <img src="pictures/MyTomilloShadow.png" alt="MyTomillo" style="margin-bottom: 0rem;">MyTomillo
                     </a></li>
-                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost()">Nueva Publicación
+                <li style="align-self: right; width: 12%;"><a href="#news" class="new-post" onclick="toPost(<%if(usuario != null){out.print(true);}else{out.print(false);}%>)">Nueva Publicación
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
@@ -50,7 +50,7 @@
                 <li style="text-align: left; width: 12%;"><a href="#about" class="advanced-search" onclick="toAdvancedSearch()"> Búsqueda Avanzada
                     <img src="pictures/AdvancedSearch.png" alt="Busqueda Avanzada" style="width: 18%;">
                 </a></li>
-                <li style="width: 7%;"><a href="#perfil" onclick="toProfile()" style="margin-right: 0.5rem; margin-left: 2rem;">
+                <li style="width: 7%;"><a href="#perfil" onclick="toProfile(<%if(usuario != null){out.print(true);}else{out.print(false);}%>)" style="margin-right: 0.5rem; margin-left: 2rem;">
                     <span class="profile-image" style="width: 2rem; height: 2rem; margin: 0rem; padding: 0rem; border: 0.1rem solid #5C5B57;">
                         <%
                         if(usuario != null){
@@ -150,22 +150,50 @@
                     }
                 }
             %>
-        
+            
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-image" href="#" aria-label="Previous" style="--bs-pagination-border-radius:50%;">
-                      <img class="pagination-image-left" src="pictures/sheeps.png" alt="sheep">
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-image" href="#" aria-label="Next" style="--bs-pagination-border-radius:50%">
-                    <img src="pictures/sheeps.png" alt="sheep">
-                  </a>
-                </li>
-              </ul>
+                <%
+                    int pag = 0;
+                    if(request.getAttribute("Pagina") != null){
+                    pag = (int)request.getAttribute("Pagina");
+                    }
+                    boolean search = false;
+                    if(request.getAttribute("search") != null) {
+                        search = true;
+                    }
+
+                    if(pag != 0){
+                    %>
+                    <li class="page-item">
+                        <form action="DashboardPagServlet" method="post">
+                            <input type="hidden" id="Pag" name="Pag" value="<%out.println(pag-1);%>">
+                            <input type="hidden" id="Search" name="Search" value="<%out.println(search);%>">
+                            <input type="hidden" id="Searchword" name="Searchword" value="<%out.println(request.getAttribute("searchword"));%>">
+                            <button class="page-image" style="background: none; border: none; width: 2.5rem; height: 2.5rem" type="submit" href="#" aria-label="Previous" style="--bs-pagination-border-radius:50%;">
+                                <img class="pagination-image-left" src="pictures/sheeps.png" alt="sheep">
+                            </button>
+                        </form>
+                    </li>
+                    <%
+                    }
+                    %>
+                    <li class="page-item"><a class="page-link" href="#"><%out.print(pag+1);%></a></li>
+                    <li class="page-item">
+                        <form action="DashboardPagServlet" method="post">
+                            <input type="hidden" id="Pag" name="Pag" value="<%out.println(pag+1);%>">
+                            <input type="hidden" id="Search" name="Search" value="<%out.println(search);%>">
+                            <input type="hidden" id="Searchword" name="Searchword" value="<%out.println(request.getAttribute("searchword"));%>">
+                            <button style="background: none; border: none; width: 2.5rem; height: 2.5rem" class="page-image" type="submit" href="#" aria-label="Next" style="--bs-pagination-border-radius:50%">
+                              <img src="pictures/sheeps.png" alt="sheep">
+                            </button>
+                        </form>
+                    </li>
+                    <%
+                %>
+
+          </ul>
+            
+            
 
         </div>
         

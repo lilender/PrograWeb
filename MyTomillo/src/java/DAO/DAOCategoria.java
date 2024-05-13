@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import com.mysql.cj.jdbc.CallableStatement;
+import java.sql.CallableStatement;
 import entidades.Categoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -25,14 +25,23 @@ function toSignIn() {
 function toHome(){
     window.location.href = 'DashboardServlet';
 }
-function toPost() {
-    window.location.href = 'PostServlet';
+function toPost(user) {
+    if(user){
+        window.location.href = 'PostServlet';    
+    }else{
+        window.location.href = 'login.jsp';
+    }
+    
 }
 function toAdvancedSearch(){
     window.location.href = 'AdvancedSearchServlet';
 }
-function toProfile() {
-    window.location.href = 'ProfileServlet';
+function toProfile(user) {
+    if(user){
+        window.location.href = 'ProfileServlet';
+    } else{
+        window.location.href = 'login.jsp';
+    }
 }
 
 function toDashboard(){
