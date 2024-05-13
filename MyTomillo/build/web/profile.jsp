@@ -63,7 +63,7 @@
     </header>
 
     <body class="container-fluid">
-        <div class="second-grey-background row">
+        <div class="second-grey-background row animate-bottom">
             
             <div class="col-md-5">
                 <div class="card-back">

@@ -150,7 +150,23 @@
                     }
                 }
             %>
-            
+        
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-image" href="#" aria-label="Previous" style="--bs-pagination-border-radius:50%;">
+                      <img class="pagination-image-left" src="pictures/sheeps.png" alt="sheep">
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-image" href="#" aria-label="Next" style="--bs-pagination-border-radius:50%">
+                    <img src="pictures/sheeps.png" alt="sheep">
+                  </a>
+                </li>
+              </ul>
+
         </div>
         
         <div class="row align-items-center">

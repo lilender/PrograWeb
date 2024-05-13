@@ -76,7 +76,7 @@
     </header>
 
     <body class="container-fluid">
-        <div class="second-grey-background row align-items-center">
+        <div class="second-grey-background row align-items-center animate-bottom">
             <h4>Búsqueda Avanzada</h4>
             <div class="col-md-2"></div>
             <div class="col-md-8">
@@ -90,13 +90,11 @@
     
                                 <div class="custom-date-wrapper" style="display: inline-block;">
                                     <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block;  width: 100%;" name="datePickerInicio">
-                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                                 
                                 <p style="display: inline-block; margin: 0rem;">hasta el día...</p>
                                 <div class="custom-date-wrapper" style="display: inline-block;">
                                     <input type="date" style="margin: 0rem; padding : 0rem; display: inline-block; width: 100%;" name="datePickerFin">
-                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                             </div>
                         </div>

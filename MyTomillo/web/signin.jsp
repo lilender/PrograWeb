@@ -23,7 +23,7 @@
 
     <body class="container-fluid">
         
-        <div class="light-background row">
+        <div class="light-background row animate-bottom">
             
             <div class="col-md-6">
                 <div id="alert">
@@ -71,7 +71,6 @@
                                 <p style="margin: 0.1rem;">Ingrese fecha de nacimiento:</p>
                                 <div class="custom-date-wrapper" style="width: 16rem;">
                                     <input type="date" style="margin: 0.9rem; padding : 0rem; width: 16rem" id="datePicker" name="datePicker">
-                                    <img src="pictures/Calendar.png" alt="Calendario" class="calendar-icon">
                                 </div>
                                 <input type="text" id="Iusername" name="Iusername" placeholder="Ingrese nombre de usuario" style="width: 100%; margin: .9rem;">                        
                                 <input type="password" id="Ipassword" name="Ipassword" placeholder="Ingrese contraseña" style="width: 100%; margin: .9rem;">                        

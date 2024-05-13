@@ -72,7 +72,7 @@
     </header>
 
     <body class="container-fluid">
-        <div class="second-grey-background row align-items-center">
+        <div class="second-grey-background row align-items-center animate-bottom">
             <h4>Dile al rebaño lo que piensas</h4>
 
             <div class="post-text" style="width: 80%; padding: 1rem;">
@@ -135,7 +135,7 @@
                                             %>
                                           <li class="">
                                                 <input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 60%">
-                                                <button type="button" id="addCategoryButton">Agregar</button>
+                                                <button type="btn button-dropdown" id="addCategoryButton">Agregar</button>
                                           </li>
 
                                         </ul>

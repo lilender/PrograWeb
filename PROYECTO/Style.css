@@ -314,9 +314,63 @@ margin-bottom: 4rem;
 }
 
 */
+/*Paginación*/
+.page-item{
+  background-color: #00000000;
+  font-size: 1.1rem;
+  border: none;
+  transition: all 200ms;
+  margin:0.5rem;
+}
+
+.page-item:hover{
+  background-color: #8BAE80;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  border: none;
+}
+
+.page-link{
+  color: #EDE6DE;
+  background-color: #00000000;
+  font-family: "Chelsea Market"; 
+  font-size: 1.1rem;
+  border: none;
+  transition: all 200ms;
+}
+
+.page-link:hover{
+  background-color: #8BAE80;
+  color: #20552bc2;
+  font-family: "Chelsea Market"; 
+  font-size: 1.3rem;
+  border-radius: 50%;
+  border: none;
+}
+
+.page-image{
+  height: 2rem;
+  width: 2rem;
+  display: inline-block;
+  text-align: center;
+}
+
+.page-item img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.pagination-image-left{
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.pagination-image-left:hover{
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
 
 /*Foto de perfil*/
-
 .profile-image{
   height: 15rem;
   width: 15rem;
@@ -699,7 +753,16 @@ textarea:focus{
   width: 18rem;
 }
 input[type=date]::-webkit-inner-spin-button,::-webkit-calendar-picker-indicator{
-  display: none;   
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
 }
 
 /*Sheeps*/
