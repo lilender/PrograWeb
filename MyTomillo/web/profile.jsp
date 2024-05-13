@@ -38,9 +38,9 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form action="dashboard.jsp">
+                    <form action="DashboardServlet" method="post" onsubmit="return validacionBusqueda()">
                         <div class="input-group mb-6">
-                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <input id="busqueda" name="busqueda" type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -103,7 +103,7 @@
                                 <input class="input" type="password" id="Ipassword" name="Ipassword" value="<%out.println(usuario.getContra());%>" style="margin: .7rem; display: none;">
 
                                 <div class="box-input">
-                                    <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;" onchange="previewFile()">
+                                    <input type="file" name="file" id="file" class="inputfile" style="height: 2.8rem; margin: .7rem; display: none;" onchange="previewFile('previewImage','file')">
                                     <label id="Ifile" class="label-file" for="file" style="height: 2.8rem; margin: .7rem; display: none;"></label> 
                                 </div>
                             </div>
@@ -131,80 +131,89 @@
                             <h1 style="font-size: 2.6rem; color: #f6f3f0; -webkit-text-stroke: .01rem #f6f3f0;">Publicaciones de <%out.println(usuario.getUsername());%></h1>
                             <%
                                 List<Publicacion> publicaciones = (List<Publicacion>)request.getAttribute("publicaciones");
+                                List<String> categorias = (List<String>) request.getAttribute("categorias");
+                                String categoriasStr = "";
+                                if (categorias != null && !categorias.isEmpty()) {
+                                    categoriasStr = String.join(",", categorias);
+                                }
                                 for (Publicacion post : publicaciones) {
                                     if(post.getImagen() != null){
                                     %>
-                                    <div class="post-text" style="width: 100%;">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="stack">
-                                                    <div class="card">
-                                                        <div class="post-img">
-                                                            <img class="image" src="data:image/jpeg;base64,<%=post.getImageAsBase64()%>">
+                                        <div class="post-text" style="width: 100%;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="stack">
+                                                        <div class="card">
+                                                            <div class="post-img">
+                                                                <img class="image" src="data:image/jpeg;base64,<%=post.getImageAsBase64()%>">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-9" style="font-size: 2.6rem;">
+                                                    <h3><%out.println(post.getFormattedDate());%></h3>
+                                                    <h4><%out.println(usuario.getUsername());%></h4>
+                                                    <br>
+                                                    <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                                    <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                                    <p class="content-post"><%out.println(post.getContenido());%></p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-9" style="font-size: 2.6rem;">
-                                                <h3><%out.println(post.getFormattedDate());%></h3>
-                                                <h4><%out.println(usuario.getUsername());%></h4>
-                                                <br>
-                                                <h1 class="title"><%out.println(post.getTitulo());%></h1>
-                                                <h2 class="class"><%out.println(post.getCategoria());%></h2>
-                                                <p class="content-post"><%out.println(post.getContenido());%></p>
+                                            <div>
+                                                <form class="d-flex flex-row-reverse" action="DeletePostServlet" method="post" onsubmit="return confirmacionBorrarPost()">
+                                                    <input type="hidden" id="IpostId" name="IpostId" value="<%out.println(post.getIdPublicacion());%>">
+                                                    <input type="hidden" id="categoriaspost" name="categoriaspost" value="<%= categoriasStr %>">
+                                                    <button class="button-primary BDeletePost" type="submit" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                                          </svg>
+                                                    </button>
+                                                    <button class="button-primary BEditPost" type="button" onclick="editarpost()" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                          </svg>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="d-flex flex-row-reverse">
-                                                <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                                      </svg>
-                                                </button>
-                                                <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                                      </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <%
                                     } else {
                                     %>
-                                    <div class="post-text" style="width: 100%;">
-                                        <h3><%out.println(post.getFormattedDate());%></h3>
-                                        <h4><%out.println(usuario.getUsername());%></h4>
-                                        <br>
-                                        <h1 class="title"><%out.println(post.getTitulo());%></h1>
-                                        <h2 class="class"><%out.println(post.getCategoria());%></h2>
-                                        <p class="content-post"><%out.println(post.getContenido());%></p>
+                                        <div class="post-text" style="width: 100%;">
+                                            <h3><%out.println(post.getFormattedDate());%></h3>
+                                            <h4><%out.println(usuario.getUsername());%></h4>
+                                            <br>
+                                            <h1 class="title"><%out.println(post.getTitulo());%></h1>
+                                            <h2 class="class"><%out.println(post.getCategoria());%></h2>
+                                            <p class="content-post"><%out.println(post.getContenido());%></p>
 
-                                        <div>
-                                            <div class="d-flex flex-row-reverse">
-                                                <button class="button-primary BDeletePost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                                      </svg>
-                                                </button>
-                                                <button class="button-primary BEditPost" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                                      </svg>
-                                                </button>
+                                            <div>
+                                                <form class="d-flex flex-row-reverse" action="DeletePostServlet" method="post" onsubmit="return confirmacionBorrarPost()">
+                                                    <input type="hidden" id="IpostId" name="IpostId" value="<%out.println(post.getIdPublicacion());%>">
+                                                    <input type="hidden" id="categoriaspost" name="categoriaspost" value="<%= categoriasStr %>">
+                                                    <button class="button-primary BDeletePost" type="submit" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Eliminar 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#1a6f24" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                                          </svg>
+                                                    </button>
+                                                    <button class="button-primary BEditPost" type="button" style="width: 16%; align-self: left; display: inline; margin: 0.2rem; padding: 0.2rem;">Editar 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1a6f24" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                          </svg>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
                                     <%
                                     }
                                 }
                             %>
-
+                            
+                                    
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -220,5 +229,36 @@
 <!--JQuery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="script.js"></script>
+<script>
+$(document).on('click', '.dropdown-item', function() {
+    var text = $(this).text();
+    var idpost = $(this).closest('.formEdit').find('[id^=DDcategoria]').attr('id').replace('DDcategoria', '');
+    $('#DDcategoria' + idpost).text(text);
+    $('#CategoriaSeleccionada' + idpost).val(text);
+});
 
+$(document).on('click', '#addCategoryButton', function() {
+    var newCategoryInput = $('#newCategoryInput');
+    var newCategoryName = newCategoryInput.val().trim();
+    if (newCategoryName.length > 15) {
+            alertDiv.innerHTML = 
+            '<strong>Categoria inválida. Máximo de 15 carácteres.</strong>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            alertbox.appendChild(alertDiv);
+            return;
+    }
+    if (newCategoryName !== "") {
+        var idpost = $(this).closest('.formEdit').find('[id^=DDcategoria]').attr('id').replace('DDcategoria', '');
+        var newItem = $('<li class="dropdown-item content-item"></li>').text(newCategoryName);
+
+        $('#categoryList').append(newItem);
+
+        $('#DDcategoria' + idpost).text(newCategoryName);
+        $('#CategoriaSeleccionada' + idpost).val(newCategoryName);
+
+        newCategoryInput.val("");
+    }
+});
+
+</script>
 </html>

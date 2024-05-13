@@ -37,9 +37,9 @@
                     <img src="pictures/NewPost.png" alt="MyPost" style="width: 20%;">
                     </a> </li>
                 <li class="row search-container" style="width: 61%;">
-                    <form action="dashboard.jsp">
+                    <form action="DashboardServlet" method="post" onsubmit="return validacionBusqueda()">
                         <div class="input-group mb-6">
-                            <input type="text" placeholder="Buscar publicación..." class="search-bar">
+                            <input id="busqueda" name="busqueda" type="text" placeholder="Buscar publicación..." class="search-bar">
                             <button class="button-normal" type="submit" style="width: 10%;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -95,7 +95,7 @@
                             <%
                         }
                         %>
-                    </div>
+                </div>
                 <form action="PostServlet" method="post" enctype="multipart/form-data" onsubmit="return validacionPost()">
                     <input type="hidden" id="IuserId" name="IuserId" value="<%out.println(usuario.getIdUsuario());%>">
                     <input type="hidden" id="CategoriaSeleccionada" name="CategoriaSeleccionada" value="">
@@ -106,7 +106,7 @@
                                 <img id="previewImage" src="pictures/PhotoDefault.png" alt="MyTomillo">
                             </div>
                             <div class="box-input" >
-                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile()">
+                                <input type="file" name="file" id="file" class="inputfile" style="width: 70%; height: 100%;" onchange="previewFile('previewImage','file')">
                                 <label class="label-file" for="file" style="width: 70%; height: 100%; background: #a4c780b7;">Agregar imagen</label>
                             </div>
                         </div>
@@ -169,6 +169,13 @@
             $("#addCategoryButton").click(function() {
                 var newCategoryInput = document.getElementById("newCategoryInput");
                 var newCategoryName = newCategoryInput.value.trim();
+                if (newCategoryName.length > 15) {
+                        alertDiv.innerHTML = 
+                        '<strong>Categoria inválida. Máximo de 15 carácteres.</strong>' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        alertbox.appendChild(alertDiv);
+                        return;
+                }
                 if (newCategoryName !== "") {
                     var newItem = document.createElement("li");
                     newItem.classList.add("dropdown-item", "content-item");

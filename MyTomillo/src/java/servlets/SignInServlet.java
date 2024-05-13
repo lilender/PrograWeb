@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
                  maxFileSize = 1024 * 1024 * 10,      // 10MB
                  maxRequestSize = 1024 * 1024 * 50)  // 50MB
+//@MultipartConfig
 public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -74,6 +75,27 @@ public class SignInServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
+        
+        /*
+                //<input type="file" accept="image/*"
+
+        String uploadPath = "";
+        File  fileSaveDir = new File(uploadPath);
+        if(!fileSaveDir.exists()){
+        fileSaveDir.mkdirs();
+        }
+        
+        String fileName = null;
+        Part part = request.getPart("file");
+        fileName = getFileName(part);
+        
+        if(fileName != ""){
+        part.write(uploadPath + File.separator + fileName);)
+        }
+        
+        
+        */
+        
         // Get the Part corresponding to the file input field
         Part filePart = request.getPart("file");
             

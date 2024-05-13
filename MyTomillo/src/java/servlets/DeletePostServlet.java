@@ -8,7 +8,6 @@ import DAO.DAOPublicacion;
 import entidades.Publicacion;
 import DAO.DAOCategoria;
 import entidades.Categoria;
-import entidades.Usuario;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,39 +28,32 @@ import java.util.List;
  *
  * @author estra
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/DashboardServlet"})
-public class DashboardServlet extends HttpServlet {
+@WebServlet(name = "DeletePostServlet", urlPatterns = {"/DeletePostServlet"})
+public class DeletePostServlet extends HttpServlet {
 
-    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        List<Publicacion> publicaciones;
-        DAOPublicacion daopost = new DAOPublicacion();
-        publicaciones = daopost.getDashboardPosts(0);
-        
-        request.setAttribute("publicaciones", publicaciones);
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
-        dispatcher.forward(request, response);
-    }
-    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String texto = request.getParameter("busqueda").trim();
-
-        List<Publicacion> publicaciones;
+        RequestDispatcher rd;
+        int id_post = Integer.parseInt(request.getParameter("IpostId").trim());
         DAOPublicacion daopost = new DAOPublicacion();
         
-        publicaciones = daopost.getSearchPosts(texto,0);
+        int result = daopost.deletepost(id_post);
+        String pantalla;
+        switch (result) {
+            case 1 -> {
+                request.setAttribute("success", "Publicación eliminada.");
+                response.sendRedirect("ProfileServlet");
+            }
+            default -> {
+                request.setAttribute("error", "No se pudo eliminar la publicación, intente de nuevo.");
+                pantalla = "profile.jsp";
+                rd = request.getRequestDispatcher(pantalla);
+                rd.forward(request, response);
+            }
+        }
         
-        request.setAttribute("search", publicaciones);
-        request.setAttribute("searchword", texto);
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
-        dispatcher.forward(request, response);
     }
+
 
 }

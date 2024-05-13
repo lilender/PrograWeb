@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import DAO.DAOCategoria;
 import DAO.DAOUsuario;
 import entidades.Usuario;
 import entidades.Publicacion;
@@ -48,6 +49,12 @@ public class ProfileServlet extends HttpServlet {
         List<Publicacion> publicaciones;
         DAOPublicacion daopost = new DAOPublicacion();
         publicaciones = daopost.getUserPosts(usuario.getIdUsuario());
+        
+        List<String> categorias;
+        DAOCategoria daocat = new DAOCategoria();
+        categorias = daocat.getcats();
+        
+        request.setAttribute("categorias", categorias);
         
         request.setAttribute("success", request.getAttribute("success"));
         request.setAttribute("error", request.getAttribute("error"));
