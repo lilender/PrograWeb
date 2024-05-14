@@ -147,7 +147,36 @@ public class DAOPublicacion {
             return log;
         }
     }
-    
+    public int getnDashboardPosts(){
+         Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT COUNT(ID_PUBLICACION) AS N FROM TB_PUBLICACIONES WHERE ESTADO = 1;";
+        
+        int log = 0;
+        
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            
+            while(rs.next()){
+                log = rs.getInt("N");
+            }
+            con.close();
+            
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println("Error " + e.getMessage());
+        } finally {
+            return log;
+        }   
+    }
+
     public List<Publicacion> getDashboardPosts(int pag){
         Connection con;
         PreparedStatement ps;
@@ -188,7 +217,6 @@ public class DAOPublicacion {
             return log;
         }
     }
-    
     public List<Publicacion> getSearchPosts(String texto, int pag){
         Connection con;
         PreparedStatement ps;
@@ -236,7 +264,42 @@ public class DAOPublicacion {
             return log;
         }
     }
-    
+    public int getnSearchPosts(String texto){
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT COUNT(ID_PUBLICACION) AS N FROM TB_PUBLICACIONES WHERE (TITULO LIKE ? OR CONTENIDO LIKE ?) AND ESTADO = 1;";
+        
+        int log = 0;
+        
+        String regex = "[,.\\s]";
+        String[] palabras = texto.split(regex);
+        String x = String.join("%",palabras);
+        String busqueda = "%".concat(x).concat("%");
+
+        try {
+            Class.forName(db.getDriver());
+            con = DriverManager.getConnection(
+                    db.getUrl() + db.getDatabase(),
+                    db.getUser(),
+                    db.getPass());
+            ps = con.prepareStatement(sql);
+            ps.setString(1, busqueda);
+            ps.setString(2, busqueda);
+            rs = ps.executeQuery();
+            
+            
+            while(rs.next()){
+                log = rs.getInt("N");
+            }
+            con.close();
+            
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println("Error " + e.getMessage());
+        } finally {
+            return log;
+        }
+    }
     public List<Publicacion> getAdvancedSearchPosts(Date f_inicio, Date f_fin, int offset, int id_cat, String texto){
         Connection con;
         CallableStatement cs;

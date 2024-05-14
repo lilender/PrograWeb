@@ -610,8 +610,8 @@ $(function() {
                         '<ul class="dropdown-menu content" id="categoryList">' +
                             categorias +
                             '<li class="">' +
-                                '<input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 60%">' +
-                                '<button type="button" id="addCategoryButton">Agregar</button>' +
+                                '<input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 90%">' +
+                                '<button type="btn button-dropdown" class="btn" id="addCategoryButton">Agregar</button>' +
                             '</li>' +
                         '</ul>' +
                     '</div>' +

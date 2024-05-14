@@ -150,7 +150,6 @@
                     }
                 }
             %>
-            
             <ul class="pagination justify-content-center">
                 <%
                     int pag = 0;
@@ -161,7 +160,7 @@
                     if(request.getAttribute("search") != null) {
                         search = true;
                     }
-
+                    int n_paginas = (int)request.getAttribute("n_paginas");
                     if(pag != 0){
                     %>
                     <li class="page-item">
@@ -176,8 +175,37 @@
                     </li>
                     <%
                     }
+                    for(int i = 1; i < n_paginas+1; i++){
+                    if(i == pag+1){
+                        %>
+                        <li class="page-item" style="background: rgba(139, 217, 133, 0.5); border-radius: 50%">
+                            <form action="DashboardPagServlet" method="post">
+                                <input type="hidden" id="Pag" name="Pag" value="<%out.println(i-1);%>">
+                                <input type="hidden" id="Search" name="Search" value="<%out.println(search);%>">
+                                <input type="hidden" id="Searchword" name="Searchword" value="<%out.println(request.getAttribute("searchword"));%>">
+                                <button style="background: none; border: none; width: 2.5rem; height: 2.5rem" class="page-image" type="submit" href="#" aria-label="Next" style="--bs-pagination-border-radius:50%">
+                                <a class="page-link" style="--bs-pagination-border-radius:50%;"><%out.print(i);%></a>
+                                </button>
+                            </form>
+                        </li>
+                        <%
+                    }else{
+                        %>
+                        <li class="page-item">
+                            <form action="DashboardPagServlet" method="post">
+                                <input type="hidden" id="Pag" name="Pag" value="<%out.println(i-1);%>">
+                                <input type="hidden" id="Search" name="Search" value="<%out.println(search);%>">
+                                <input type="hidden" id="Searchword" name="Searchword" value="<%out.println(request.getAttribute("searchword"));%>">
+                                <button style="background: none; border: none; width: 2.5rem; height: 2.5rem" class="page-image" type="submit" href="#" aria-label="Next" style="--bs-pagination-border-radius:50%">
+                                <a class="page-link" style="--bs-pagination-border-radius:50%;"><%out.print(i);%></a>
+                                </button>
+                            </form>
+                        </li>
+                        <%
+                    }
+                    }
+                    if(pag+1 != n_paginas){
                     %>
-                    <li class="page-item"><a class="page-link" href="#"><%out.print(pag+1);%></a></li>
                     <li class="page-item">
                         <form action="DashboardPagServlet" method="post">
                             <input type="hidden" id="Pag" name="Pag" value="<%out.println(pag+1);%>">
@@ -189,6 +217,7 @@
                         </form>
                     </li>
                     <%
+                    }
                 %>
 
           </ul>

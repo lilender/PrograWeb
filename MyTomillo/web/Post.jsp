@@ -135,7 +135,7 @@
                                             %>
                                           <li class="">
                                                 <input id="newCategoryInput" type="text" placeholder="Nueva Categoría" style="width: 60%">
-                                                <button type="btn button-dropdown" id="addCategoryButton">Agregar</button>
+                                                <button type="btn button-dropdown" class="btn" id="addCategoryButton">Agregar</button>
                                           </li>
 
                                         </ul>

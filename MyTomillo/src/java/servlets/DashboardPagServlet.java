@@ -47,6 +47,7 @@ public class DashboardPagServlet extends HttpServlet {
 
             publicaciones = daopost.getSearchPosts(texto,pag);
 
+            request.setAttribute("n_paginas",daopost.getnSearchPosts(texto)/10+1); 
             request.setAttribute("search", publicaciones);
             request.setAttribute("searchword", texto);
             request.setAttribute("Pagina", pag);
@@ -56,7 +57,7 @@ public class DashboardPagServlet extends HttpServlet {
             List<Publicacion> publicaciones;
             DAOPublicacion daopost = new DAOPublicacion();
             publicaciones = daopost.getDashboardPosts(pag);
-
+            request.setAttribute("n_paginas",daopost.getnDashboardPosts()/10+1); 
             request.setAttribute("publicaciones", publicaciones);
             request.setAttribute("Pagina", pag);
 

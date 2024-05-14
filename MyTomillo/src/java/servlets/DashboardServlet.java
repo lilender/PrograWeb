@@ -40,6 +40,8 @@ public class DashboardServlet extends HttpServlet {
         List<Publicacion> publicaciones;
         DAOPublicacion daopost = new DAOPublicacion();
         publicaciones = daopost.getDashboardPosts(0);
+
+        request.setAttribute("n_paginas",daopost.getnDashboardPosts()/10+1); 
         
         request.setAttribute("publicaciones", publicaciones);
         
@@ -47,6 +49,7 @@ public class DashboardServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
     
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -56,7 +59,7 @@ public class DashboardServlet extends HttpServlet {
         DAOPublicacion daopost = new DAOPublicacion();
         
         publicaciones = daopost.getSearchPosts(texto,0);
-        
+        request.setAttribute("n_paginas",daopost.getnSearchPosts(texto)/10+1); 
         request.setAttribute("search", publicaciones);
         request.setAttribute("searchword", texto);
         
